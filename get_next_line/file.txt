@@ -1,0 +1,9 @@
+first version of get next line
+testing with 1 line
+
+with 2 lines
+
+
+with 11
+with 2 empty lines at the end
+
