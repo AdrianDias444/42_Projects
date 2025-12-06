@@ -94,7 +94,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return ((void *)d);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	size_t	len_s1;
@@ -112,5 +112,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_memmove(str, s1, len_s1);
 	ft_memmove(str + len_s1, s2, len_s2);
 	str[len_s1 + len_s2] = '\0';
+	free(s1);
 	return (str);
 }
