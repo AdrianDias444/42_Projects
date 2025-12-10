@@ -70,7 +70,11 @@ char	*clean_old_stack(char *stack)
 	i = 0;
 	while (stack[i] && stack[i] != '\n')
 		i++;
-	new_stack = ft_substr(stack, i + 1, ft_strlen(stack) - 1);
+    if(stack[i] == '\n')
+        i++;
+    if (!stack[i])
+		return (free(stack), NULL);
+	new_stack = ft_substr(stack, i, ft_strlen(stack) - 1);
 	free(stack);
 	return (new_stack);
 }
@@ -81,26 +85,17 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*temp;
 	if (fd < 0 || BUFFER_SIZE <= 0)
-	{
-		free(stack);
-		return (NULL);
-	}
+		return (free(stack), NULL);
 
 	temp = read_newline(fd, stack);
 	if (!temp || !*temp)
-	{
-		free(stack);
-		stack = NULL;
-		return (NULL);
-	}
-	stack = temp;
+		return (free(stack), stack = NULL, NULL);
+	
+    stack = temp;
 	line = extract_line(stack);
 	if (!line)
-	{
-		free(stack);
-		stack = NULL;
-		return (NULL);
-	}
+		return (free(stack), stack = NULL, NULL);
+
 	stack = clean_old_stack(stack);
 	if (stack && !*stack)
 	{
@@ -111,21 +106,17 @@ char	*get_next_line(int fd)
 }
 int main(void)
 {
-	char* fileName = "largefile.txt";
+	char* fileName = "get_next_line.c";
 
 	int fd = open(fileName, O_RDWR);
 	int i = 0;
-	char *line;
+	char *line="";
 
-	while (i < 12)
+	while (line)
 	{
 		line = get_next_line(fd);
-		printf("|%d Call - %s", i + 1, line);
-		if(!line)
-			printf("\n");
+		printf("%s", line);
 		free(line);
 		i++;
 	}
-	close(fd);
-	free(get_next_line(-1));
 }
