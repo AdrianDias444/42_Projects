@@ -104,19 +104,19 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-int main(void)
-{
-	char* fileName = "get_next_line.c";
+// int main(void)
+// {
+// 	char* fileName = "get_next_line.c";
 
-	int fd = open(fileName, O_RDWR);
-	int i = 0;
-	char *line="";
+// 	int fd = open(fileName, O_RDWR);
+// 	int i = 0;
+// 	char *line="";
 
-	while (line)
-	{
-		line = get_next_line(fd);
-		printf("%s", line);
-		free(line);
-		i++;
-	}
-}
+// 	while (line)
+// 	{
+// 		line = get_next_line(fd);
+// 		printf("%s", line);
+// 		free(line);
+// 		i++;
+// 	}
+// }

@@ -92,23 +92,23 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-int main(void)
-{
-	int fd = open("get_next_line.c", O_RDWR);
-    int fd2 = open("get_next_line_bonus.c", O_RDWR);
+// int main(void)
+// {
+// 	int fd = open("get_next_line.c", O_RDWR);
+//     int fd2 = open("get_next_line_bonus.c", O_RDWR);
 
-	int i = 0;
-	char *line="";
-    char *line2="";
+// 	int i = 0;
+// 	char *line="";
+//     char *line2="";
 
-	while (i<1000)
-	{
-		line = get_next_line(fd);
-        line2 = get_next_line(fd2);
-		printf("%s", line);
-        printf("%s", line2);
-		free(line);
-        free(line2);
-		i++;
-	}
-}
+// 	while (line && line2)
+// 	{
+// 		line = get_next_line(fd);
+//         line2 = get_next_line(fd2);
+// 		printf("%s", line);
+//         printf("%s", line2);
+// 		free(line);
+//         free(line2);
+// 		i++;
+// 	}
+// }
