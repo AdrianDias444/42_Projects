@@ -10,47 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
-	static char	*stack;
+	static char	*stack[FD_MAX];
 	char		*line;
 	char		*temp;
 	int			i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (free(stack), NULL);
-	temp = read_newline(fd, stack);
+		return (free(stack[fd]), NULL);
+	temp = read_newline(fd, stack[fd]);
 	if (!temp || !*temp)
-		return (free(stack), stack = NULL, NULL);
-	stack = temp;
-	if (!stack || !*stack)
+		return (free(stack[fd]), stack[fd] = NULL, NULL);
+	stack[fd] = temp;
+	if (!stack[fd] || !*stack[fd])
 		return (NULL);
 	i = 0;
-	while (stack[i] && stack[i] != '\n')
+	while (stack[fd][i] && stack[fd][i] != '\n')
 		i++;
-	line = ft_substr(stack, 0, i + 1);
+	line = ft_substr(stack[fd], 0, i + 1);
 	if (!line)
-		return (free(stack), stack = NULL, NULL);
-	stack = clean_old_stack(stack);
-	if (stack && !*stack)
+		return (free(stack[fd]), stack[fd] = NULL, NULL);
+	stack[fd] = clean_old_stack(stack[fd]);
+	if (stack[fd] && !*stack[fd])
 	{
-		return (free(stack), stack = NULL);
+		return (free(stack[fd]), stack[fd] = NULL);
 	}
 	return (line);
 }
 
-int	main(void)
-{
-	int fd = open("get_next_line.c", O_RDONLY);
-
-	char *line = "";
-	while (line != NULL)
-	{
-		line = get_next_line(fd);
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
-}
