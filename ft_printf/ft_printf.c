@@ -84,7 +84,7 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (total_len);
 }
-int main(void)
+/* int main(void)
 {
 
 	ft_putstr("====== PRINTF TESTER ======\n\n");
@@ -250,3 +250,4 @@ int main(void)
     printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %%"));
 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %%"));
 }
+ */
