@@ -34,7 +34,7 @@ int	ft_ptr_adrr(void *ptr)
 	return (ft_puthex(adress, 'x') + 2);
 }
 
-int	format(char c, va_list args)
+int	ft_format(char c, va_list args)
 {
 	void	*ptr;
 
@@ -75,7 +75,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%' && ft_spec(str[i + 1]))
 		{
-			total_len += format(str[i + 1], args);
+			total_len += ft_format(str[i + 1], args);
 			i += 2;
 		}
 		else
