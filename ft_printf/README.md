@@ -63,4 +63,4 @@ To manage variable arguments, the `<stdarg.h>` library provides three essential 
 
 - **`va_end`**: Cleans up the `va_list` variable after all arguments have been accessed. It should be called before the function returns.
 
-These macros allow the function to process an unknown number of arguments dynamically, based on the format specifiers encountered in the format string.
+These functions allow to process an unknown number of arguments dynamically, based on the format specifiers encountered in the format string.
