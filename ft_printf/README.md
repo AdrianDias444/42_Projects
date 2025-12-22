@@ -55,7 +55,7 @@ The return value of `ft_format()` is always the number of characters printed fro
 
 ### Variadic Arguments Handling
 
-To manage variable arguments, the `<stdarg.h>` library provides three essential macros:
+To manage variable arguments, we use:
 
 - **`va_start`**: Initializes a `va_list` variable to point to the first optional argument passed to the function. It must be called before accessing any optional arguments.
   
