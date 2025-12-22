@@ -25,10 +25,7 @@ int	ft_ptr_adrr(void *ptr)
 	size_t	adress;
 
 	if (!ptr)
-	{
-		ft_putstr("(nil)");
-		return (5);
-	}
+		return (ft_putstr("(nil)"));
 	adress = (size_t)ptr;
 	ft_putstr("0x");
 	return (ft_puthex(adress, 'x') + 2);
@@ -97,159 +94,153 @@ int	ft_printf(const char *str, ...)
 // 	printf(" RETURNED VALUE | %d\n",printf("PRINTF BASE | %c", a));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %c", a));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     char b = 'b';
 // 	printf(" RETURNED VALUE | %d\n",printf("PRINTF BASE | %c", b));
 // 	ft_printf(" RETURNED VALUE | %d\n",ft_printf("MY FUNCTION | %c", b));
 // 	ft_putstr("------------------------\n");
-	
+
 //     char c = ' ';
 // 	printf(" RETURNED VALUE | %d\n",printf("PRINTF BASE | %c", c));
 // 	ft_printf(" RETURNED VALUE | %d\n",ft_printf("MY FUNCTION | %c", c));
 // 	ft_putstr("------------------------\n");
 
-
 // 	ft_putstr("\n#########################\n");
 // 	ft_putstr("###### TEST FOR %s ######\n");
 // 	ft_putstr("#########################\n\n");
 // 	ft_putstr("-------------------------\n");
-	
+
 //     char *str = NULL;
 // 	printf(" RETURNED VALUE | %d\n",printf("PRINTF BASE | %s", str));
 // 	ft_printf(" RETURNED VALUE | %d\n",ft_printf("MY FUNCTION | %s", str));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     char *str2 = "Testing";
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %s", str2));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %s", str2));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     char *str3 = "Printf is not working";
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %s", str3));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %s", str3));
-	
-    
+
 //     ft_putstr("-------------------------\n");
 // 	ft_putstr("\n#########################\n");
 // 	ft_putstr("###### TEST FOR %p ######\n");
 // 	ft_putstr("#########################\n\n");
 // 	ft_putstr("-------------------------\n");
-	
+
 //     char *ptr = "NULL";
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %p", ptr));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %p", ptr));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     char *ptr2 = NULL;
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %p", ptr2));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %p", ptr2));
 // 	ft_putstr("-------------------------\n");
-    
+
 //     int ptr3[12];
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %p", ptr3));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %p", ptr3));
-	
-    
+
 //     ft_putstr("-------------------------\n");
 // 	ft_putstr("\n################################\n");
 // 	ft_putstr("###### TEST FOR %d and %i ######\n");
 // 	ft_putstr("################################\n\n");
 // 	ft_putstr("-------------------------\n");
-	
+
 //     int nb = 23;
 // 	ft_putstr("%d\n");
 // 	printf(" RETURNED VALUE | %d\n",printf("PRINTF BASE | %d", nb));
 // 	ft_printf(" RETURNED VALUE | %d\n",ft_printf("MY FUNCTION | %d", nb));
 // 	ft_putstr("-------------------------\n");
-	
-//     long n = 20000000000000000;
+
+//     int n = 2147483647;
 // 	ft_putstr("%d\n");
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %d", n));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %d", n));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     int nb2 = 23;
 // 	ft_putstr("%i\n");
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %d", nb2));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %d", nb2));
 // 	ft_putstr("-------------------------\n");
-	
-//     long n2 = 20000000000000000;
+
+//     int n2 = 2147483647;
 // 	ft_putstr("%i\n");
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %d", n2));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %d", n2));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     ft_putstr("\n#########################\n");
 // 	ft_putstr("###### TEST FOR %u ######\n");
 // 	ft_putstr("#########################\n\n");
 // 	ft_putstr("-------------------------\n");
-	
+
 //     int u = 12;
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %u", u));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %u", u));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     int u1 = 0;
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %u", u1));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %u", u1));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     int u2 = -2;
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %u", u2));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %u", u2));
 // 	ft_putstr("-------------------------\n");
-	
-    
+
 //     ft_putstr("\n#########################\n");
 // 	ft_putstr("###### TEST FOR %x ######\n");
 // 	ft_putstr("#########################\n\n");
 // 	ft_putstr("-------------------------\n");
-	
+
 //     int hex = 12;
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %x", hex));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %x", hex));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     int hex2 = 42000;
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %x", hex2));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %x", hex2));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     int hex3 = 367906;
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %x", hex3));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %x", hex3));
 // 	ft_putstr("-------------------------\n");
-	
-    
+
 //     ft_putstr("\n#########################\n");
 // 	ft_putstr("###### TEST FOR %X ######\n");
 // 	ft_putstr("#########################\n\n");
 // 	ft_putstr("-------------------------\n");
-	
+
 //     int hex_U = 12;
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %X", hex_U));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %X", hex_U));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     int hex2_U = 42000;
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %X", hex2_U));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %X", hex2_U));
 // 	ft_putstr("-------------------------\n");
-	
+
 //     int hex3_U = 367906;
 // 	printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %X", hex3_U));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %X", hex3_U));
 // 	ft_putstr("-------------------------\n");
-    
+
 //     ft_putstr("\n#########################\n");
 // 	ft_putstr("###### TEST FOR %% ######\n");
 // 	ft_putstr("#########################\n\n");
 // 	ft_putstr("-------------------------\n");
-	
+
 //     printf(" RETURNED VALUE | %d\n", printf("PRINTF BASE | %%"));
 // 	ft_printf(" RETURNED VALUE | %d\n", ft_printf("MY FUNCTION | %%"));
 // 	ft_putstr("-------------------------\n");
 
 // }
-

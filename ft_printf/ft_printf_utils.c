@@ -22,10 +22,7 @@ int	ft_putstr(char *str)
 	int	i;
 
 	if (!str)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
+		return (write(1, "(null)", 6));
 	i = 0;
 	while (str[i])
 		write(1, &str[i++], 1);
@@ -57,7 +54,7 @@ int	ft_putnbr_unsigned(unsigned int nb)
 
 	i = 0;
 	if (nb > 9)
-		i +=ft_putnbr_unsigned(nb / 10);
+		i += ft_putnbr_unsigned(nb / 10);
 	i += ft_putchar((nb % 10) + '0');
 	return (i);
 }

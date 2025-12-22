@@ -52,3 +52,15 @@ To identify these cases, we use `ft_spec()`.
 Each time we call `ft_format()`, we pass the current argument and its corresponding format specifier as parameters. Inside `ft_format()`, multiple if statements determine the current format.
 
 The return value of `ft_format()` is always the number of characters printed from the argument, which is then added to the `total_len` variable — the final return value of `ft_printf()`.
+
+### Variadic Arguments Handling
+
+To manage variable arguments, the `<stdarg.h>` library provides three essential macros:
+
+- **`va_start`**: Initializes a `va_list` variable to point to the first optional argument passed to the function. It must be called before accessing any optional arguments.
+  
+- **`va_arg`**: Retrieves the next argument from the `va_list` of a specified type. Each call advances the `va_list` pointer to the next argument.
+
+- **`va_end`**: Cleans up the `va_list` variable after all arguments have been accessed. It should be called before the function returns.
+
+These macros allow the function to process an unknown number of arguments dynamically, based on the format specifiers encountered in the format string.
