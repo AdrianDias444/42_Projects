@@ -65,6 +65,8 @@ int	ft_printf(const char *str, ...)
 	int		i;
 	int		total_len;
 
+	if (!str)
+		return (-1);
 	i = 0;
 	total_len = 0;
 	va_start(args, str);
