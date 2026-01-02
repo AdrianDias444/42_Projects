@@ -2,13 +2,9 @@
 
 void ft_print_node(t_node *first_node)
 {
-    t_node *current;
-
-    
-    current = first_node;
-    while(current && current->nb)
+    while(first_node)
     {
-        printf("%d\n", current->nb);  
-        current = current->next;
+        printf("%d\n", first_node->nb);  
+        first_node = first_node->next;
     }
 }
