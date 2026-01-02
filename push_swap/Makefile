@@ -1,7 +1,7 @@
 NAME = push_swap.a
 
-SOURCES = libft_utils/ft_atoi.c ft_utils/ft_print_node.c ft_utils/ft_to_stack.c\
-ft_swap_utils/ft_sa.c ft_swap_utils/ft_pb.c push_swap.c
+SOURCES = libft_utils/ft_atoi.c mv_utils/ft_create_node.c mv_utils/ft_stack_init.c\
+mv_utils/ft_stack_pop.c mv_utils/ft_stack_push.c utils/ft_print_stack.c push_swap.c
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
