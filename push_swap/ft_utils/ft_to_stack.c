@@ -11,7 +11,6 @@ t_node *ft_to_stackA(int n, int i, t_node *prev)
     stackA -> nb = n;
     stackA -> index = i;
     stackA -> final_index = 0;
-    stackA -> past = prev;
     stackA -> next = NULL;
     
     if(prev != NULL)
