@@ -8,4 +8,5 @@ void rb(t_stack *stack)
         return ;
     first_node = ft_stack_pop(stack);
     ft_stack_push_back(stack, first_node);
+    printf("rb\n");
 }

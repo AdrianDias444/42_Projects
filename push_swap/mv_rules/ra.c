@@ -8,9 +8,10 @@ void ra(t_stack *stack)
         return ;
     first_node = ft_stack_pop(stack);
     ft_stack_push_back(stack, first_node);
+    printf("ra\n");
 }
 
-int main(void)
+/* int main(void)
 {
     t_node *first_node;
     t_node *second_node;
@@ -36,3 +37,4 @@ int main(void)
     ra(&stack_A);
     ft_print_stack(&stack_A);
 }
+ */

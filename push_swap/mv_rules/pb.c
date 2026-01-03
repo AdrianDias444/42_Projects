@@ -8,6 +8,7 @@ void pb(t_stack *stack_A, t_stack *stack_B)
         return ;
     node_to_push = ft_stack_pop(stack_A);
     ft_stack_push(stack_B, node_to_push);
+    printf("pb\n");
 }
 
 // int main(void)

@@ -8,4 +8,5 @@ void pa(t_stack *stack_B, t_stack *stack_A)
         return ;
     node_to_push = ft_stack_pop(stack_B);
     ft_stack_push(stack_A, node_to_push);
+    printf("pa\n");
 }

@@ -38,6 +38,8 @@ t_node *ft_stack_pop_back(t_stack *stack);
 
 void ft_print_stack(t_stack *stack);
 t_node *ft_last_node(t_stack *stack);
+int ft_lst_size(t_stack *stack);
+int ft_is_in_middle(t_stack *stack, t_node *node);
 
 //////////////////////////////////////////////////////////
 
@@ -52,6 +54,13 @@ void rr(t_stack *stack_A, t_stack *stack_B);
 void rra(t_stack *stack);
 void rrb(t_stack *stack);
 void rrr(t_stack *stack_A, t_stack *stack_B);
+
+//////////////////////////////////////////////////////////
+
+t_node *ft_min_node(t_stack *stack);
+t_node *ft_max_node(t_stack *stack);
+int ft_calc_cost(t_stack *stack, t_node *node_to_calc);
+void ft_double_sort(t_stack *stack_A, t_stack *stack_B);
 
 //////////////////////////////////////////////////////////
 

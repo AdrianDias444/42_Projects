@@ -15,4 +15,5 @@ void sb(t_stack *stack)
     stack ->top = second_node;
     second_node -> next = first_node;
     first_node -> next = third_node;
+    printf("sb\n");
 }

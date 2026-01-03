@@ -9,4 +9,5 @@ void rrb(t_stack *stack)
 
     last_node = ft_stack_pop_back(stack);
     ft_stack_push(stack, last_node);
+    printf("rrb\n");
 }
