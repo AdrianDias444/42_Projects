@@ -6,7 +6,7 @@ void ft_print_stack(t_stack *stack)
 
     if(!stack || !stack -> top)
     {
-        printf("Stack vazia ou nao inicilizada");
+        printf("Stack vazia ou nao inicilizada\n");
         return ;
     }
     current = stack -> top;

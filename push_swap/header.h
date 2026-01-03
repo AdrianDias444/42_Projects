@@ -25,12 +25,34 @@ typedef struct s_stack
 // My functions
 
 int	ft_atoi(const char *nptr);
+//////////////////////////////////////////////////////////
 
 t_node *ft_create_node(int value);
 void ft_stack_init(t_stack *stack);
 void ft_stack_push(t_stack *stack, t_node *node);
 t_node *ft_stack_pop(t_stack *stack);
+void ft_stack_push_back(t_stack *stack, t_node *node);
+t_node *ft_stack_pop_back(t_stack *stack);
+
+//////////////////////////////////////////////////////////
 
 void ft_print_stack(t_stack *stack);
+t_node *ft_last_node(t_stack *stack);
+
+//////////////////////////////////////////////////////////
+
+void sa(t_stack *stack);
+void sb(t_stack *stack);
+void ss(t_stack *stack_A, t_stack *stack_B);
+void pa(t_stack *stack_B, t_stack *stack_A);
+void pb(t_stack *stack_A, t_stack *stack_B);
+void ra(t_stack *stack);
+void rb(t_stack *stack);
+void rr(t_stack *stack_A, t_stack *stack_B);
+void rra(t_stack *stack);
+void rrb(t_stack *stack);
+void rrr(t_stack *stack_A, t_stack *stack_B);
+
+//////////////////////////////////////////////////////////
 
 #endif
