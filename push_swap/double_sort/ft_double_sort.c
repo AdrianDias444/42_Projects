@@ -7,7 +7,7 @@ void ft_double_sort(t_stack *stack_A, t_stack *stack_B)
     int min_calc;
     int max_calc;
 
-    while(stack_A->top)
+    while(stack_A->top && ft_lst_size(stack_A) > 1)
     {
         max_node = ft_max_node(stack_A);
         min_node = ft_min_node(stack_A);
@@ -32,6 +32,7 @@ void ft_double_sort(t_stack *stack_A, t_stack *stack_B)
         }
         pb(stack_A, stack_B);
     }
+    pb(stack_A, stack_B);
     while(stack_B->top)
     {
         pa(stack_B, stack_A);

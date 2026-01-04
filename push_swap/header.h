@@ -61,6 +61,9 @@ t_node *ft_min_node(t_stack *stack);
 t_node *ft_max_node(t_stack *stack);
 int ft_calc_cost(t_stack *stack, t_node *node_to_calc);
 void ft_double_sort(t_stack *stack_A, t_stack *stack_B);
+void ft_sort_man(t_stack *stack_A, t_stack *stack_B);
+void ft_sort_3_elem(t_stack *stack_A, t_stack *stack_B);
+
 
 //////////////////////////////////////////////////////////
 

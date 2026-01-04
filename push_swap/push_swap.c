@@ -21,8 +21,10 @@ int main(int argc, char **argv)
             i++;
         }
         ft_print_stack(&stack_A);
-        
-        ft_double_sort(&stack_A, &stack_B);
+        if(i <= 5)
+            ft_sort_man(&stack_A, &stack_B);
+        else
+            ft_double_sort(&stack_A, &stack_B);
         printf("\n");
         ft_print_stack(&stack_A);
     }

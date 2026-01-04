@@ -19,6 +19,8 @@ double_sort/ft_min_node.c\
 double_sort/ft_max_node.c\
 double_sort/ft_calc_cost.c\
 double_sort/ft_double_sort.c\
+double_sort/ft_sort_man.c\
+double_sort/ft_sort_3_elem.c\
 push_swap.c
 
 OBJECTS = $(SOURCES:%.c=%.o)
