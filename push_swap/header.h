@@ -40,6 +40,7 @@ void ft_print_stack(t_stack *stack);
 t_node *ft_last_node(t_stack *stack);
 int ft_lst_size(t_stack *stack);
 int ft_is_in_middle(t_stack *stack, t_node *node);
+int ft_is_ordered(t_stack *stack);
 
 //////////////////////////////////////////////////////////
 
@@ -57,14 +58,20 @@ void rrr(t_stack *stack_A, t_stack *stack_B);
 
 //////////////////////////////////////////////////////////
 
+void ft_double_sort(t_stack *stack_A, t_stack *stack_B);
 t_node *ft_min_node(t_stack *stack);
 t_node *ft_max_node(t_stack *stack);
 int ft_calc_cost(t_stack *stack, t_node *node_to_calc);
-void ft_double_sort(t_stack *stack_A, t_stack *stack_B);
 void ft_sort_man(t_stack *stack_A, t_stack *stack_B);
 void ft_sort_3_elem(t_stack *stack_A, t_stack *stack_B);
 
 
 //////////////////////////////////////////////////////////
 
+void ft_quick_sort(t_stack *stack_A, t_stack *stack_B);
+t_node *ft_return_mid(t_stack *stack);
+t_stack ft_dup_stack(t_stack *stack);
+t_node *ft_remove_this_node(t_stack *stack, t_node *node_to_del);
+
+//////////////////////////////////////////////////////////
 #endif

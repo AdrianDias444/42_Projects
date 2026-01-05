@@ -7,6 +7,7 @@ int main(int argc, char **argv)
     t_stack stack_A;
     t_stack stack_B;
     t_node *current;
+    t_node *node;
 
     i = 1;
     ft_stack_init(&stack_A);
@@ -21,11 +22,19 @@ int main(int argc, char **argv)
             i++;
         }
         ft_print_stack(&stack_A);
-        if(i <= 5)
+
+        node = ft_return_mid(&stack_A);
+        if(!node)
+            printf("Node nao existe");
+
+        printf("\n%d\n", node->nb);
+        //ft_print_stack(&stack_A);
+        /* if(i <= 5)
             ft_sort_man(&stack_A, &stack_B);
         else
             ft_double_sort(&stack_A, &stack_B);
-        printf("\n");
-        ft_print_stack(&stack_A);
+        printf("\n"); */
+        //ft_print_stack(&stack_A);
+
     }
 }

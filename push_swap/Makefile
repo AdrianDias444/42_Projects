@@ -11,6 +11,7 @@ utils/ft_print_stack.c\
 utils/ft_last_node.c\
 utils/ft_lst_size.c\
 utils/ft_is_in_middle.c\
+utils/ft_is_ordered.c\
 mv_rules/sa.c mv_rules/sb.c mv_rules/ss.c\
 mv_rules/pa.c mv_rules/pb.c\
 mv_rules/ra.c mv_rules/rb.c mv_rules/rr.c\
@@ -21,6 +22,10 @@ double_sort/ft_calc_cost.c\
 double_sort/ft_double_sort.c\
 double_sort/ft_sort_man.c\
 double_sort/ft_sort_3_elem.c\
+quick_sort/ft_quick_sort.c\
+quick_sort/ft_return_mid.c\
+quick_sort/ft_dup_stack.c\
+quick_sort/ft_remove_this_node.c\
 push_swap.c
 
 OBJECTS = $(SOURCES:%.c=%.o)
