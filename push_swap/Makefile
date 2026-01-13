@@ -1,6 +1,9 @@
 NAME = push_swap.a
 
 SOURCES = libft_utils/ft_atoi.c\
+libft_utils/ft_split.c\
+libft_utils/ft_strlcpy.c\
+libft_utils/ft_strlen.c\
 mv_utils/ft_create_node.c\
 mv_utils/ft_stack_init.c\
 mv_utils/ft_stack_pop.c\
@@ -26,6 +29,7 @@ quick_sort/ft_quick_sort.c\
 quick_sort/ft_return_mid.c\
 quick_sort/ft_dup_stack.c\
 quick_sort/ft_remove_this_node.c\
+quick_sort/ft_make_a_cicle.c\
 push_swap.c
 
 OBJECTS = $(SOURCES:%.c=%.o)

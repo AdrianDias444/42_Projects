@@ -3,17 +3,36 @@
 int main(int argc, char **argv)
 {
     int i;
+    //int j;
     int nb;
     t_stack stack_A;
     t_stack stack_B;
     t_node *current;
-    t_node *node;
+
 
     i = 1;
     ft_stack_init(&stack_A);
     ft_stack_init(&stack_B);
+    /////////////////////////////////////////////////
+    /* if(argc == 2)
+    {
+        char **str = ft_split(argv[1], 32);
+        j = 0;
+
+        while(str[j])
+        {
+            nb = ft_atoi(str[j]);
+            current = ft_create_node(nb);
+            ft_stack_push_back(&stack_A, current);
+            j++;
+        }
+        ft_quick_sort(&stack_A, &stack_B);
+        return 0;
+    } */
+    //////////////////////////////////////////////////
     if(argc > 1)
     {
+
         while(i < argc)
         {
             nb = ft_atoi(argv[i]);
@@ -22,19 +41,9 @@ int main(int argc, char **argv)
             i++;
         }
         ft_print_stack(&stack_A);
-
-        node = ft_return_mid(&stack_A);
-        if(!node)
-            printf("Node nao existe");
-
-        printf("\n%d\n", node->nb);
-        //ft_print_stack(&stack_A);
-        /* if(i <= 5)
-            ft_sort_man(&stack_A, &stack_B);
-        else
-            ft_double_sort(&stack_A, &stack_B);
-        printf("\n"); */
-        //ft_print_stack(&stack_A);
+        ft_quick_sort(&stack_A, &stack_B);
+        //ft_double_sort(&stack_A, &stack_B);
+        ft_print_stack(&stack_B);
 
     }
 }

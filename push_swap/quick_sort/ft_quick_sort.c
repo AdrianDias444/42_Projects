@@ -2,21 +2,17 @@
 
 void ft_quick_sort(t_stack *stack_A, t_stack *stack_B)
 {
-     int lst_size;
-    int nodes_to_push;
 
     if(ft_is_ordered(stack_A) == 1)
         return ;
 
-    lst_size = ft_lst_size(stack_A);
-    nodes_to_push = lst_size/2;
+    while(ft_lst_size(stack_A) > 2)
+        ft_make_a_cicle(stack_A, stack_B);
 
-    if(lst_size%2 != 0)
-        nodes_to_push++;
-    while(ft_lst_size(stack_A) > nodes_to_push)
-        pb(stack_A, stack_B);
-/*     while(lst_size(stack_B) > 2)
-    {
 
-    } */
+    if(ft_lst_size(stack_A) == 2)
+        if(!ft_is_ordered(stack_A))
+            sa(stack_A);
+    /* while(stack_B->top)
+        pa(stack_B, stack_A); */
 }

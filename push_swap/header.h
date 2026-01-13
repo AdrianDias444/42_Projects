@@ -25,6 +25,9 @@ typedef struct s_stack
 // My functions
 
 int	ft_atoi(const char *nptr);
+char	**ft_split(char const *s, char c);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlen(const char *s);
 //////////////////////////////////////////////////////////
 
 t_node *ft_create_node(int value);
@@ -72,6 +75,7 @@ void ft_quick_sort(t_stack *stack_A, t_stack *stack_B);
 t_node *ft_return_mid(t_stack *stack);
 t_stack ft_dup_stack(t_stack *stack);
 t_node *ft_remove_this_node(t_stack *stack, t_node *node_to_del);
+void ft_make_a_cicle(t_stack *stack_A, t_stack *stack_B);
 
 //////////////////////////////////////////////////////////
 #endif
