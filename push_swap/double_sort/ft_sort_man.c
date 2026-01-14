@@ -8,11 +8,11 @@ void ft_sort_man(t_stack *stack_A, t_stack *stack_B)
         if(stack_A->top->nb > stack_A->top->next->nb)
             sa(stack_A);
     if(stack_A_size == 3)
-        ft_sort_3_elem(stack_A, stack_B);
+        ft_sort_3_elem(stack_A);
     if(stack_A_size == 4)
     {
         pb(stack_A, stack_B);
-        ft_sort_3_elem(stack_A, stack_B);
+        ft_sort_3_elem(stack_A);
         if(stack_B->top->nb > ft_max_node(stack_A)->nb)
         {
             pa(stack_B, stack_A);

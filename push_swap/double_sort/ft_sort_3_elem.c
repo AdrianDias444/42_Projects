@@ -1,17 +1,12 @@
 #include "../header.h"
 
-void ft_sort_3_elem(t_stack *stack_A, t_stack *stack_B)
+void ft_sort_3_elem(t_stack *stack_A)
 {
-    t_node *top_A;
 
-    pb(stack_A, stack_B);
-    if(stack_A->top->nb > stack_A->top->next->nb)
-        sa(stack_A);
-    pa(stack_B, stack_A);
-    top_A = stack_A->top;
-    if(top_A->nb > top_A->next->nb && top_A->nb > top_A->next->next->nb)
+    if(ft_max_node(stack_A) == stack_A->top)
         ra(stack_A);
-    top_A = stack_A->top;
-    if(top_A->nb > top_A->next->nb)
+    if(ft_max_node(stack_A) == stack_A->top->next)
+        rra(stack_A);
+    if(stack_A->top->nb > stack_A->top->next->nb)
         sa(stack_A);
 }

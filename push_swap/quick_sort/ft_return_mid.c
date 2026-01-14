@@ -13,9 +13,7 @@ t_node *ft_return_mid(t_stack *stack)
     node_count = 0;
     stack_dup = ft_dup_stack(stack);
 
-    max_node = ft_max_node(&stack_dup);
-    if(ft_lst_size(stack) %2 == 0)
-        node_count++;
+    max_node = ft_max_node(&stack_dup);;
     while(node_to_remove > node_count)
     {
         max_node = ft_max_node(&stack_dup);

@@ -3,31 +3,27 @@
 
 void ft_make_a_cicle(t_stack *a, t_stack *b)
 {
-    t_node *pivot = ft_return_mid(a);
-    int count = ft_lst_size(a);
-    int moved = 0;
-
-    while (moved < count / 2)
+    t_node *pivot;
+    
+    pivot = ft_return_mid(a);
+    while (ft_min_node(a)->nb <= pivot->nb)
     {
         if (a->top->nb <= pivot->nb)
         {
-            if (!b->top || a->top->nb > b->top->nb)
-            {
+            if(b->top && b->top->next)
+                if(b->top->nb < b->top->next->nb)
+                    sb(b);
+            
+            while(b->top && a->top->nb < b->top->nb && a->top->nb > ft_min_node(b)->nb)
+                rb(b);
+            
+            if(!b->top || !b->top->next)
                 pb(a, b);
-            }
-            else if (a->top->nb < ft_min_node(b)->nb)
-            {
-                while (b->top != ft_min_node(b))
-                    rb(b);
+            else if(b->top && b->top->next)
                 pb(a, b);
-            }
-            else
-            {
-                while (b->top->nb > a->top->nb)
-                    rb(b);
-                pb(a, b);
-            }
-            moved++;
+            if(b->top && b->top == ft_min_node(b))
+                rb(b);
+
         }
         else
             ra(a);
