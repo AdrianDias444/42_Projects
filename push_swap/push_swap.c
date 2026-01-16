@@ -43,10 +43,8 @@ int main(int argc, char **argv)
         ft_print_stack(&stack_A);
         ft_quick_sort(&stack_A, &stack_B);
         //ft_double_sort(&stack_A, &stack_B);
-        ft_print_stack(&stack_A);
+        ft_print_stack(&stack_B);
 
-/*         if(ft_is_ordered(&stack_A) == 1)
-            printf("is orderer"); */
 
     }
 }

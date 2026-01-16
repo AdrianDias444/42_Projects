@@ -1,33 +1,33 @@
 #include "../header.h"
 
 
-void ft_make_a_cicle(t_stack *a, t_stack *b)
+void ft_make_a_cicle(t_stack *stack_A, t_stack *stack_B)
 {
     t_node *pivot;
     
-    pivot = ft_return_mid(a);
-    while (ft_min_node(a)->nb <= pivot->nb)
+    pivot = ft_return_mid(stack_A);
+    printf("\npivot number is %d\n", pivot->nb);
+    while (ft_min_node(stack_A)->nb <= pivot->nb)
     {
-        if (a->top->nb <= pivot->nb)
+        if (stack_A->top->nb <= pivot->nb)
         {
-            if(b->top && b->top->next)
-                if(b->top->nb < b->top->next->nb)
-                    sb(b);
-            
-            while(b->top && a->top->nb < b->top->nb && a->top->nb > ft_min_node(b)->nb)
-                rb(b);
-            
-            if(!b->top || !b->top->next)
-                pb(a, b);
-            else if(b->top && b->top->next)
-                pb(a, b);
-            if(b->top && b->top == ft_min_node(b))
-                rb(b);
+            if(!stack_B->top || !stack_B->top->next)
+                pb(stack_A, stack_B);
+            if(stack_B->top && stack_B->top->next && stack_B->top->nb < stack_B->top->next->nb)
+                sb(stack_B);
 
+            if(stack_B->top->next &&  (stack_B->top->next->nb) < (stack_A->top->nb) < (stack_B->top->nb) && stack_A->top->nb <= pivot->nb)
+            {
+                rb(stack_B);
+                pb(stack_A, stack_B);
+                rrb(stack_B);
+            }
+            else
+                rb(stack_B);        
         }
         else
-            ra(a);
+            ra(stack_A);
     }
-    while (ft_max_node(b) != b->top)
-        rrb(b);
+    while (ft_max_node(stack_B) != stack_B->top)
+        rrb(stack_B);
 }
