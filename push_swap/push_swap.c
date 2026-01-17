@@ -40,10 +40,10 @@ int main(int argc, char **argv)
             ft_stack_push_back(&stack_A, current);
             i++;
         }
-        ft_print_stack(&stack_A);
+        //ft_print_stack(&stack_A);
         ft_quick_sort(&stack_A, &stack_B);
         //ft_double_sort(&stack_A, &stack_B);
-        ft_print_stack(&stack_B);
+        //ft_print_stack(&stack_A);
 
 
     }
