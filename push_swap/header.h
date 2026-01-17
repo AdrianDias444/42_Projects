@@ -77,6 +77,7 @@ t_stack ft_dup_stack(t_stack *stack);
 t_node *ft_remove_this_node(t_stack *stack, t_node *node_to_del);
 void ft_make_a_cicle(t_stack *stack_A, t_stack *stack_B);
 void ft_remake_cicle(t_stack *stack_A, t_stack *stack_B);
-
+int ft_more_under_pivot(t_stack *stack, t_node *pivot);
+int ft_find_place(t_stack *stack, t_node *node_to_insert);
 //////////////////////////////////////////////////////////
 #endif

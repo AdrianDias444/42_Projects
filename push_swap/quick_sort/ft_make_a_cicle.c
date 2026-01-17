@@ -6,6 +6,7 @@ void ft_make_a_cicle(t_stack *stack_A, t_stack *stack_B)
     t_node *pivot;
 
     pivot = ft_return_mid(stack_A);
+
     while(ft_min_node(stack_A)->nb <= pivot->nb)
     {
         while(stack_B->top && stack_B->top->next && ft_max_node(stack_B) != stack_B->top)
@@ -27,8 +28,14 @@ void ft_make_a_cicle(t_stack *stack_A, t_stack *stack_B)
             }
             else
             {
+                int find_place = ft_find_place(stack_B, stack_A->top);
                 while(ft_min_node(stack_B)->nb < stack_A->top->nb && stack_A->top->nb < ft_max_node(stack_B)->nb && !(stack_B->top->nb < stack_A->top->nb && stack_A->top->nb < ft_last_node(stack_B)->nb))
-                    rb(stack_B);
+                {
+                    if(find_place == 1)
+                        rb(stack_B);
+                    else
+                        rrb(stack_B);
+                }
                 pb(stack_A, stack_B);
             }
         }
