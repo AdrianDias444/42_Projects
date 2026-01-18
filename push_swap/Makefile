@@ -33,6 +33,8 @@ quick_sort/ft_make_a_cicle.c\
 quick_sort/ft_remake_cicle.c\
 quick_sort/ft_more_under_pivot.c\
 quick_sort/ft_find_place.c\
+quick_sort/ft_insert_node.c\
+quick_sort/ft_min_below.c\
 push_swap.c
 
 OBJECTS = $(SOURCES:%.c=%.o)

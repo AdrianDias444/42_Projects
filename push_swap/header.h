@@ -79,5 +79,7 @@ void ft_make_a_cicle(t_stack *stack_A, t_stack *stack_B);
 void ft_remake_cicle(t_stack *stack_A, t_stack *stack_B);
 int ft_more_under_pivot(t_stack *stack, t_node *pivot);
 int ft_find_place(t_stack *stack, t_node *node_to_insert);
+void ft_insert_node(t_stack *stack_A, t_stack *stack_B);
+t_node *ft_min_bellow(t_stack *stack_B, t_node *node_to_calc);
 //////////////////////////////////////////////////////////
 #endif
