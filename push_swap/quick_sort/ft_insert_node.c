@@ -4,21 +4,24 @@
 void ft_insert_node(t_stack *stack_A, t_stack *stack_B)
 {
     int find_place = ft_find_place(stack_B, stack_A->top);
-
-    int count;
-
-    count = 0;
-    while(ft_min_bellow(stack_A, stack_A->top) != stack_A->top)
+    if(stack_A->top->nb > ft_min_node(stack_B)->nb)
     {
-        if(find_place == 1)
+        while(ft_min_bellow(stack_B, stack_A->top)->nb != stack_B->top->nb)
         {
-            rb(stack_B);
-            count++;
+            if(find_place == 1)
+                rb(stack_B);
+            else
+                rrb(stack_B);
         }
-        else
+    }
+    else
+    {
+        while(stack_B->top->nb != ft_max_node(stack_B)->nb)
         {
-            rrb(stack_B);
-            count++;
+            if(ft_calc_cost(stack_B, ft_max_node(stack_B)) == 1)
+                rb(stack_B);
+            else
+                rrb(stack_B);
         }
     }
     pb(stack_A, stack_B);
