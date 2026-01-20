@@ -6,7 +6,6 @@ void ft_make_a_cicle(t_stack *stack_A, t_stack *stack_B)
     t_node *pivot;
 
     pivot = ft_return_mid(stack_A);
-    //int cost;
     while(ft_min_node(stack_A)->nb <= pivot->nb)
     {
         if(stack_A->top->nb <= pivot->nb)
