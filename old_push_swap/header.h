@@ -24,7 +24,7 @@ typedef struct s_stack
 //----------------------
 // My functions
 
-int     ft_atoi(const char *nptr);
+int	ft_atoi(const char *nptr);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
@@ -66,7 +66,7 @@ t_node *ft_min_node(t_stack *stack);
 t_node *ft_max_node(t_stack *stack);
 int ft_calc_cost(t_stack *stack, t_node *node_to_calc);
 void ft_sort_man(t_stack *stack_A, t_stack *stack_B);
-void ft_sort_3_elem(t_stack *stack_A, t_stack *stack_B);
+void ft_sort_3_elem(t_stack *stack_A);
 
 
 //////////////////////////////////////////////////////////
@@ -81,9 +81,5 @@ int ft_more_under_pivot(t_stack *stack, t_node *pivot);
 int ft_find_place(t_stack *stack, t_node *node_to_insert);
 void ft_insert_node(t_stack *stack_A, t_stack *stack_B);
 t_node *ft_min_bellow(t_stack *stack_B, t_node *node_to_calc);
-int ft_how_many_not_order(t_stack *stack);
-t_node *ft_sub_pivot(t_stack *stack);
-t_stack ft_sub_stack(t_stack *stack);
-t_node *ft_return_max_sub_node(t_stack *stack);
 //////////////////////////////////////////////////////////
 #endif
