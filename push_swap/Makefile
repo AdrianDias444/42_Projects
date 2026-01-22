@@ -19,11 +19,12 @@ mv_rules/sa.c mv_rules/sb.c mv_rules/ss.c\
 mv_rules/pa.c mv_rules/pb.c\
 mv_rules/ra.c mv_rules/rb.c mv_rules/rr.c\
 mv_rules/rra.c mv_rules/rrb.c mv_rules/rrr.c\
-extra/ft_min_node.c\
-extra/ft_max_node.c\
-extra/ft_calc_cost.c\
-extra/ft_sort_man.c\
-extra/ft_sort_3_elem.c\
+double_sort/ft_min_node.c\
+double_sort/ft_max_node.c\
+double_sort/ft_calc_cost.c\
+double_sort/ft_double_sort.c\
+double_sort/ft_sort_man.c\
+double_sort/ft_sort_3_elem.c\
 quick_sort/ft_quick_sort.c\
 quick_sort/ft_return_mid.c\
 quick_sort/ft_dup_stack.c\
@@ -34,10 +35,7 @@ quick_sort/ft_more_under_pivot.c\
 quick_sort/ft_find_place.c\
 quick_sort/ft_insert_node.c\
 quick_sort/ft_min_below.c\
-quick_sort/ft_how_many_not_order.c\
-quick_sort/ft_sub_pivot.c\
-quick_sort/ft_sub_stack.c\
-quick_sort/ft_return_max_sub_node.c\
+quick_sort/ft_return_mid_mid.c\
 push_swap.c
 
 OBJECTS = $(SOURCES:%.c=%.o)

@@ -14,10 +14,17 @@ void ft_insert_node(t_stack *stack_A, t_stack *stack_B)
                 rrb(stack_B);
         }
     }
-    if(stack_A->top)
-        pb(stack_A, stack_B);
-    if(stack_B->top->nb == ft_min_node(stack_B)->nb)
-        rb(stack_B);
+    else
+    {
+        while(stack_B->top->nb != ft_max_node(stack_B)->nb)
+        {
+            if(ft_calc_cost(stack_B, ft_max_node(stack_B)) == 1)
+                rb(stack_B);
+            else
+                rrb(stack_B);
+        }
+    }
+    pb(stack_A, stack_B);
 }
 
 

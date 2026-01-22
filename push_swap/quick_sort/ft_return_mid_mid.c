@@ -1,6 +1,6 @@
 #include "../header.h"
 
-t_node *ft_return_mid(t_stack *stack)
+t_node *ft_return_mid_mid(t_stack *stack)
 {
 
     int node_to_remove;
@@ -9,7 +9,7 @@ t_node *ft_return_mid(t_stack *stack)
     t_stack stack_dup;
 
     ft_stack_init(&stack_dup);
-    node_to_remove = ft_lst_size(stack)/2;
+    node_to_remove = ft_lst_size(stack)/2 + ft_lst_size(stack)/4 + ft_lst_size(stack)/8;
     node_count = 0;
     stack_dup = ft_dup_stack(stack);
 

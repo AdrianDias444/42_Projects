@@ -40,10 +40,10 @@ int main(int argc, char **argv)
             ft_stack_push_back(&stack_A, current);
             i++;
         }
-        //ft_print_stack(&stack_A);        
-        ft_quick_sort(&stack_A, &stack_B);
         //ft_print_stack(&stack_A);
-        //printf("\nmax sub node is %d\n", ft_return_max_sub_node(&stack_A)->nb);
+        ft_quick_sort(&stack_A, &stack_B);
+        //ft_double_sort(&stack_A, &stack_B);
+        //ft_print_stack(&stack_A);
 
 
     }
