@@ -34,6 +34,7 @@ void ft_make_a_cicle(t_stack *stack_A, t_stack *stack_B)
         }
 
     }
+    free(pivot);
     while(stack_B->top != ft_max_node(stack_B))
     {
         if(ft_calc_cost(stack_B, ft_max_node(stack_B)) == 1)
@@ -41,4 +42,5 @@ void ft_make_a_cicle(t_stack *stack_A, t_stack *stack_B)
         else
             rrb(stack_B);
     }
+
 }

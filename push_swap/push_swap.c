@@ -44,7 +44,8 @@ int main(int argc, char **argv)
         ft_quick_sort(&stack_A, &stack_B);
         //ft_double_sort(&stack_A, &stack_B);
         //ft_print_stack(&stack_A);
-
+        ft_free_stack(&stack_A);
+        ft_free_stack(&stack_B);
 
     }
 }
