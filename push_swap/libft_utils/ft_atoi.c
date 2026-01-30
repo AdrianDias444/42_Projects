@@ -1,10 +1,10 @@
 #include "../header.h"
 
-int	ft_atoi(const char *nptr)
+long long	ft_atoi(const char *nptr)
 {
-	int	signal;
-	int	negativo;
-	int	res;
+	long long	signal;
+	long long	negativo;
+	long long	res;
 
 	signal = 0;
 	negativo = 1;

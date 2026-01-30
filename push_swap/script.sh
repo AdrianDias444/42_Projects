@@ -3,7 +3,7 @@
 soma=0
 
 for ((i = 0; i < 10; i++)); do
-    ARG=($(shuf -i 1-2500 -n 100))
+    ARG=($(shuf -i 1-2500 -n 500))
 
     output=$(./a.out "${ARG[@]}")
 

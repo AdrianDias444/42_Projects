@@ -4,6 +4,8 @@ SOURCES = libft_utils/ft_atoi.c\
 libft_utils/ft_split.c\
 libft_utils/ft_strlcpy.c\
 libft_utils/ft_strlen.c\
+libft_utils/ft_substr.c\
+libft_utils/ft_strdup.c\
 mv_utils/ft_create_node.c\
 mv_utils/ft_stack_init.c\
 mv_utils/ft_stack_pop.c\
@@ -35,6 +37,8 @@ quick_sort/ft_find_place.c\
 quick_sort/ft_insert_node.c\
 quick_sort/ft_min_below.c\
 quick_sort/ft_return_mid_mid.c\
+parser/ft_parser.c\
+parser/ft_is_a_string.c\
 push_swap.c
 
 OBJECTS = $(SOURCES:%.c=%.o)

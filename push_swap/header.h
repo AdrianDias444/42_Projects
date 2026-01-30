@@ -25,13 +25,15 @@ typedef struct s_stack
 //////////////////////////////////////////////////////////
 // Libft functions
 
-int	ft_atoi(const char *nptr);
+long long   ft_atoi(const char *nptr);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *s);
 //////////////////////////////////////////////////////////
 // mv_utils
-t_node *ft_create_node(int value);
+t_node *ft_create_node(long long value);
 void ft_stack_init(t_stack *stack);
 void ft_stack_push(t_stack *stack, t_node *node);
 t_node *ft_stack_pop(t_stack *stack);
@@ -79,4 +81,8 @@ void ft_insert_node(t_stack *stack_A, t_stack *stack_B);
 t_node *ft_min_bellow(t_stack *stack_B, t_node *node_to_calc);
 t_node *ft_return_mid_mid(t_stack *stack);
 //////////////////////////////////////////////////////////
+// parser
+void ft_parser(int argc, char **argv, t_stack *stack_A);
+int ft_is_a_string(char *str);
+
 #endif

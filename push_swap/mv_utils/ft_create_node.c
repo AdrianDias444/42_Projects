@@ -1,6 +1,6 @@
 #include "../header.h"
 
-t_node *ft_create_node(int value)
+t_node *ft_create_node(long long value)
 {
     t_node *new_node;
 
