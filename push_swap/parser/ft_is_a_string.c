@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_is_a_string.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: addias <addias@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/15 11:24:32 by addias            #+#    #+#             */
+/*   Updated: 2026/02/15 12:25:58 by addias           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header.h"
 
-int ft_is_a_string(char *str)
+int	ft_is_a_string(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while(str[i])
-    {
-        if(str[i] == ' ')
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ')
+			return (0);
+		i++;
+	}
+	return (1);
 }

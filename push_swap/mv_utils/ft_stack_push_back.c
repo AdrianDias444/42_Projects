@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_stack_push_back.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: addias <addias@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/15 11:24:25 by addias            #+#    #+#             */
+/*   Updated: 2026/02/15 11:24:25 by addias           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header.h"
 
-void ft_stack_push_back(t_stack *stack, t_node *node)
+void	ft_stack_push_back(t_stack *stack, t_node *node)
 {
-    t_node *last;
+	t_node	*last;
 
-    if(!stack->top)
-    {
-        stack -> top = node;
-        return ;
-    }
-    last = ft_last_node(stack);
-    last -> next = node;
+	if (!stack->top)
+	{
+		stack->top = node;
+		return ;
+	}
+	last = ft_last_node(stack);
+	last->next = node;
 }
 
 // int main(void)

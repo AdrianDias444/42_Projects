@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pb.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: addias <addias@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/15 11:23:31 by addias            #+#    #+#             */
+/*   Updated: 2026/02/15 12:03:54 by addias           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header.h"
 
-void pb(t_stack *stack_A, t_stack *stack_B)
+void	pb(t_stack *stack_A, t_stack *stack_B)
 {
-    t_node *node_to_push;
+	t_node	*node_to_push;
 
-    if(!stack_A || !stack_A->top)
-        return ;
-    node_to_push = ft_stack_pop(stack_A);
-    ft_stack_push(stack_B, node_to_push);
-    printf("pb\n");
+	if (!stack_A || !stack_A->top)
+		return ;
+	node_to_push = ft_stack_pop(stack_A);
+	ft_stack_push(stack_B, node_to_push);
+	ft_printf("pb\n");
 }
 
 // int main(void)

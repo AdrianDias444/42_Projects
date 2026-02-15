@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_stack_init.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: addias <addias@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/15 11:24:14 by addias            #+#    #+#             */
+/*   Updated: 2026/02/15 12:05:17 by addias           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header.h"
 
-void ft_stack_init(t_stack *stack)
+void	ft_stack_init(t_stack *stack)
 {
-    stack -> top = NULL;
-    stack -> size = 0;
+	stack->top = NULL;
+	stack->size = 0;
 }

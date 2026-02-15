@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: addias <addias@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/02/15 11:27:20 by addias            #+#    #+#              #
+#    Updated: 2026/02/15 11:33:57 by addias           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = push_swap.a
 
 SOURCES = libft_utils/ft_atoi.c\
@@ -6,6 +18,8 @@ libft_utils/ft_strlcpy.c\
 libft_utils/ft_strlen.c\
 libft_utils/ft_substr.c\
 libft_utils/ft_strdup.c\
+libft_utils/ft_printf.c\
+libft_utils/ft_printf_utils.c\
 mv_utils/ft_create_node.c\
 mv_utils/ft_stack_init.c\
 mv_utils/ft_stack_pop.c\
@@ -31,7 +45,6 @@ quick_sort/ft_return_mid.c\
 quick_sort/ft_dup_stack.c\
 quick_sort/ft_remove_this_node.c\
 quick_sort/ft_make_a_cicle.c\
-quick_sort/ft_remake_cicle.c\
 quick_sort/ft_more_under_pivot.c\
 quick_sort/ft_find_place.c\
 quick_sort/ft_insert_node.c\

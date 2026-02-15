@@ -1,0 +1,77 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: addias <addias@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/15 11:31:46 by addias            #+#    #+#             */
+/*   Updated: 2026/02/15 12:03:16 by addias           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../header.h"
+
+int	ft_putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+
+int	ft_putstr(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (write(1, "(null)", 6));
+	i = 0;
+	while (str[i])
+		write(1, &str[i++], 1);
+	return (i);
+}
+
+int	ft_putnbr(int nb)
+{
+	long	n;
+	int		i;
+
+	n = nb;
+	i = 0;
+	if (nb < 0)
+	{
+		n = -n;
+		write(1, "-", 1);
+		i++;
+	}
+	if (n > 9)
+		i += ft_putnbr(n / 10);
+	i += ft_putchar((n % 10) + '0');
+	return (i);
+}
+
+int	ft_putnbr_unsigned(unsigned int nb)
+{
+	int	i;
+
+	i = 0;
+	if (nb > 9)
+		i += ft_putnbr_unsigned(nb / 10);
+	i += ft_putchar((nb % 10) + '0');
+	return (i);
+}
+
+int	ft_puthex(unsigned long nb, char def)
+{
+	char	*hex;
+	int		i;
+
+	i = 0;
+	if (nb == 0)
+		return (ft_putchar('0'));
+	hex = "0123456789abcdef";
+	if (def == 'X')
+		hex = "0123456789ABCDEF";
+	if (nb >= 16)
+		i += ft_puthex(nb / 16, def);
+	i += ft_putchar(hex[nb % 16]);
+	return (i);
+}

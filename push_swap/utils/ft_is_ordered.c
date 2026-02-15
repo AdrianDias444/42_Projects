@@ -1,37 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_is_ordered.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: addias <addias@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/15 11:26:06 by addias            #+#    #+#             */
+/*   Updated: 2026/02/15 13:08:31 by addias           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header.h"
 
-int ft_is_ordered(t_stack *stack)
+int	ft_is_ordered(t_stack *stack)
 {
-    t_node *current;
-    int i;
+	t_node	*current;
+	int		i;
 
-    i = 1;
-    current = stack->top;
-    while(current && current -> next)
-    {
-        if(current->nb > current ->next->nb)
-            i = 0;
-        current = current -> next;
-    }
-    return(i);
+	i = 1;
+	current = stack->top;
+	while (current && current->next)
+	{
+		if (current->nb > current->next->nb)
+			i = 0;
+		current = current->next;
+	}
+	return (i);
 }
 
 /* int main(void)
 {
-    t_node *first_node;
-    t_node *second_node;
-    t_node *third_node;
+	t_node *first_node;
+	t_node *second_node;
+	t_node *third_node;
 
-    t_stack stack;
+	t_stack stack;
 
-    ft_stack_init(&stack);
+	ft_stack_init(&stack);
 
-    first_node = ft_create_node(1);
-    ft_stack_push_back(&stack, first_node);
+	first_node = ft_create_node(1);
+	ft_stack_push_back(&stack, first_node);
 
-    second_node = ft_create_node(2);
-    ft_stack_push_back(&stack, second_node);
+	second_node = ft_create_node(2);
+	ft_stack_push_back(&stack, second_node);
 
-    third_node = ft_create_node(3);
-    ft_stack_push_back(&stack, third_node);
+	third_node = ft_create_node(3);
+	ft_stack_push_back(&stack, third_node);
 } */

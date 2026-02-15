@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ss.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: addias <addias@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/15 11:24:02 by addias            #+#    #+#             */
+/*   Updated: 2026/02/15 12:04:36 by addias           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header.h"
 
-void ss(t_stack *stack_A, t_stack *stack_B)
+void	ss(t_stack *stack_A, t_stack *stack_B)
 {
-    sa(stack_A);
-    sb(stack_B);
-    printf("ss\n");
+	sa(stack_A);
+	sb(stack_B);
+	ft_printf("ss\n");
 }

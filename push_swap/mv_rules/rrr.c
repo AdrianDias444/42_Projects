@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rrr.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: addias <addias@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/15 11:23:51 by addias            #+#    #+#             */
+/*   Updated: 2026/02/15 12:04:20 by addias           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header.h"
 
-void rrr(t_stack *stack_A, t_stack *stack_B)
+void	rrr(t_stack *stack_A, t_stack *stack_B)
 {
-    rra(stack_A);
-    rrb(stack_B);
-    printf("rrr\n");
+	rra(stack_A);
+	rrb(stack_B);
+	ft_printf("rrr\n");
 }
