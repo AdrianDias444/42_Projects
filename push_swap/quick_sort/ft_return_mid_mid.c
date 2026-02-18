@@ -6,7 +6,7 @@
 /*   By: addias <addias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 11:25:24 by addias            #+#    #+#             */
-/*   Updated: 2026/02/15 12:50:00 by addias           ###   ########.fr       */
+/*   Updated: 2026/02/17 11:02:11 by addias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_node	*ft_return_mid_mid(t_stack *stack)
 		+ ft_lst_size(stack) / 8;
 	node_count = 0;
 	stack_dup = ft_dup_stack(stack);
-	max_node = ft_max_node(&stack_dup);
 	while (node_to_remove > node_count)
 	{
 		max_node = ft_max_node(&stack_dup);

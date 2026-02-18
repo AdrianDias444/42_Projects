@@ -6,7 +6,7 @@
 /*   By: addias <addias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 11:26:44 by addias            #+#    #+#             */
-/*   Updated: 2026/02/15 11:58:49 by addias           ###   ########.fr       */
+/*   Updated: 2026/02/17 10:39:45 by addias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	main(int argc, char **argv)
 	{
 		ft_parser(argc, argv, &stack_a);
 		ft_quick_sort(&stack_a, &stack_b);
+		ft_free_stack(&stack_a);
 	}
-	ft_free_stack(&stack_a);
 }
