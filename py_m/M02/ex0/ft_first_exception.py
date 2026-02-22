@@ -12,17 +12,14 @@ def check_temperature(temp_str:str):
         print(f"Error: '{temp_str}' is not a valid number")
 
 
-def test_temperature_input():
-    print("=== Garden Temperature Checker ===\n")
-
-    test = ["25", "abc", "100", "-50"]
+def test_temperature_input(test):
     for a in test:
         print(f"Testing temperature: {a}")
-        out = check_temperature(a)
-        if(out):
+        if(check_temperature(a)):
             print(f"Temperature {a}°C is perfect for plants!")
 
-        print()
 
-
-test_temperature_input()
+if __name__ == "__main__":
+    print("=== Garden Temperature Checker ===\n")
+    test = ["25", "abc", "100", "-50"]
+    test_temperature_input(test)

@@ -1,4 +1,6 @@
+
 def garden_operations(error:str):
+    garden_dict = {"tomatoes": 10}
     if(error == "ValueError"):
         nb = int("abc")
     elif(error == "ZeroDivisionError"):
@@ -6,8 +8,7 @@ def garden_operations(error:str):
     elif (error == "FileNotFoundError"):
         open("missing.txt", "r")
     elif (error == "KeyError"):
-        garden_dict = {"tomatoes": 10}
-        garden_dict["missing\_plant"]
+        garden_dict["apples"]
         
 def test_error_types():
     print("=== Garden Error Types Demo ===")
@@ -27,12 +28,7 @@ def test_error_types():
         except FileNotFoundError:
             print(f"Caught {a}: no such file 'missing.txt'")
         except KeyError:
-            print(f"Caught {a}: 'missing\_plant'")
+            print(f"Caught {a}: 'apple'")
         print()
 
 test_error_types()
-
-
-
-a = int("212s13")
-

@@ -1,3 +1,32 @@
+class Plant():
+    def __init__(self, name:str, height:int):
+        self.name = name
+        self.height = height
+        self.initial_height = height
+        self.plant_type = "plant"
+    def grow(self):
+        self.height += 1
+        print(f"{self.name} grew 1cm")
+
+class FloweringPlant(Plant):
+    def __init__(self, name:str, height:int, color:str, bloom:bool):
+        super().__init__(name, height)
+        self.color = color
+        self.bloom = False
+        self.plant_type = "flower"
+    def bloom_plant(self):
+        self.is_blooming = True
+        print(f"The flower {self.name} is blooming")
+
+class PrizeFlower(FloweringPlant):
+    def __init__(self, name:str, height:int, color:str, bloom:str, points:int):
+        super().__init__(name, height, color, bloom)
+        self.points = points    
+        self.plant_type = "prized flower"
+    def prized(self):
+        self.points += 10
+
+
 
 class GardenManager():
     def __init__(self, name:str, number:int):
@@ -54,33 +83,6 @@ class GardenManager():
     def get_stats(self):
         return self.GardenStats(self.plants)
 
-class Plant():
-    def __init__(self, name:str, height:int):
-        self.name = name
-        self.height = height
-        self.initial_height = height
-        self.plant_type = "plant"
-    def grow(self):
-        self.height += 1
-        print(f"{self.name} grew 1cm")
-
-class FloweringPlant(Plant):
-    def __init__(self, name:str, height:int, color:str, bloom:bool):
-        super().__init__(name, height)
-        self.color = color
-        self.bloom = False
-        self.plant_type = "flower"
-    def bloom_plant(self):
-        self.is_blooming = True
-        print(f"The flower {self.name} is blooming")
-
-class PrizeFlower(FloweringPlant):
-    def __init__(self, name:str, height:int, color:str, bloom:str, points:int):
-        super().__init__(name, height, color, bloom)
-        self.points = points    
-        self.plant_type = "prized flower"
-    def prized(self):
-        self.points += 10
 
 if __name__ == "__main__":
     print("=== Garden Management System Demo ===\n")
@@ -122,4 +124,4 @@ if __name__ == "__main__":
         bob_score += p.height
     
     print(f"\nGarden scores - Alice: {alice_score}, Bob: {bob_score}")
-    print(f"Total gardens managed: {len(jardins)}\n")
+    print(f"Total gardens managed: {len(jardins)}\n")   
