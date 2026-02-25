@@ -107,7 +107,7 @@ def test_garden_management():
 
     print("Adding plants to garden...")
     
-    name = ["tomato", "lettuce", "apple"]
+    name = ["tomato", "lettuce", "", "apple"]
     for i in name:
         plant = Plant(i, 53, 22)
         garden.add_plant(plant)
@@ -123,7 +123,7 @@ def test_garden_management():
     print("\nTesting error recovery...")
     garden.error_recovery(plants)
 
-    print("Garden management system test complete")
+    print("\nGarden management system test complete")
 
 if __name__ == "__main__":
     test_garden_management()
