@@ -8,7 +8,7 @@ class SunlightError(Exception):
     pass
 
 def check_plant_health(plant_name, water_level, sunlight_hours):
-    if(plant_name.strip(" ") == ""):
+    if(not plant_name or plant_name.strip(" ") == ""):
         raise VoidError("Plant name cannot be empty!\n")
 
     if(not(1 <= water_level <= 10)):
@@ -35,7 +35,7 @@ def test_plant_checks():
         print("Error")
 
     print("Testing empty plant names...")
-    plant2 = " "
+    plant2 = None
     try:
         check_plant_health(plant2, 5, 10)
         print(f"Plant '{plant2}' have a valid name\n")
