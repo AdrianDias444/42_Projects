@@ -75,11 +75,11 @@ class Inventory_Manager():
         }
         for i in inventory.items():
             if(int(i[1]) > 3):
-                lst['Moderate'].update({i[0]:i[1]})
+                lst['Moderate'].update({i[0]:int(i[1])})
             else:
-                lst['Scarce'].update({i[0]:i[1]})
+                lst['Scarce'].update({i[0]:int(i[1])})
                 if(int(i[1]) < 2):
-                    lst['Restock'].update({i[0]:i[1]})
+                    lst['Restock'].update({i[0]:int(i[1])})
 
         print(f"Moderate: {lst['Moderate']}")
         print(f"Scarce: {lst['Scarce']}")
