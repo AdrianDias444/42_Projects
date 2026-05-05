@@ -1,0 +1,83 @@
+import random
+from typing import Generator
+
+from config import Cell, Grid
+from utils import retrieve_position as rp
+
+
+def calculate_neighbors(grid: Grid, cell: Cell) -> int:
+    neighbors = 0
+    if rp.return_north_cell(grid, cell).x >= 0:
+        neighbors += 1
+    if rp.return_east_cell(grid, cell).x >= 0:
+        neighbors += 1
+    if rp.return_south_cell(grid, cell).x >= 0:
+        neighbors += 1
+    if rp.return_west_cell(grid, cell).x >= 0:
+        neighbors += 1
+    return neighbors
+
+
+def calculate_unvisited_neighbors(
+    grid: Grid, cell: Cell
+) -> Generator[Cell, None, None]:
+
+    norht_cell = rp.return_north_cell(grid, cell)
+    if norht_cell.x >= 0 and not norht_cell.visited:
+        yield norht_cell
+
+    east_cell = rp.return_east_cell(grid, cell)
+    if east_cell.x >= 0 and not east_cell.visited:
+        yield east_cell
+
+    south_cell = rp.return_south_cell(grid, cell)
+    if south_cell.x >= 0 and not south_cell.visited:
+        yield south_cell
+
+    west_cell = rp.return_west_cell(grid, cell)
+    if west_cell.x >= 0 and not west_cell.visited:
+        yield west_cell
+
+
+def remove_walls_between(cell1: Cell, cell2: Cell):
+    if cell2.x == cell1.x + 1:  # cell2 está à direita
+        cell1.walls["right"] = False
+        cell2.walls["left"] = False
+    elif cell2.x == cell1.x - 1:  # cell2 está à esquerda
+        cell1.walls["left"] = False
+        cell2.walls["right"] = False
+    elif cell2.y == cell1.y + 1:  # cell2 está abaixo
+        cell1.walls["bottom"] = False
+        cell2.walls["top"] = False
+    elif cell2.y == cell1.y - 1:  # cell2 está acima
+        cell1.walls["top"] = False
+        cell2.walls["bottom"] = False
+
+
+def dfs(grid: Grid):
+    caminho = []
+    total = []
+    entry_cell = grid.entry_cell
+    entry_cell.visited = True
+    caminho.append(entry_cell)
+    total.append(entry_cell)
+
+    while len(total) != grid.width * grid.height:
+        current = caminho[-1]
+
+        unvisited = list(calculate_unvisited_neighbors(grid, current))
+
+        if len(unvisited) > 0:
+            next_cell = random.choice(unvisited)
+            next_cell.visited = True
+
+            if not next_cell.logo:
+                remove_walls_between(current, next_cell)
+
+            caminho.append(next_cell)
+            total.append(next_cell)
+        else:
+            caminho.pop()
+            if not caminho:
+                break
+    return caminho

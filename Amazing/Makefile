@@ -1,5 +1,5 @@
 install:
-	pip install mypy, numpy, pytest
+	pip install mypy numpy pytest
 
 run:
 	python3 a_maze_ing.py config.txt

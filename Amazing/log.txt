@@ -1,0 +1,42 @@
+# 1 log (24/04)
+--------------------------------------------------------------
+# Testar todos os return (Norh, South, East, West)
+# Praticamente certeza que estao a funcionar
+# Entretanto preciso de verificar limites, fora do grid
+# Ou entao dentro do grid e tentar retornar posicoes impossiveis
+# Caso o center_cell esteja na margem
+
+
+# 2 log (24/04)
+-------------------------------------------------------------
+# return_north_cell() testado para todos os casos possiveis
+# (todos os 4 cantos do grid)
+# (coordenadadas negativas. Apenas x/ Apenas y/ Ambos x e y)
+# (celula inexistente, entrentanto north_cell existe, retorna Cell(-1, -1)
+
+
+# 3 log (25/04) : 11:30
+--------------------------------------------------------------
+# return_east_cell() testado
+# tinha um erro, retornava west ao inves de east (Corrigido)
+# return_south_cell() testado
+# return_weast_cell() testado
+
+
+# 4 log (25/04) : 12:09
+--------------------------------------------------------------
+# calculate_neighbors(), funcao para retornar um inteiro
+# representado o numero de celulas existentes a volta
+# (Testado)
+
+
+# 5 log (25/04) : 12:33
+--------------------------------------------------------------
+# calculate_unvisited_neighbors(), funcao para retornar
+# celulas vizinhas com self.visited == False
+# (Testado)
+
+
+# 6 log (25/04) : 14:59
+--------------------------------------------------------------
+# Inicio da logica princial do while

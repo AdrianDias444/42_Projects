@@ -15,6 +15,20 @@ class Cell:
         self.walls = {"top": True, "left": True, "bottom": True, "right": True}
         self.entry = False
         self.exit = False
+        self.visited = False
+        self.logo = False
+        self.binary_list = [1, 1, 1, 1]
+        self.binary = 0
+        self.hex = ""
+
+    def convert_binaryList_to_binary(self) -> int:
+        binary = 0
+        for i in self.binary_list:
+            binary = binary * 2 + i
+        return binary
+
+    def convert_binary_to_hex(self, binary):
+        return format(binary, "X")
 
 
 class Grid:
