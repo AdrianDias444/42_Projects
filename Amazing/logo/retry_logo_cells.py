@@ -9,7 +9,7 @@ def make_cells_visited_right(grid: Grid, center_cell: Cell, aresta: int):
         if cell == center_cell:
             lock = True
             continue
-        if lock and i < aresta:
+        if lock and i < aresta and not cell.entry and not cell.exit:
             cell.visited = True
             cell.logo = True
             cells.append(cell)
@@ -21,7 +21,7 @@ def make_cells_visited_left(grid: Grid, center_cell: Cell, aresta: int):
     i = 0
     cells = []
     for cell in reversed(grid.grid[center_cell.y]):
-        if cell.x < center_cell.x and i < aresta:
+        if cell.x < center_cell.x and i < aresta and not cell.entry and not cell.exit:
             cell.visited = True
             cell.logo = True
             cells.append(cell)
@@ -36,6 +36,8 @@ def make_cells_visited_top(grid: Grid, center_cell: Cell, aresta: int):
             if (
                 cell.x == center_cell.x
                 and center_cell.y - aresta <= cell.y < center_cell.y
+                and not cell.entry
+                and not cell.exit
             ):
                 cell.visited = True
                 cell.logo = True
@@ -50,6 +52,8 @@ def make_cells_visited_bottom(grid: Grid, center_cell: Cell, aresta: int):
             if (
                 cell.x == center_cell.x
                 and center_cell.y < cell.y <= center_cell.y + aresta
+                and not cell.entry
+                and not cell.exit
             ):
                 cell.visited = True
                 cell.logo = True

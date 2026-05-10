@@ -19,7 +19,7 @@ def give_hex_to_cells(grid: Grid):
 
 
 def put_hex_cells_in_file(grid: Grid, coordinates):
-    file = open("output_file.txt", "a")
+    file = open(grid.output_file, "a")
     for row in grid.grid:
         for cell in row:
             file.write(cell.hex)

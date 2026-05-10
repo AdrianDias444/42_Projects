@@ -42,6 +42,8 @@ def print_grid(grid: Grid, caminho):
                     print("|###", end="")
                 elif cell in caminho:
                     print("| . ", end="")
+                    # elif cell in extensao:
+                    # print("| ? ", end="")
 
                 else:
                     print("|   ", end="")
@@ -54,6 +56,8 @@ def print_grid(grid: Grid, caminho):
                     print("####", end="")
                 elif cell in caminho:
                     print(" .  ", end="")
+                    # elif cell in extensao:
+                    # print(" ?  ", end="")
 
                 else:
                     print("    ", end="")

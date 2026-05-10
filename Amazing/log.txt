@@ -40,3 +40,10 @@
 # 6 log (25/04) : 14:59
 --------------------------------------------------------------
 # Inicio da logica princial do while
+
+
+# 7 log (09/05): 10:30
+--------------------------------------------------------------
+# Toda a logica de gerador feito
+# Ainda tenho de lidar caso grid menor que 10x10, assim nao exibir logo e printar mensagem de erro na consola (Corrigido)
+# Lidar com parser (numeros negativos, espacos entre coordenadas, coordenadas fora do grid)
