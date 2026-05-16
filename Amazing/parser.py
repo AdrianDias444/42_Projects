@@ -13,6 +13,10 @@ class Equal_Not_Defined_Error(Exception):
     pass
 
 
+class Key_Not_Exist(Exception):
+    pass
+
+
 def checker_configs_keys(configs_keys):
     lista = []
     width = "WIDTH"
@@ -38,6 +42,7 @@ def checker_configs_keys(configs_keys):
     lista = list(set(lista))
     if not len(lista) == 6:
         return "Error"
+    return lista
 
 
 def checker_configs_values(configs_values):
@@ -68,6 +73,11 @@ def raise_equal_not_defined_error(file):
                 )
 
 
+def raise_key_not_exist(key, keys_list):
+    if key not in keys_list:
+        raise Key_Not_Exist("Invalid Config File!")
+
+
 def order_values(lst_keys, list_values):
     list_values_order = []
 
@@ -95,7 +105,7 @@ def order_values(lst_keys, list_values):
 def parser_to_class(file):
     lst_values = []
     lst_keys = []
-
+    keys_ideal = ["WIDTH", "HEIGHT", "ENTRY", "EXIT", "OUTPUT_FILE", "PERFECT"]
     try:
         raise_equal_not_defined_error(file)
     except Equal_Not_Defined_Error as e:
@@ -103,16 +113,21 @@ def parser_to_class(file):
         return "Error"
     file.seek(0)
     for row in file:
-        array = row.split("=", maxsplit=1)
-        lst_values.append(array[1].strip().replace(" ", ""))
-        lst_keys.append(array[0].strip().upper().replace(" ", ""))
+        if not row[0] == "#":
+            array = row.split("=", maxsplit=1)
+            lst_values.append(array[1].strip().replace(" ", ""))
+            lst_keys.append(array[0].strip().upper().replace(" ", ""))
     try:
+        raise_key_not_exist(lst_keys, keys_ideal)
         raise_keys_configs_error(lst_keys)
         raise_value_configs_error(lst_values)
     except Keys_Configs_Error as e:
         print(e)
         return "Error"
     except Value_Configs_Error as e:
+        print(e)
+        return "Error"
+    except Key_Not_Exist as e:
         print(e)
         return "Error"
     lst_values = order_values(lst_keys, lst_values)
