@@ -1,28 +1,36 @@
 #!/usr/bin/python3
 
-if __name__ == "__main__"
-    class Plant:
-        def __init__(self, name:str, height:int, age:int):
-            self.name = name
-            self.height = height
-            self.age = age
 
-        def get_info(plant:Plant):
-            print(f"{plant.name}: {plant.height}cm, {plant.age} days old")
-        def grow(plant:Plant):
-            plant.height = plant.height+6
-        def age(plant:Plant):
-            plant.age = plant.age+6
+class Plant:
+    def __init__(self, name: str, height: float, age_days: int) -> None:
+        self.name = name
+        self.height = height
+        self.age_days = age_days
 
+    def show(self) -> None:
+        print(f"{self.name}: {round(self.height, 2)}cm, {self.age_days} days old")
+
+    def grow(self) -> None:
+        self.height += 0.55
+
+    def age(self) -> None:
+        self.age_days += 1
+
+
+def main():
     plant = Plant("Rose", 25, 30)
-    height_initial = plant.height
-    print("=== Day 1 ===")
+    initial_height = plant.height
+    print("=== Garden Plant Growth ===")
+    plant.show()
+    for i in range(1, 8):
+        print(f"=== Day {i} ===")
+        plant.grow()
+        plant.age()
+        plant.show()
 
-    Plant.get_info(plant)
+    growth = round(plant.height - initial_height, 2)
+    print(f"Growth this week + {growth}cm")
 
-    print("=== Day 7 ===")
-    Plant.grow(plant)
-    Plant.age(plant)
-    Plant.get_info(plant)
 
-    print(f"Growth this week + {plant.height - height_initial}cm")
+if __name__ == "__main__":
+    main()
