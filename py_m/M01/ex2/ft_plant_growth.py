@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 if __name__ == "__main__"
     class Plant:
         def __init__(self, name:str, height:int, age:int):
