@@ -1,25 +1,22 @@
-def check_temperature(temp_str:str):
+#!/usr/bin/python
+
+def input_temperature(temp_str)-> int:
     try:
+        print(f"Input data is '{temp_str}'")
         nb = int(temp_str)
-        if(0 <= nb <= 50):
-            return nb
-        else:
-            if(nb < 0):
-                print(f"Error: {temp_str}C is too cold for plants (min 0°C)")
-            else:
-                print(f"Error: {temp_str}C is too hot for plants (max 40°C)")
+        print(f"Temperature is now {nb}°C\n")
+        return (nb)
     except ValueError:
-        print(f"Error: '{temp_str}' is not a valid number")
-
-
-def test_temperature_input(test):
-    for a in test:
-        print(f"Testing temperature: {a}")
-        if(check_temperature(a)):
-            print(f"Temperature {a}°C is perfect for plants!")
-
-
+        print(f"Caught input_temperature error: invalid literal for int() with base 10: '{temp_str}'\n")
+    
+def test_temperature():
+    input_temperature(25)
+    input_temperature('abc')
+    print("All tests completed - program didn't crash!")
+    
+def  main():
+    print("=== Garden Temperature ===\n")
+    test_temperature()
+            
 if __name__ == "__main__":
-    print("=== Garden Temperature Checker ===\n")
-    test = ["25", "abc", "100", "-50"]
-    test_temperature_input(test)
+    main()
