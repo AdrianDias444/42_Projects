@@ -1,46 +1,48 @@
+#!/usr/bin/python
+
 import sys
 import math
 
-
-class coord_error(Exception):
+class FormatError(Exception):
     pass
-
-def raise_coord_error(string:str):
-    splited = str.split(',')
-    list = []
-    for x in splited:
+def raise_format_error(item):
+    int_item = []
+    if not len(item) == 3:
+        raise FormatError()
+    try:
+        for c in item:
+            nb = float(c)
+            int_item.append(nb)
+    except ValueError:
+        raise FormatError()
+    return (int_item)
+    
+def get_player_pos():
+    while True:
+        coordinates = input("Enter new coordinates as floats in format 'x,y,z': ")
+        item = coordinates.split(",")
         try:
-            nb = int(x)
-            list.append(int(x))
-        except ValueError:
-            raise coord_error (f'\nParsing invalid coordinates: "{str}"')
-    final = tuple(list)
-    return final
+            item = raise_format_error(item)
+            return (item[0], item[1], item[2])
+        except FormatError:
+            print("Invalid Sintax")
+def calculate_distance(tup1, tup2):
+    distance = math.sqrt((tup2[0]-tup1[0])**2 + (tup2[1]-tup1[1])**2 + (tup2[2]-tup1[2])**2)
+    return round(distance,4)        
+
+def main():
+    print("=== Game Coordinate System ===")
+    
+    print("Get a first set of coordinates")
+    tupple1 = get_player_pos()
+    print(f"Got a first tupple: {tupple1}")
+    print(f"It includes: X={tupple1[0]}, Y={tupple1[1]}, Z={tupple1[2]}")
+    print(f"Distance to center: {calculate_distance(tupple1, (0,0,0))}")
+    
+    print()
+    print("Get a second set of coordinates")
+    tupple2 = get_player_pos()
+    print(f"Distance between the 2 sets of coordinates: {calculate_distance(tupple1, tupple2)}")
     
 if __name__ == "__main__":
-    print("=== Game coordinate System ===")
-    pos = (10, 20, 5)
-    distance = math.sqrt((pos[0]-0)**2 + (pos[1]-0)**2 + (pos[2]-0)**2)
-    print(f"Position created: {pos}")
-    print(f"Distance between (0, 0, 0) and {pos}: {distance:.2f}")
-
-    str = "3,4,0"
-
-    try:
-        final = raise_coord_error(str)
-        print(f'\nParsing coordinates: "{str}"')
-        print(f"Parsed position: {final}")
-        distance = math.sqrt((final[0]-0)**2 + (final[1]-0)**2 + (final[2]-0)**2)
-        print(f"Distance between (0, 0, 0) and {final}: {distance}")
-        print("\nUnpacking demonstration:")
-        print(f"Player at x={final[0]}, y={final[1]}, z={final[2]}")
-        (x, y, z) = final
-        print(f"Coordinates: X={x}, Y={y}, Z={z}")
-
-    except coord_error as e:
-        print(e)
-        print(f"Error parsing coordinates: ", end="")
-        print(f"invalid literal for int() with base 10: '{str.split(',')[0]}'")
-        print(f"Error details -Type: ValueError", end="")
-        print(f', Args: ("invalid literal for int() with base 10: ', end="")
-        print(f"'{str.split(',')[0]}')")
+    main()

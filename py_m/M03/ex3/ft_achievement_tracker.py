@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 class Player():
     def __init__(self, player_name:str, achievements):
         self.player_name = player_name
@@ -52,8 +54,7 @@ class Achievement_Manager():
         print(f"Bob unique: {bob_unique}")
 
 
-
-if __name__ == "__main__":
+def main():
     print("=== Achievement Tracker System ===")
     alice = Player("alice", set(['first_kill', 'level_10','treasure_hunter', 'speed_demon']))
 
@@ -73,3 +74,5 @@ if __name__ == "__main__":
     manager.common_to_all(lst)
     manager.rare_achievements(lst)
     manager.player_communities(lst)
+if __name__ == "__main__":
+    main()
