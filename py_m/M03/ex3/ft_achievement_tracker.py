@@ -1,78 +1,71 @@
 #!/usr/bin/python
 
-class Player():
-    def __init__(self, player_name:str, achievements):
-        self.player_name = player_name
-        self.achievements = achievements
-    def get_info(self):
-        print(f"Player {i.player_name} achievements: {i.achievements}")
+import random
 
-class Achievement_Manager():
-    def __init__(self):
-        pass
-    def all_achievements(self, lst_players):
-        z = set([])
-        for i in lst_players:
-            z = z.union(i.achievements)
-        print(f"All unique achievements: {z}")
-        print(f"Total unique achievements: {len(z)}")
-    
-    def common_to_all(self, lst_players):
-        z = lst_players[0].achievements
-        for i in lst_players:
-            z = z.intersection(i.achievements)
-        print(f"Common to all players: {z}")
+def gen_player_achievements(all_awards):
+    num_awards = random.randint(5, 10)
+    return set(random.sample(all_awards, num_awards))
 
-    def rare_achievements(self, lst_players):
-        lst_final= []
-        for i in lst_players:
-            lst_final.extend(i.achievements)
-        j = 0
-        while(j < len(lst_final)):
-            elemento = lst_final[j]
-            count = 0
-            z = 0
-            while(z < len(lst_final)):
-                if(lst_final[z] == elemento):
-                    count += 1
-                z+=1
-            if (count > 1):
-                lst_final = [x for x in lst_final if x != elemento]
-            else:
-                j += 1
-        print(f"Rare achievement (1 player): {set(lst_final)}\n")
-
-    def player_communities(self, lst_player):
-        common = lst_player[0].achievements.intersection(lst_player[1].achievements)
-
-        alice_unique = lst_player[0].achievements.difference(lst_player[1].achievements)
-
-        bob_unique = lst_player[1].achievements.difference(lst_player[0].achievements)
-
-        print(f"{lst_player[0].player_name} vs {lst_player[1].player_name} common: {common}")
-        print(f"Alice unique: {alice_unique}")
-        print(f"Bob unique: {bob_unique}")
+all_awards = [
+    'Crafting Genius',
+    'World Savior',
+    'Master Explorer',
+    'Collector Supreme',
+    'Untouchable',
+    'Boss Slayer',
+    'Strategist',
+    'Unstoppable',
+    'Speed Runner',
+    'Survivor',
+    'Treasure Hunter',
+    'First Steps',
+    'Sharp Mind',
+    'Hidden Path Finder'
+]
 
 
 def main():
     print("=== Achievement Tracker System ===")
-    alice = Player("alice", set(['first_kill', 'level_10','treasure_hunter', 'speed_demon']))
+    alice = gen_player_achievements(all_awards)
+    bob =  gen_player_achievements(all_awards)
+    charlie = gen_player_achievements(all_awards)
+    dylan = gen_player_achievements(all_awards)
+    
+    print(f"Player Alice {alice}\n")
+    print(f"Player Bob {bob}\n")
+    print(f"Player Charlie {charlie}\n")
+    print(f"Player Dylan {dylan}\n")
 
-    bob = Player("bob", set(['first_kill', 'level_10', 'boss_slayer', 'collector']))
+    union = set().union(alice, bob, charlie, dylan)
+    print(f"All distinct achievement: {union}\n")
+    
+    inter = set.intersection(alice, bob, charlie, dylan)
+    print(f"Common achievements: {inter}\n")
+    
+    alice_diff = alice.difference(bob, charlie, dylan)
+    print(f"Only Alice has: {alice_diff}\n")
+    
+    bob_diff = bob.difference(alice, charlie, dylan)
+    print(f"Only Bob has: {bob_diff}\n")
+    
+    charlie_diff = charlie.difference(alice, bob, dylan)
+    print(f"Only Charlie has: {charlie_diff}\n")
+    
+    dylan_diff = dylan.difference(alice, bob, charlie)
+    print(f"Only Dylan has: {dylan_diff}\n")
+    
+    alice_missing = set(all_awards).difference(alice)
+    print(f"Alice is missing: {alice_missing}\n")
+    
+    bob_missing = set(all_awards).difference(bob)
+    print(f"Bob is missing: {bob_missing}\n")
+    
+    charlie_missing = set(all_awards).difference(charlie)
+    print(f"Charlie is missing: {charlie_missing}\n")
+    
+    dylan_missing = set(all_awards).difference(dylan)
+    print(f"Dylan is missing: {dylan_missing}\n")
+    
 
-    charlie = Player("charlie", set(['level_10', 'treasure_hunter', 'boss_slayer', 'speed_demon', 'perfectionist']))
-
-
-    lst = [alice, bob, charlie]
-
-    for i in lst:
-        i.get_info()
-    print("\n=== Achievement Analytics ===")
-    manager = Achievement_Manager()
-    manager.all_achievements(lst)
-    print()
-    manager.common_to_all(lst)
-    manager.rare_achievements(lst)
-    manager.player_communities(lst)
 if __name__ == "__main__":
     main()
