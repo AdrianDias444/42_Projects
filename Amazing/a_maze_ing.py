@@ -29,7 +29,7 @@ def config_class_checker(config_class: Config) -> int:
 
 def main():
     if len(sys.argv) == 2:
-        file = open("config.txt", "r")
+        file = open(sys.argv[1], "r")
         config_class = parser.parser_to_class(file)
         if config_class == "Error":
             return

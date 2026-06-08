@@ -17,19 +17,15 @@ class Plant:
 def main():
     print("=== Plant Factory Output ===")
     plant = [
-        Plant("Rose", 25, 30),
-        Plant("Oak", 200, 365),
-        Plant("Cactus", 5, 90),
-        Plant("Sunflower", 80, 45),
-        Plant("Fern", 15, 120),
+        Plant("Rose", 25.0, 30),
+        Plant("Oak", 200.0, 365),
+        Plant("Cactus", 5.0, 90),
+        Plant("Sunflower", 80.0, 45),
+        Plant("Fern", 15.0, 120),
     ]
 
-    j = 0
     for i in plant:
         i.show()
-        j += 1
-
-    print(f"Total plants created: {j}")
 
 
 if __name__ == "__main__":

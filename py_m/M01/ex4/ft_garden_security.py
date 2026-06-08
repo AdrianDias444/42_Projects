@@ -8,7 +8,7 @@ class Plant:
         self.age = age_days
 
     def show(self) -> str:
-        return f"{self.name}: {self.height}cm, {self.age} days old"
+        return f"{self.name}: {round(self.height,1)}cm, {self.age} days old"
 
     def get_height(self) -> float:
         return self.height
@@ -34,7 +34,7 @@ class Plant:
 
 
 def main():
-    plant = Plant("Rose", 30, 5)
+    plant = Plant("Rose", 15, 10)
 
     print("=== Garden Security System ===")
     print(f"Plant created: {plant.show()}")

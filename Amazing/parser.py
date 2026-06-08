@@ -73,9 +73,10 @@ def raise_equal_not_defined_error(file):
                 )
 
 
-def raise_key_not_exist(key, keys_list):
-    if key not in keys_list:
-        raise Key_Not_Exist("Invalid Config File!")
+def raise_key_not_exist(list_key, keys_list):
+    for c in list_key:
+        if not c in keys_list:
+            raise Key_Not_Exist("Invalid Config File!")
 
 
 def order_values(lst_keys, list_values):
