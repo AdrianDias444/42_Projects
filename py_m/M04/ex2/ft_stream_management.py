@@ -49,21 +49,13 @@ def main() -> None:
                 novo_arquivo.close()
                 print(f"Data saved in file '{novo_nome}'.")
             except (FileNotFoundError, PermissionError, IOError) as e:
-                print(f"[STDERR] Error opening file '{novo_nome}': {e}", file=sys.stderr)
+                print("[STDERR] Error opening file", end="")
+                print(f"'{novo_nome}': {e}", file=sys.stderr)
                 print("Data not saved.")
 
-    except FileNotFoundError:
+    except (FileNotFoundError, PermissionError, IOError) as e:
         print(f"[STDERR] Error opening file '{filename}': "
-              f"[Errno 2] No such file or directory: '{filename}'", file=sys.stderr)
-        sys.exit(1)
-
-    except PermissionError:
-        print(f"[STDERR] Error opening file '{filename}': "
-              f"[Errno 13] Permission denied: '{filename}'", file=sys.stderr)
-        sys.exit(1)
-
-    except IOError as e:
-        print(f"[STDERR] Error opening file '{filename}': {e}", file=sys.stderr)
+              f"{e}:", file=sys.stderr)
         sys.exit(1)
 
 
