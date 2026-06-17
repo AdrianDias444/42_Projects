@@ -1,4 +1,3 @@
-# ft_transmutation_0.py
 from alchemy.transmutation.recipes import lead_to_gold
 
 print("=== Transmutation 0 ===")
