@@ -18,7 +18,7 @@ def raise_garden_error(number_of_plants: int):
 
 
 def raise_plant_error(sun_hours_per_day: int):
-    if (sun_hours_per_day < 0):
+    if (sun_hours_per_day < 12):
         raise PlantError("The tomato plant is wilting")
 
 
@@ -32,11 +32,11 @@ def test_custom_errors():
 
     print("Testing PlantError...")
     try:
-        raise_plant_error(-12)
+        raise_plant_error(2)
     except PlantError as e:
         print(f"Caught PlantError: {e}\n")
 
-    print("Testing WaterError")
+    print("Testing WaterError...")
     try:
         raise_water_error(2)
     except WaterError as e:
@@ -44,7 +44,7 @@ def test_custom_errors():
 
     print("Testing catching all garden errors...")
     try:
-        raise_plant_error(-12)
+        raise_plant_error(2)
     except GardenError as e:
         print(f"Caught a garden error: {e}")
     try:

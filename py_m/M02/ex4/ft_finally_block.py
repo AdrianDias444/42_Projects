@@ -20,7 +20,7 @@ def test_watering_system():
         for a in plants1:
             water_plant(a)
     except PlantError as e:
-        print(e)
+        print("Caught PlantError: Invalid plant name to water: {e}")
         print(".. ending tests and returning to main")
     finally:
         print("Closing watering system")
