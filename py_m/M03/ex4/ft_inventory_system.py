@@ -20,7 +20,7 @@ def process_argv():
             qty = int(qty_str)
             inventory[item] = qty
         except ValueError:
-            print(f"Quantity error for '{item}': invalid", end="")
+            print(f"Quantity error for '{item}': invalid ", end="")
             print(f"literal for int() with base 10: '{qty_str}'")
 
     return (inventory)
@@ -44,10 +44,15 @@ def return_max(inventory):
 
 def main():
     print("=== Inventory System Analysis ===")
+    if len(sys.argv) == 1:
+        print("Need Arguments")
+        return
     inventory = process_argv()
+    if len(inventory) == 0:
+        return
     print(f"Got inventory: {inventory}")
     print(f"Item list: {list(inventory.keys())}")
-    print(f"Total quantity of the {len(inventory.keys())}", end="")
+    print(f"Total quantity of the {len(inventory.keys())} ", end="")
     print(f"items: {sum(inventory.values())}")
     for item in inventory.keys():
         total = sum(inventory.values())

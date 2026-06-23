@@ -51,7 +51,7 @@ def main():
     print()
     print("Get a second set of coordinates")
     tupple2 = get_player_pos()
-    print("Distance between the 2 sets of coordinates:", end="")
+    print("Distance between the 2 sets of coordinates: ", end="")
     print(calculate_distance(tupple1, tupple2))
 
 
