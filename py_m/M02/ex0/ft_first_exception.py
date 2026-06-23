@@ -12,9 +12,12 @@ def input_temperature(temp_str):
 
 
 def test_temperature():
-    input_temperature(25)
-    input_temperature('abc')
-    print("All tests completed - program didn't crash!")
+    try:
+        input_temperature(25)
+        input_temperature('abc')
+        print("All tests completed - program didn't crash!")
+    except Excpetion:
+        print("Input_temperature() fail!, Error catched")
 
 
 def main():
