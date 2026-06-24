@@ -1,40 +1,37 @@
 #!/usr/bin/python3
 
-def secure_archive(file: str, action: str = "r", content: str = "") -> tuple:
-    if action == "r":
+def secure_archive(f: str, act: str = "r", cont: str = "") -> tuple[bool, str]:
+    if act == "r":
         try:
-            with open(file, 'r') as file_obj:
+            with open(f, 'r') as file_obj:
                 data = file_obj.read()
             return (True, data)
         except (FileNotFoundError, PermissionError, IOError) as e:
             return (False, str(e))
 
-    elif action == "w":
+    elif act == "w":
         try:
-            with open(file, 'w') as file_obj:
-                file_obj.write(content)
+            with open(f, 'w') as file_obj:
+                file_obj.write(cont)
             return (True, "Content successfully written to file")
         except (FileNotFoundError, PermissionError, IOError) as e:
             return (False, str(e))
 
     else:
-        return (False, f"Unknown action: {action}")
+        return (False, f"Unknown action: {act}")
 
 
 def main() -> None:
     print("=== Cyber Archives Security ===")
 
-    # Test 1: Read from non existent file
     print("Using 'secure_archive' to read from a nonexistent file:")
     result = secure_archive("/not/existing/file", "r")
     print(result)
 
-    # Test 2: Read from inaccessible file
     print("\nUsing 'secure_archive' to read from an inaccessible file:")
     result = secure_archive("/etc/master.passwd", "r")
     print(result)
 
-    # Test 3: Read from regular file
     print("\nUsing 'secure_archive' to read from a regular file:")
     with open("ancient_fragment.txt", "w") as f:
         f.write("[FRAGMENT 001]")
@@ -47,7 +44,6 @@ def main() -> None:
     result = secure_archive("ancient_fragment.txt", "r")
     print(result)
 
-    # Test 4: Write content to a new file
     print("\nUsing 'secure_archive' to write previous content to a new file:")
     result = secure_archive(
         "new_fragment.txt",

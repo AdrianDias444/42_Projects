@@ -5,7 +5,7 @@ import sys
 
 def main() -> None:
     if len(sys.argv) != 2:
-        print("Usage: ft_ancient_text.py <file>")
+        print("Usage: ft_ancient_text.py <file>\n")
         sys.exit(1)
 
     filename: str = sys.argv[1]
@@ -16,27 +16,22 @@ def main() -> None:
     try:
         file_obj = open(filename, 'r')
 
-        content: str = file_obj.read()
+        content = file_obj.read()
 
-        print("---")
-        print(content, end='')
+        print("---\n")
+        print(content)
         print("---")
 
         file_obj.close()
         print(f"File '{filename}' closed.")
 
-    except FileNotFoundError:
-        print(f"Error opening file '{filename}': "
-              f"[Errno 2] No such file or directory: '{filename}'")
-        sys.exit(1)
-
-    except PermissionError:
-        print(f"Error opening file '{filename}': "
-              f"[Errno 13] Permission denied: '{filename}'")
-        sys.exit(1)
-
+    except FileNotFoundError as e:
+        print(f"Error opening file '{filename}': {e}")
+    except PermissionError as e:
+        print(f"Error opening file '{filename}': {e}")
     except IOError as e:
         print(f"Error opening file '{filename}': {e}")
+    finally:
         sys.exit(1)
 
 

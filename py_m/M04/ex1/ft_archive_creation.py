@@ -8,7 +8,7 @@ def main() -> None:
         print("Usage: ft_archive_creation.py <file>")
         sys.exit(1)
 
-    filename: str = sys.argv[1]
+    filename = sys.argv[1]
 
     print("=== Cyber Archives Recovery & Preservation ===")
     print(f"Accessing file '{filename}'")
@@ -17,9 +17,9 @@ def main() -> None:
         file_obj = open(filename, 'r')
         conteudo = file_obj.read()
 
-        print("---")
+        print("---\n")
         print(conteudo, end='')
-        print("---")
+        print("\n---\n")
 
         file_obj.close()
         print(f"File '{filename}' closed.")
@@ -46,14 +46,12 @@ def main() -> None:
             novo_arquivo.close()
             print(f"Data saved in file '{novo_nome}'.")
 
-    except FileNotFoundError:
-        print(f"Error opening file '{filename}': "
-              f"[Errno 2] No such file or directory: '{filename}'")
+    except FileNotFoundError as e:
+        print(f"Error opening file '{filename}': {e}")
         sys.exit(1)
 
-    except PermissionError:
-        print(f"Error opening file '{filename}': "
-              f"[Errno 13] Permission denied: '{filename}'")
+    except PermissionError as e:
+        print(f"Error opening file '{filename}': {e}")
         sys.exit(1)
 
     except IOError as e:

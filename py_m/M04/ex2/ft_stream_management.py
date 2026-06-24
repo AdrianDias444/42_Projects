@@ -17,12 +17,12 @@ def main() -> None:
         file_obj = open(filename, 'r')
         conteudo = file_obj.read()
 
-        print("---")
+        print("---\n")
         print(conteudo, end='')
-        print("---")
+        print("\n\n---")
 
         file_obj.close()
-        print(f"File '{filename}' closed.")
+        print(f"File '{filename}' closed.\n")
 
         linhas = conteudo.split("\n")
         conteudo_transformado = ""
@@ -31,9 +31,9 @@ def main() -> None:
             conteudo_transformado += nova_linha
 
         print("Transform data:")
-        print("---")
+        print("---\n")
         print(conteudo_transformado, end='')
-        print("---")
+        print("\n---")
 
         print("Enter new file name (or empty): ", end='')
         sys.stdout.flush()
@@ -50,8 +50,9 @@ def main() -> None:
                 print(f"Data saved in file '{novo_nome}'.")
             except (FileNotFoundError, PermissionError, IOError) as e:
                 print("[STDERR] Error opening file", end="")
+                sys.stdout.flush()
                 print(f"'{novo_nome}': {e}", file=sys.stderr)
-                print("Data not saved.")
+                print(" Data not saved.")
 
     except (FileNotFoundError, PermissionError, IOError) as e:
         print(f"[STDERR] Error opening file '{filename}': "
