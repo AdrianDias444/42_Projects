@@ -13,7 +13,7 @@ class Equal_Not_Defined_Error(Exception):
     pass
 
 
-class Key_Not_Exist(Exception):
+class Key_Not_Exist_Error(Exception):
     pass
 
 
@@ -76,7 +76,7 @@ def raise_equal_not_defined_error(file):
 def raise_key_not_exist(list_key, keys_list):
     for c in list_key:
         if not c in keys_list:
-            raise Key_Not_Exist("Invalid Config File!")
+            raise Key_Not_Exist_Error("Invalid Config File!")
 
 
 def order_values(lst_keys, list_values):
@@ -102,6 +102,12 @@ def order_values(lst_keys, list_values):
 
     return list_values_order
 
+def pass_keys_and_values(file, lst_values, lst_keys):
+    for row in file:
+        if not row[0] == "#":
+            array = row.split("=", maxsplit=1)
+            lst_values.append(array[1].strip().replace(" ", ""))
+            lst_keys.append(array[0].strip().upper().replace(" ", ""))
 
 def parser_to_class(file):
     lst_values = []
@@ -113,22 +119,12 @@ def parser_to_class(file):
         print(e)
         return "Error"
     file.seek(0)
-    for row in file:
-        if not row[0] == "#":
-            array = row.split("=", maxsplit=1)
-            lst_values.append(array[1].strip().replace(" ", ""))
-            lst_keys.append(array[0].strip().upper().replace(" ", ""))
+    pass_keys_and_values(file, lst_values, lst_keys)
     try:
         raise_key_not_exist(lst_keys, keys_ideal)
         raise_keys_configs_error(lst_keys)
         raise_value_configs_error(lst_values)
-    except Keys_Configs_Error as e:
-        print(e)
-        return "Error"
-    except Value_Configs_Error as e:
-        print(e)
-        return "Error"
-    except Key_Not_Exist as e:
+    except (Key_Not_Exist_Error, Keys_Configs_Error, Value_Configs_Error) as e:
         print(e)
         return "Error"
     lst_values = order_values(lst_keys, lst_values)
