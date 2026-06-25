@@ -17,10 +17,6 @@ class Value_Configs_Error(Exception):
     pass
 
 
-
-
-
-
 def checker_configs_keys(configs_keys):
     lista = []
     width = "WIDTH"
