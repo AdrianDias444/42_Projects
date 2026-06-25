@@ -44,7 +44,7 @@ def raise_y_out_height(grid_height: int, cell_y: int) -> None:
 def raise_invalid_output_file(output_file: str) -> None:
     str1 = output_file.split(".", maxsplit=1)
     if "." in output_file:
-        if len(str1) > 2 or not str1[1] == "txt":
+        if not str1[1] == "txt":
             raise Invalid_Output_File(
                 f"Invalid input! [.{str1[1]}] is a invalid extension"
             )
@@ -56,7 +56,7 @@ def process_number_input(nb: str, flag: bool):
         raise_negative_error(number, flag)
         return number
     except ValueError:
-        print(f"[{nb.strip()}] is not a int number")
+        print(f"[{nb}] is not a int number")
         return "Error"
     except Negative_Error as e:
         print(e)
@@ -117,8 +117,8 @@ class Config:
     def __init__(self, lst_values) -> None:
         self.width = process_number_input(lst_values[0].replace(" ", ""), True)
         self.height = process_number_input(lst_values[1].replace(" ", ""), True)
-        self.entry = process_cell_input(lst_values[2].strip().replace(" ", ""), self, False)
-        self.exit = process_cell_input(lst_values[3].strip().replace(" ", ""), self, False)
+        self.entry = process_cell_input(lst_values[2].replace(" ", ""), self, False)
+        self.exit = process_cell_input(lst_values[3].replace(" ", ""), self, False)
         self.output_file = process_output_file(lst_values[4].replace(" ", ""))
         self.perfect = process_perfect_input(lst_values[5].replace(" ", ""))
 

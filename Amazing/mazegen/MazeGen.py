@@ -1,9 +1,10 @@
-from .config import Config, Grid
+from .config import Config
 from .algorithm import algorithm
+from sys import exit
 
 class MazeGenerator:
     def __init__(self, config: Config) -> None:
-        self.grid = Grid(config)
+        self.config = config
 
     @staticmethod
     def config_class_checker(config: Config) -> int:
@@ -23,14 +24,13 @@ class MazeGenerator:
 
 
     def run(self) -> None:
-
         if self.config_class_checker(self.config) == -1:
-            return 
+            exit(-1)
 
         algorithm(self.config)
 
 
-    def menu(self) -> None:
+"""     def menu(self) -> None:
         choice = 0
         while not choice == 4:
             choice = int(input("=== A-Maze-ing ==="
@@ -42,11 +42,4 @@ class MazeGenerator:
 
             if choice == 1:
                 self.run()
-
-            if choice == 2:
-
-
-
-
-
-
+ """
