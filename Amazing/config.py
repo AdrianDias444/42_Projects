@@ -18,20 +18,16 @@ class Invalid_Output_File(Exception):
     pass
 
 
-def raise_negative_error(nb: int, grid: bool) -> None:
+def raise_negative_error(nb: int, flag: bool) -> None:
     if nb < 0:
         raise Negative_Error(f"Invalid input! [{nb}] is a invalid (negative) number")
-    if nb == 0 and grid:
+    if nb == 0 and flag:
         raise Negative_Error(f"Invalid input! [{nb}] is a invalid number")
 
 
 def raise_perfect_error(perfect: str) -> None:
-    if (
-        not perfect == "True"
-        and not perfect == "true"
-        and not perfect == "False"
-        and not perfect == "false"
-    ):
+    perfect = perfect.upper()
+    if not (perfect == "TRUE" or perfect == "FALSE"):
         raise Perfect_Error(f"Invalid input! [{perfect}] is not a boolean string")
 
 
@@ -46,33 +42,37 @@ def raise_y_out_height(grid_height: int, cell_y: int) -> None:
 
 
 def raise_invalid_output_file(output_file: str) -> None:
-    str = output_file.split(".", maxsplit=1)
+    str1 = output_file.split(".", maxsplit=1)
     if "." in output_file:
-        if len(str) > 2 or not str[1] == "txt":
+        if len(str1) > 2 or not str1[1] == "txt":
             raise Invalid_Output_File(
-                f"Invalid input! [.{str[1]}] is a invalid extension"
+                f"Invalid input! [.{str1[1]}] is a invalid extension"
             )
 
 
-def process_number_input(nb: str, grid: bool):
+def process_number_input(nb: str, flag: bool):
     try:
         number = int(nb)
-        raise_negative_error(number, grid)
+        raise_negative_error(number, flag)
         return number
     except ValueError:
-        print(f"[{nb.strip()}] is not a number")
+        print(f"[{nb.strip()}] is not a int number")
         return "Error"
     except Negative_Error as e:
         print(e)
         return "Error"
 
 
-def process_cell_input(cell: str, configs, grid: bool) -> str:
+def process_cell_input(cell: str, configs, flag: bool) -> str:
     i = 0
     try:
         array = cell.split(",", maxsplit=1)
+        if len(array) == 1:
+            print(f"[{array[0]}] is a invalid Cell Config. ", end="")
+            print("Need correct coordinates format")
+            return "Error"
         for c in array:
-            c = process_number_input(c, grid)
+            c = process_number_input(c, flag)
             c = int(c)
             if i == 0:
                 raise_x_out_width(configs.width, c)
@@ -114,13 +114,13 @@ def process_perfect_input(perfect: str) -> str:
 
 
 class Config:
-    def __init__(self, config) -> None:
-        self.width = process_number_input(config[0].replace(" ", ""), True)
-        self.height = process_number_input(config[1].replace(" ", ""), True)
-        self.entry = process_cell_input(config[2].strip().replace(" ", ""), self, False)
-        self.exit = process_cell_input(config[3].strip().replace(" ", ""), self, False)
-        self.output_file = process_output_file(config[4].replace(" ", ""))
-        self.perfect = process_perfect_input(config[5].replace(" ", ""))
+    def __init__(self, lst_values) -> None:
+        self.width = process_number_input(lst_values[0].replace(" ", ""), True)
+        self.height = process_number_input(lst_values[1].replace(" ", ""), True)
+        self.entry = process_cell_input(lst_values[2].strip().replace(" ", ""), self, False)
+        self.exit = process_cell_input(lst_values[3].strip().replace(" ", ""), self, False)
+        self.output_file = process_output_file(lst_values[4].replace(" ", ""))
+        self.perfect = process_perfect_input(lst_values[5].replace(" ", ""))
 
 
 class Cell:

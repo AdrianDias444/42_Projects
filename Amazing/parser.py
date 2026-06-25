@@ -1,6 +1,14 @@
 from config import Config
 
 
+class Equal_Not_Defined_Error(Exception):
+    pass
+
+
+class Key_Not_Exist_Error(Exception):
+    pass
+
+
 class Keys_Configs_Error(Exception):
     pass
 
@@ -9,12 +17,8 @@ class Value_Configs_Error(Exception):
     pass
 
 
-class Equal_Not_Defined_Error(Exception):
-    pass
 
 
-class Key_Not_Exist_Error(Exception):
-    pass
 
 
 def checker_configs_keys(configs_keys):
@@ -39,29 +43,11 @@ def checker_configs_keys(configs_keys):
             lista.append(c)
         elif c == perfect:
             lista.append(c)
-    lista = list(set(lista))
     if not len(lista) == 6:
         return "Error"
     return lista
 
 
-def checker_configs_values(configs_values):
-    for c in configs_values:
-        c = c.strip().replace(" ", "")
-        if c == "":
-            return "Error"
-
-
-def raise_keys_configs_error(configs_keys):
-    checker = checker_configs_keys(configs_keys)
-    if checker == "Error":
-        raise Keys_Configs_Error("Invalid Config File! Keys not well defined")
-
-
-def raise_value_configs_error(configs_values):
-    checker = checker_configs_values(configs_values)
-    if checker == "Error":
-        raise Value_Configs_Error("Invalid Config File! Values not well defined")
 
 
 def raise_equal_not_defined_error(file):
@@ -73,10 +59,24 @@ def raise_equal_not_defined_error(file):
                 )
 
 
-def raise_key_not_exist(list_key, keys_list):
-    for c in list_key:
-        if not c in keys_list:
+def raise_key_not_exist(list_keys, ideal_list_keys):
+    for c in list_keys:
+        if not c in ideal_list_keys:
+            print (c)
             raise Key_Not_Exist_Error("Invalid Config File!")
+
+
+def raise_keys_configs_error(configs_keys):
+    checker = checker_configs_keys(configs_keys)
+    if checker == "Error":
+        raise Keys_Configs_Error("Invalid Config File! Keys not well defined")
+
+
+def raise_value_configs_error(configs_values):
+    for c in configs_values:
+        c = c.strip().replace(" ", "")
+        if c == "":
+            raise Value_Configs_Error("Invalid Config File! Values not well defined")
 
 
 def order_values(lst_keys, list_values):
@@ -102,12 +102,12 @@ def order_values(lst_keys, list_values):
 
     return list_values_order
 
-def pass_keys_and_values(file, lst_values, lst_keys):
+def pass_keys_and_values(file, lst_keys, lst_values):
     for row in file:
         if not row[0] == "#":
             array = row.split("=", maxsplit=1)
-            lst_values.append(array[1].strip().replace(" ", ""))
             lst_keys.append(array[0].strip().upper().replace(" ", ""))
+            lst_values.append(array[1].strip().replace(" ", ""))
 
 def parser_to_class(file):
     lst_values = []
@@ -119,7 +119,7 @@ def parser_to_class(file):
         print(e)
         return "Error"
     file.seek(0)
-    pass_keys_and_values(file, lst_values, lst_keys)
+    pass_keys_and_values(file, lst_keys, lst_values)
     try:
         raise_key_not_exist(lst_keys, keys_ideal)
         raise_keys_configs_error(lst_keys)
