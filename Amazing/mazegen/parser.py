@@ -1,4 +1,4 @@
-from config import Config
+from .config import Config
 
 
 class Equal_Not_Defined_Error(Exception):

@@ -1,19 +1,18 @@
-import random
 from typing import Generator
-
-from config import Cell, Grid
-from utils import retrieve_position as rp
-
+from random import choice
+from .config import Grid, Cell
+from .retrieve_position import (return_north_cell, return_east_cell,
+                                return_south_cell, return_west_cell)
 
 def calculate_neighbors(grid: Grid, cell: Cell) -> int:
     neighbors = 0
-    if rp.return_north_cell(grid, cell).x >= 0:
+    if return_north_cell(grid, cell).x >= 0:
         neighbors += 1
-    if rp.return_east_cell(grid, cell).x >= 0:
+    if return_east_cell(grid, cell).x >= 0:
         neighbors += 1
-    if rp.return_south_cell(grid, cell).x >= 0:
+    if return_south_cell(grid, cell).x >= 0:
         neighbors += 1
-    if rp.return_west_cell(grid, cell).x >= 0:
+    if return_west_cell(grid, cell).x >= 0:
         neighbors += 1
     return neighbors
 
@@ -22,19 +21,19 @@ def calculate_unvisited_neighbors(
     grid: Grid, cell: Cell
 ) -> Generator[Cell, None, None]:
 
-    norht_cell = rp.return_north_cell(grid, cell)
+    norht_cell = return_north_cell(grid, cell)
     if norht_cell.x >= 0 and not norht_cell.visited:
         yield norht_cell
 
-    east_cell = rp.return_east_cell(grid, cell)
+    east_cell = return_east_cell(grid, cell)
     if east_cell.x >= 0 and not east_cell.visited:
         yield east_cell
 
-    south_cell = rp.return_south_cell(grid, cell)
+    south_cell = return_south_cell(grid, cell)
     if south_cell.x >= 0 and not south_cell.visited:
         yield south_cell
 
-    west_cell = rp.return_west_cell(grid, cell)
+    west_cell = return_west_cell(grid, cell)
     if west_cell.x >= 0 and not west_cell.visited:
         yield west_cell
 
@@ -68,7 +67,7 @@ def dfs(grid: Grid):
         unvisited = list(calculate_unvisited_neighbors(grid, current))
 
         if len(unvisited) > 0:
-            next_cell = random.choice(unvisited)
+            next_cell = choice(unvisited)
             next_cell.visited = True
 
             if not next_cell.logo:

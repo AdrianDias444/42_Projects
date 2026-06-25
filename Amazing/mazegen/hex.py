@@ -1,4 +1,4 @@
-from config import Grid
+from .config import Grid
 
 
 def give_hex_to_cells(grid: Grid):
@@ -13,9 +13,7 @@ def give_hex_to_cells(grid: Grid):
             if not cell.walls["left"]:
                 cell.binary_list[0] = 0
             cell.binary = cell.convert_binaryList_to_binary()
-            # print("binary", cell.binary)
             cell.hex = cell.convert_binary_to_hex(cell.binary)
-            # print("hex", cell.hex)
 
 
 def put_hex_cells_in_file(grid: Grid, coordinates):

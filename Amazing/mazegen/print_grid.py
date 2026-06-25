@@ -1,6 +1,7 @@
-from config import Cell, Grid
+from .config import Cell, Grid
 
 def print_grid(grid: Grid, caminho):
+    print("\33c")
     for row in grid.grid:
         # LINHA TOP
         for cell in row:

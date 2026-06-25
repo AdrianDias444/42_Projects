@@ -1,4 +1,4 @@
-from config import Cell, Grid
+from .config import Cell, Grid
 
 
 def cell_out_of_the_grid(grid: Grid, cell: Cell) -> int:

@@ -1,5 +1,4 @@
-from config import Cell, Grid
-
+from .config import Grid, Cell
 
 def make_cells_visited_right(grid: Grid, center_cell: Cell, aresta: int):
     lock = False

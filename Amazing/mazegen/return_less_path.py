@@ -1,5 +1,5 @@
-from config import Cell, Grid
-from utils.return_correct_path import calculate_possible_cell
+from .config import Cell, Grid
+from .return_correct_path import calculate_possible_cell
 
 
 def bfs(grid: Grid):
