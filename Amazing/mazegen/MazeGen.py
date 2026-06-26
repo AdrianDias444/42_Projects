@@ -7,10 +7,23 @@ from .return_less_path import bfs
 
 class MazeGenerator:
     def __init__(self, config: Config) -> None:
+        """Initialize MazeGenerator with a Config object.
+        
+        Args:
+            config: Config object with maze generation parameters.
+        """
         self.config = config
 
     @staticmethod
     def config_class_checker(config: Config) -> int:
+        """Validate all fields in a Config object for errors.
+        
+        Args:
+            config: Config object to validate.
+            
+        Returns:
+            0 if valid, -1 if any field contains an error or entry equals exit.
+        """
         if config.width == "Error":
             return -1
         if config.height == "Error":
@@ -29,11 +42,23 @@ class MazeGenerator:
             return -1
         return 0
 
+
     def run(self, print_path, color) -> None:
+        """Run the maze generation algorithm with current configuration.
+        
+        Args:
+            print_path: Boolean flag to control path printing.
+            color: Color code string for grid visualization.
+            
+        Returns:
+            Grid object representing the generated maze.
+        """
         grid_class = algorithm(self.config, print_path, color)
         return grid_class
 
+
     def menu(self) -> None:
+        """Display an interactive menu for maze generation, path toggling, and color rotation."""
         user_nb = 0
         print_path = True
         print("\33c")

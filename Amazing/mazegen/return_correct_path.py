@@ -6,6 +6,15 @@ from .retrieve_position import (return_east_cell, return_north_cell,
 
 
 def calculate_possible_cell(grid: Grid, current_cell: Cell):
+    """Yield all accessible neighbor cells through open walls from current_cell.
+    
+    Args:
+        grid: Grid object containing the maze.
+        current_cell: Cell to find accessible neighbors from.
+        
+    Yields:
+        Cell objects that are connected via open walls (no wall between).
+    """
     north_cell = return_north_cell(grid, current_cell)
     if not current_cell.walls["top"] and not north_cell.walls["bottom"]:
         yield north_cell
@@ -32,6 +41,15 @@ def calculate_possible_cell(grid: Grid, current_cell: Cell):
 
 
 def return_correct_path(grid: Grid):
+    """Find a valid path from entry to exit using backtracking with random choices.
+    
+    Args:
+        grid: Grid object.
+        
+    Returns:
+        List of Cell objects representing the path from entry to exit, 
+        or empty list if no path found.
+    """
     path = [grid.entry_cell]
     visited = {grid.entry_cell}
     current_cell = grid.entry_cell

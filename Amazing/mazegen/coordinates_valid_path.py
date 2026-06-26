@@ -7,7 +7,7 @@ def coordinates_valid_path(grid: Grid, path):
     """Convert a valid path into a list of directional coordinates (N, E, S, W).
     
     Args:
-        grid: Grid object containing the maze.
+        grid: Grid object containing the maze as a parameter.
         path: List of Cell objects representing the valid path.
         
     Returns:

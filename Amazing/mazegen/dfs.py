@@ -8,7 +8,15 @@ from .retrieve_position import (return_north_cell, return_east_cell,
 def calculate_unvisited_neighbors(
     grid: Grid, cell: Cell
 ) -> Generator[Cell, None, None]:
-
+    """Yield all unvisited neighbor cells of a given cell.
+    
+    Args:
+        grid: Grid object containing the maze.
+        cell: Cell to check neighbors from.
+        
+    Yields:
+        Unvisited neighbor Cell objects (north, east, south, west).
+    """
     norht_cell = return_north_cell(grid, cell)
     if norht_cell.x >= 0 and not norht_cell.visited:
         yield norht_cell
@@ -27,6 +35,12 @@ def calculate_unvisited_neighbors(
 
 
 def remove_walls_between(cell1: Cell, cell2: Cell):
+    """Remove the walls between two adjacent cells.
+    
+    Args:
+        cell1: First Cell object.
+        cell2: Second Cell object adjacent to cell1.
+    """
     if cell2.x == cell1.x + 1:  # cell2 está à direita
         cell1.walls["right"] = False
         cell2.walls["left"] = False
@@ -42,6 +56,15 @@ def remove_walls_between(cell1: Cell, cell2: Cell):
 
 
 def dfs(grid: Grid):
+    """Generate a maze using iterative Depth-First Search algorithm.
+    
+    Args:
+        grid: Grid object with cells to remove the correct walls
+        to make the maze.
+        
+    Returns:
+        List of Cell objects representing the DFS traversal path.
+    """
     caminho = []
     total = []
     entry_cell = grid.entry_cell

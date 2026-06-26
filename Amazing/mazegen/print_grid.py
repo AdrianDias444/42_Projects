@@ -2,10 +2,29 @@ from .config import Grid
 
 
 def c(texto, cor):
+    """
+    Apply ANSI color formatting to text.
+    
+    Args:
+        texto: Text string to colorize.
+        cor: ANSI color code string.
+        
+    Returns:
+        Colorized text string with ANSI reset at the end.
+    """
     return f"\033[{cor}m{texto}\033[0m"
 
 
 def print_grid(grid: Grid, caminho, print_path: bool, color: int):
+    """
+    Print the maze grid with walls, entry, exit, logo cells, and optional path.
+    
+    Args:
+        grid: Grid object containing the maze.
+        caminho: List of Cell objects representing the valid path.
+        print_path: If True, highlight the path cells with dots.
+        color: ANSI color code for grid walls.
+    """
     for row in grid.grid:
         # LINHA TOP
         for cell in row:
