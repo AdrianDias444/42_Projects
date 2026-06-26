@@ -1,12 +1,4 @@
-from .config import Cell, Grid
-from .dfs import remove_walls_between
-from .retrieve_position import (
-    return_east_cell,
-    return_north_cell,
-    return_south_cell,
-    return_west_cell,
-)
-from .return_correct_path import calculate_possible_cell
+from .config import Grid
 
 
 def create_more_possible_paths(grid: Grid):

@@ -2,7 +2,9 @@ run:
 	python3 a_maze_ing.py config.txt
 
 install:
-	pip install mypy numpy pytest
+	python3 -m venv env
+	source env/bin/activate
+	pip install mypy numpy pytest flake8
 
 debug:
 	python3 -m pdb a_maze_ing.py

@@ -6,7 +6,7 @@
 
 A-Maze-ing is a terminal based maze generator written in Python. Given a configuration file, the program generates a random maze, optionally perfect (a single unique path between entry and exit), renders it visually in the terminal using ASCII art with ANSI colors, solves it using BFS, and exports the result to a hexadecimal output file.
 
-A notable visual feature: mazes larger than 8×8 cells display the number **"42"** carved into the maze structure using fully closed cells.
+A notable visual feature: mazes larger than 10×10 cells display the number **"42"** into the maze structure using fully closed cells.
 
 **Key features:**
 - Iterative DFS-based maze generation with optional imperfection (random wall breaks)
@@ -25,16 +25,12 @@ A notable visual feature: mazes larger than 8×8 cells display the number **"42"
 
 - Python 3.10 or later
 - `make` (optional but recommended)
-
-### Installation
-
-```bash
-git clone git@github.com:maiavictorh/42-A-Maze-ing.git
-cd 42-A-Maze-ing
-make install
 ```
-
-This creates a virtual environment and installs all dependencies from `requirements.txt`.
+. mypy
+. numpy
+. pytest
+. flake8
+```
 
 ### Running the Program
 
@@ -77,15 +73,15 @@ PERFECT=True
 
 | Key | Type | Description | Example |
 |-----|------|-------------|---------|
-| `WIDTH` | Integer ≥ 3 | Maze width in cells | `WIDTH=20` |
-| `HEIGHT` | Integer ≥ 3 | Maze height in cells | `HEIGHT=15` |
-| `ENTRY` | `x,y` | Entry cell coordinates (0-based) | `ENTRY=0,0` |
-| `EXIT` | `x,y` | Exit cell coordinates (0-based) | `EXIT=19,14` |
-| `OUTPUT_FILE` | `.txt` filename | Path to the hex output file | `OUTPUT_FILE=maze.txt` |
+| `WIDTH` | Integer ≥ 1 | Maze width in cells | `WIDTH=20` |
+| `HEIGHT` | Integer ≥ 1 | Maze height in cells | `HEIGHT=15` |
+| `ENTRY` | `x,y` | Entry cell coordinates | `ENTRY=0,0` |
+| `EXIT` | `x,y` | Exit cell coordinates | `EXIT=19,14` |
+| `OUTPUT_FILE` | `.txt` filename or only name, without extension| Path to the hex output file | `OUTPUT_FILE=maze.txt` |
 | `PERFECT` | `True`/`False` | Whether the maze has a single solution | `PERFECT=True` |
 
 **Validation rules enforced by the parser:**
-- `WIDTH` and `HEIGHT` must be ≥ 3.
+- `WIDTH` and `HEIGHT` must be ≥ 1.
 - `ENTRY` and `EXIT` must be different and within bounds.
 - `OUTPUT_FILE` must end in `.txt`.
 - No duplicate or unknown keys are allowed.
@@ -95,15 +91,10 @@ PERFECT=True
 
 ## Maze Generation Algorithm
 
-The project uses an **iterative DFS (Depth-First Search) with backtracking**, also known as the **Recursive Backtracker algorithm**, implemented iteratively with an explicit stack to avoid Python's recursion limit.
+The project uses an **iterative DFS (Depth-First Search) with backtracking**, also known as the **Recursive Backtracker algorithm**.
 
 **How it works:**
-1. Start from the entry cell, mark it as visited.
-2. Push it onto the stack with a shuffled list of 4 directions.
-3. At each step, try the next unvisited, non-"42" neighbor.
-4. If found, carve the wall between the current cell and the neighbor, mark the neighbor as visited, and push it.
-5. If no unvisited neighbor remains, pop the stack (backtrack).
-6. Continue until the stack is empty.
+1. 
 
 **Why this algorithm?**
 
@@ -240,8 +231,8 @@ The terminal renderer draws the maze using ANSI escape codes and block character
 
 | Member | Role |
 |--------|------|
-| `lde-frei` | *maze generation, solving and rendering algorithm, initial project structure, docstrings* |
-| `victode-` | *flake8, mypy, makefile, parser, documentation, structural organization and improvements* |
+| `addias` | *maze generation, solving and rendering algorithm, initial project structure, docstrings* |
+| `julidelg` | *flake8, mypy, makefile, parser, documentation, structural organization and improvements* |
 
 ### Planning
 
@@ -256,7 +247,7 @@ Adding a proper seed parameter to the config, supporting MLX rendering, multiple
 - **Python 3.10+** — core language
 - **flake8** — PEP 8 linting
 - **mypy** — static type checking
-- **AI assistance** — used to brainstorm algorithm structure and explore edge cases in the BFS solver; all generated code was reviewed, tested, and understood before integration.
+- **AI assistance** — used to brainstorm algorithm structure and explore edge cases in the BFS solver; all generated code was reviewed.
 
 ---
 

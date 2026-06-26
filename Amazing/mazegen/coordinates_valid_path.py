@@ -4,6 +4,15 @@ from .retrieve_position import (return_north_cell, return_east_cell,
 
 
 def coordinates_valid_path(grid: Grid, path):
+    """Convert a valid path into a list of directional coordinates (N, E, S, W).
+    
+    Args:
+        grid: Grid object containing the maze.
+        path: List of Cell objects representing the valid path.
+        
+    Returns:
+        List of strings with cardinal directions to navigate from entry to exit.
+    """
     coordinates = []
     current_cell = grid.entry_cell
     visited = [current_cell]

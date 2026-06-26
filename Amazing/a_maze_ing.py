@@ -13,7 +13,9 @@ def main():
                     return
 
                 mazegen = MazeGenerator(config)
-                mazegen.run()
+                if mazegen.config_class_checker(config) == -1:
+                    sys.exit()
+                mazegen.menu()
         except Exception as e:
             print(e)
 

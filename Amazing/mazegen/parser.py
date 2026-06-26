@@ -38,8 +38,6 @@ def checker_configs_keys(lst_keys):
     return lista
 
 
-
-
 def raise_equal_not_defined_error(file):
     for row in file:
         if not row[0] == "#":
@@ -51,8 +49,8 @@ def raise_equal_not_defined_error(file):
 
 def raise_key_not_exist(list_keys, ideal_list_keys):
     for c in list_keys:
-        if not c in ideal_list_keys:
-            print (c)
+        if c not in ideal_list_keys:
+            print(c)
             raise Key_Not_Exist_Error("Invalid Config File!")
 
 
@@ -66,7 +64,8 @@ def raise_value_configs_error(lst_values):
     for c in lst_values:
         c = c.replace(" ", "")
         if c == "":
-            raise Value_Configs_Error("Invalid Config File! Values not well defined")
+            raise Value_Configs_Error("Invalid Config File!"
+                                      "Values not well defined")
 
 
 def order_values(lst_keys, lst_values):
@@ -92,12 +91,14 @@ def order_values(lst_keys, lst_values):
 
     return list_values_order
 
+
 def pass_keys_and_values(file, lst_keys, lst_values):
     for row in file:
         if not row[0] == "#":
             array = row.split("=", maxsplit=1)
             lst_keys.append(array[0].upper().replace(" ", ""))
             lst_values.append(array[1].replace(" ", ""))
+
 
 def parser_to_class(file):
     lst_values = []

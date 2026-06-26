@@ -1,4 +1,4 @@
-from .config import Cell, Grid
+from .config import Grid
 from .return_correct_path import calculate_possible_cell
 
 

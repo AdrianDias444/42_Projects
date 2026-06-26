@@ -2,7 +2,7 @@ import random
 
 from .config import Cell, Grid
 from .retrieve_position import (return_east_cell, return_north_cell,
-                                     return_south_cell, return_west_cell,)
+                                return_south_cell, return_west_cell,)
 
 
 def calculate_possible_cell(grid: Grid, current_cell: Cell):

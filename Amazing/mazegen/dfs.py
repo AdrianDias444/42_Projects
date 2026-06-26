@@ -4,18 +4,6 @@ from .config import Grid, Cell
 from .retrieve_position import (return_north_cell, return_east_cell,
                                 return_south_cell, return_west_cell)
 
-def calculate_neighbors(grid: Grid, cell: Cell) -> int:
-    neighbors = 0
-    if return_north_cell(grid, cell).x >= 0:
-        neighbors += 1
-    if return_east_cell(grid, cell).x >= 0:
-        neighbors += 1
-    if return_south_cell(grid, cell).x >= 0:
-        neighbors += 1
-    if return_west_cell(grid, cell).x >= 0:
-        neighbors += 1
-    return neighbors
-
 
 def calculate_unvisited_neighbors(
     grid: Grid, cell: Cell

@@ -1,5 +1,6 @@
 from .config import Grid, Cell
 
+
 def make_cells_visited_right(grid: Grid, center_cell: Cell, aresta: int):
     lock = False
     i = 0
@@ -20,7 +21,11 @@ def make_cells_visited_left(grid: Grid, center_cell: Cell, aresta: int):
     i = 0
     cells = []
     for cell in reversed(grid.grid[center_cell.y]):
-        if cell.x < center_cell.x and i < aresta and not cell.entry and not cell.exit:
+        if (
+            cell.x < center_cell.x and i < aresta and
+            not cell.entry and not cell.exit
+        ):
+
             cell.visited = True
             cell.logo = True
             cells.append(cell)
