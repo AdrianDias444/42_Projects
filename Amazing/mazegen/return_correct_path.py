@@ -1,17 +1,20 @@
 import random
+from typing import Generator
 
 from .config import Cell, Grid
 from .retrieve_position import (return_east_cell, return_north_cell,
                                 return_south_cell, return_west_cell,)
 
 
-def calculate_possible_cell(grid: Grid, current_cell: Cell):
-    """Yield all accessible neighbor cells through open walls from current_cell.
-    
+def calculate_possible_cell(grid: Grid,
+                            current_cell: Cell) -> Generator[Cell, None, None]:
+    """
+    Yield all accessible neighbor cells through open walls from current_cell.
+
     Args:
         grid: Grid object containing the maze.
         current_cell: Cell to find accessible neighbors from.
-        
+
     Yields:
         Cell objects that are connected via open walls (no wall between).
     """
@@ -40,15 +43,17 @@ def calculate_possible_cell(grid: Grid, current_cell: Cell):
         pass
 
 
-def return_correct_path(grid: Grid):
-    """Find a valid path from entry to exit using backtracking with random choices.
-    
+def return_correct_path(grid: Grid) -> list[Cell]:
+    """
+    Find a valid path from entry to exit using backtracking
+    with random choices.
+
     Args:
         grid: Grid object.
-        
+
     Returns:
-        List of Cell objects representing the path from entry to exit, 
-        or empty list if no path found.
+        List of Cell objects representing the path from entry to
+        exit, or empty list if no path found.
     """
     path = [grid.entry_cell]
     visited = {grid.entry_cell}

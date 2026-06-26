@@ -1,17 +1,19 @@
-from .config import Grid
+from .config import Grid, Cell
 from .retrieve_position import (return_north_cell, return_east_cell,
                                 return_south_cell, return_west_cell)
 
 
-def coordinates_valid_path(grid: Grid, path):
-    """Convert a valid path into a list of directional coordinates (N, E, S, W).
-    
+def coordinates_valid_path(grid: Grid, path: list[Cell]) -> list[str]:
+    """
+    Convert a valid path into a list of directional coordinates (N, E, S, W).
+
     Args:
         grid: Grid object containing the maze as a parameter.
         path: List of Cell objects representing the valid path.
-        
+
     Returns:
-        List of strings with cardinal directions to navigate from entry to exit.
+        List of strings with cardinal directions
+        to navigate from entry to exit.
     """
     coordinates = []
     current_cell = grid.entry_cell

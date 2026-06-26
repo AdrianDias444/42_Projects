@@ -1,3 +1,6 @@
+from typing import Any
+
+
 class Negative_Error(Exception):
     """
     Exception raised for negative or zero (when flagged) number inputs.
@@ -36,9 +39,9 @@ class Invalid_Output_File(Exception):
 class Cell:
     def __init__(self, x: int, y: int) -> None:
         """
-        Initialize a Cell with coordinates, walls, state flags 
+        Initialize a Cell with coordinates, walls, state flags
         and variables for the output file.
-        
+
         Args:
             x: The x-coordinate of the cell.
             y: The y-coordinate of the cell.
@@ -55,8 +58,9 @@ class Cell:
         self.hex = ""
 
     def convert_binaryList_to_binary(self) -> int:
-        """Convert the binary_list attribute to an integer binary representation.
-        
+        """
+        Convert the binary_list attributeto an integer binary representation.
+
         Returns:
             Integer representing the binary value of binary_list.
         """
@@ -67,10 +71,10 @@ class Cell:
 
     def convert_binary_to_hex(self, binary: int) -> str:
         """Convert a binary integer to its hexadecimal string representation.
-        
+
         Args:
             binary: Integer to convert to hexadecimal.
-            
+
         Returns:
             Hexadecimal string representation of the binary integer.
         """
@@ -80,11 +84,11 @@ class Cell:
 def raise_negative_error(nb: int, flag: bool) -> None:
     """
     Raise Negative_Error if nb is negative or zero when flagged.
-    
+
     Args:
         nb: Number to validate.
         flag: If True, also raise error when nb is zero.
-        
+
     Raises:
         Negative_Error: If nb is negative, or if flag is True and nb is zero.
     """
@@ -98,10 +102,10 @@ def raise_negative_error(nb: int, flag: bool) -> None:
 def raise_perfect_error(perfect: str) -> None:
     """
     Raise Perfect_Error if perfect is not 'TRUE' or 'FALSE' (case-insensitive).
-    
+
     Args:
         perfect: String to validate as boolean.
-        
+
     Raises:
         Perfect_Error: If perfect is not 'TRUE' or 'FALSE'.
     """
@@ -114,11 +118,11 @@ def raise_perfect_error(perfect: str) -> None:
 def raise_x_out_width(grid_width: int, cell_x: int) -> None:
     """
     Raise X_Out_Width if cell_x is greater than or equal to grid_width.
-    
+
     Args:
         grid_width: Width of the grid.
         cell_x: X-coordinate to validate.
-        
+
     Raises:
         X_Out_Width: If cell_x >= grid_width.
     """
@@ -129,11 +133,11 @@ def raise_x_out_width(grid_width: int, cell_x: int) -> None:
 def raise_y_out_height(grid_height: int, cell_y: int) -> None:
     """
     Raise Y_Out_Height if cell_y is greater than or equal to grid_height.
-    
+
     Args:
         grid_height: Height of the grid.
         cell_y: Y-coordinate to validate.
-        
+
     Raises:
         Y_Out_Height: If cell_y >= grid_height.
     """
@@ -144,10 +148,10 @@ def raise_y_out_height(grid_height: int, cell_y: int) -> None:
 def raise_invalid_output_file(output_file: str) -> None:
     """
     Raise Invalid_Output_File if output_file extension is not '.txt'.
-    
+
     Args:
         output_file: Filename to validate.
-        
+
     Raises:
         Invalid_Output_File: If extension is not 'txt'.
     """
@@ -159,16 +163,16 @@ def raise_invalid_output_file(output_file: str) -> None:
             )
 
 
-def process_number_input(nb: str, flag: bool) -> int | str:
+def process_number_input(nb: str, flag: bool) -> int:
     """
     Process and validate a numeric string input.
-    
+
     Args:
         nb: String to convert to integer.
         flag: Passed to raise_negative_error to control zero validation.
-        
+
     Returns:
-        The integer value if valid, or "Error" string if invalid.
+        The integer value if valid, or -1 if invalid.
     """
     try:
         number = int(nb)
@@ -176,23 +180,24 @@ def process_number_input(nb: str, flag: bool) -> int | str:
         return number
     except ValueError:
         print(f"[{nb.strip()}] is not a int number")
-        return "Error"
+        return -1
     except Negative_Error as e:
         print(e)
-        return "Error"
+        exit()
+        return -1
 
 
-def process_cell_input(cell: str, configs: 'Config', flag: bool) -> str | Cell:
+def process_cell_input(cell: str, configs: 'Config', flag: bool) -> Any:
     """
     Process and validate cell coordinate input string.
-    
+
     Args:
         cell: String with x,y coordinates.
         configs: Config object for grid dimensions validation.
         flag: Passed to process_number_input for zero validation.
-        
+
     Returns:
-        Valid cell coordinate string, or "Error" string if invalid.
+        Valid cell coordinate string, or -1 if invalid.
     """
     i = 0
     try:
@@ -200,76 +205,75 @@ def process_cell_input(cell: str, configs: 'Config', flag: bool) -> str | Cell:
         if len(array) == 1:
             print(f"[{array[0]}] is a invalid Cell Config. ", end="")
             print("Need correct coordinates format")
-            return "Error"
+            return -1
         for c in array:
-            c = process_number_input(c, flag) # type: ignore
-            c = int(c) #type: ignore
+            nb = process_number_input(c, flag)
             if i == 0:
-                if not configs.width == "Error":
-                    raise_x_out_width(configs.width, c) #type: ignore
+                if not configs.width == -1:
+                    raise_x_out_width(configs.width, nb)
             elif i == 1:
-                if not configs.height == "Error":
-                    raise_y_out_height(configs.height, c) #type: ignore
+                if not configs.height == -1:
+                    raise_y_out_height(configs.height, nb)
             i += 1
 
     except ValueError:
         print(f"[{cell.strip()}] is a invalid cell coordinate")
-        return "Error"
+        return -1
     except X_Out_Width as e:
         print(e)
-        return "Error"
+        return -1
     except Y_Out_Height as e:
         print(e)
-        return "Error"
+        return -1
 
     return cell
 
 
-def process_output_file(output_file: str) -> str:
+def process_output_file(output_file: str) -> Any:
     """
     Process and validate output filename string.
-    
+
     Args:
         output_file: Filename string to validate.
-        
+
     Returns:
-        Valid output filename, or "Error" string if invalid.
+        Valid output filename, or -1 string if invalid.
     """
     output_file = output_file.strip()
     try:
         raise_invalid_output_file(output_file)
     except Invalid_Output_File as e:
         print(e)
-        return "Error"
+        return -1
     return output_file
 
 
-def process_perfect_input(perfect: str) -> str:
+def process_perfect_input(perfect: str) -> Any:
     """
     Process and validate perfect maze boolean string input.
-    
+
     Args:
         perfect: String to validate as boolean.
-        
+
     Returns:
-        Valid perfect string, or "Error" string if invalid.
+        Valid perfect string, or -1 if invalid.
     """
     perfect = perfect.strip()
     try:
         raise_perfect_error(perfect)
     except Perfect_Error as e:
         print(e)
-        return "Error"
+        return -1
     return perfect
 
 
 class Config:
-    def __init__(self, lst_values) -> None:
+    def __init__(self, lst_values: list[str]) -> None:
         """
         Initialize Config by processing all input values from lst_values.
-        
+
         Args:
-            lst_values: List of strings containing width, height, entry, exit, 
+            lst_values: List of strings containing width, height, entry, exit,
                 output_file, and perfect.
         """
         self.width = process_number_input(lst_values[0].replace(" ", ""),
@@ -284,13 +288,12 @@ class Config:
         self.perfect = process_perfect_input(lst_values[5].replace(" ", ""))
 
 
-
-
 class Grid:
-    def __init__(self, configs) -> None:
+    def __init__(self, configs: Config, seed: int) -> None:
         """
-        Initialize Grid from Config object, create grid and mark entry/exit cells.
-        
+        Initialize Grid from Config object,
+        create grid and mark entry/exit cells.
+
         Args:
             configs: Config object with grid parameters.
         """
@@ -303,11 +306,12 @@ class Grid:
         self.grid = self.create_grid()
         self.entry_cell = self.mark_entry()
         self.exit_cell = self.mark_exit()
+        self.seed = seed
 
     def create_grid(self) -> list[list[Cell]]:
         """
         Create a 2D grid of Cell objects based on width and height.
-        
+
         Returns:
             2D list of Cell objects representing the grid.
         """
@@ -332,7 +336,7 @@ class Grid:
     def mark_entry(self) -> Cell:
         """
         Mark the entry cell in the grid and return it.
-        
+
         Returns:
             The Cell marked as entry, or Cell(-1, -1) if not found.
         """
@@ -348,7 +352,7 @@ class Grid:
     def mark_exit(self) -> Cell:
         """
         Mark the exit cell in the grid and return it.
-        
+
         Returns:
             The Cell marked as exit, or Cell(-1, -1) if not found.
         """

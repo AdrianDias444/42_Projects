@@ -1,38 +1,39 @@
 from .config import Config
+from typing import Any
 
 
-class Equal_Not_Defined_Error(Exception):
+class EqualNotDefinedError(Exception):
     """
     Exception raised when a config line have no '=' assignment.
     """
     pass
 
 
-class Key_Not_Exist_Error(Exception):
+class KeyNotExistError(Exception):
     """
     Exception raised when a config key is not in the expected keys list.
     """
     pass
 
 
-class Keys_Configs_Error(Exception):
+class KeysConfigsError(Exception):
     """
     Exception raised when config keys are not the six mandatory.
     """
     pass
 
 
-class Value_Configs_Error(Exception):
+class ValueConfigsError(Exception):
     """
     Exception raised when config values are empty or full of spaces.
     """
     pass
 
 
-def checker_configs_keys(lst_keys):
+def checker_configs_keys(lst_keys: list[str]) -> list[str] | str:
     """
     Filter and validate list keys against the expected.
-    
+
     Args:
         lst_keys: List of key strings to check.
 
@@ -59,83 +60,84 @@ def checker_configs_keys(lst_keys):
     return lista
 
 
-def raise_equal_not_defined_error(file):
+def raise_equal_not_defined_error(file: str) -> None:
     """
-    Raise Equal_Not_Defined_Error if any non-comment line lacks '=' assignment.
-    
+    Raise EqualNotDefinedError if any non-comment line lacks '=' assignment.
+
     Args:
         file: File object to check.
-        
+
     Raises:
-        Equal_Not_Defined_Error: If a line has no '=' and is not a comment.
+        EqualNotDefinedError: If a line has no '=' and is not a comment.
     """
     for row in file:
-        if not row[0] == "#":
-            if "=" not in row and row:
-                raise Equal_Not_Defined_Error(
-                    "Invalid Config File! Not a atribution definition"
-                )
+        if row.strip() and not row.strip().startswith("#"):
+            if "=" not in row:
+                raise EqualNotDefinedError(
+                    "Invalid Config File! Not a attribution definition")
 
 
-def raise_key_not_exist(list_keys, ideal_list_keys):
+def raise_key_not_exist(list_keys: list[str],
+                        ideal_list_keys: list[str]) -> None:
     """
-    Raise Key_Not_Exist_Error if any key is not in the ideal keys list.
-    
+    Raise KeyNotExistError if any key is not in the ideal keys list.
+
     Args:
         list_keys: List of keys to validate.
         ideal_list_keys: List of allowed key strings.
 
     Raises:
-        Key_Not_Exist_Error: If an invalid key is found.
+        KeyNotExistError: If an invalid key is found.
     """
     for c in list_keys:
         if c not in ideal_list_keys:
             print(c)
-            raise Key_Not_Exist_Error("Invalid Config File!")
+            raise KeyNotExistError("Invalid Config File!")
 
 
-def raise_keys_configs_error(lst_keys):
+def raise_keys_configs_error(lst_keys: list[str]) -> None:
     """
-    Raise Keys_Configs_Error if config keys are not properly defined.
-    
+    Raise KeysConfigsError if config keys are not properly defined.
+
     Args:
         lst_keys: List of key strings to validate.
-        
+
     Raises:
-        Keys_Configs_Error: If keys do not match expected configuration.
+        KeysConfigsError: If keys do not match expected configuration.
     """
     checker = checker_configs_keys(lst_keys)
     if checker == "Error":
-        raise Keys_Configs_Error("Invalid Config File! Keys not well defined")
+        raise KeysConfigsError("Invalid Config File! Keys not well defined")
 
 
-def raise_value_configs_error(lst_values):
+def raise_value_configs_error(lst_values: list[str]) -> None:
     """
-    Raise Value_Configs_Error if any config value is empty.
-    
+    Raise ValueConfigsError if any config value is empty.
+
     Args:
         lst_values: List of value strings to validate.
-        
+
     Raises:
-        Value_Configs_Error: If any value is empty after removing spaces.
+        ValueConfigsError: If any value is empty after removing spaces.
     """
     for c in lst_values:
         c = c.replace(" ", "")
         if c == "":
-            raise Value_Configs_Error("Invalid Config File!"
-                                      "Values not well defined")
+            raise ValueConfigsError("Invalid Config File!"
+                                    "Values not well defined")
 
 
-def order_values(lst_keys, lst_values):
+def order_values(lst_keys: list[str], lst_values: list[str]) -> list[str]:
     """
     Order config values according to the expected key sequence.
-    
+
     Args:
         lst_keys: List of config keys.
         lst_values: List of corresponding config values.
-        
+
     Returns:
-        List of values ordered as: width, height, entry, exit, output_file, perfect.
+        List of values ordered as: width, height,
+        entry, exit, output_file, perfect.
     """
     list_values_order = []
 
@@ -160,50 +162,58 @@ def order_values(lst_keys, lst_values):
     return list_values_order
 
 
-def pass_keys_and_values(file, lst_keys, lst_values):
+def pass_keys_and_values(file: str, lst_keys: list[str],
+                         lst_values: list[str]) -> None:
     """
     Extract keys and values from a config file passing to their
     respective list, ignoring comment lines.
-    
+
     Args:
         file: File object to read from.
         lst_keys: List to populate with extracted keys.
         lst_values: List to populate with extracted values.
     """
     for row in file:
+
+        if not row.strip() or row.strip().startswith("#"):
+            continue
+
         if not row[0] == "#":
             array = row.split("=", maxsplit=1)
             lst_keys.append(array[0].upper().replace(" ", ""))
             lst_values.append(array[1].replace(" ", ""))
 
 
-def parser_to_class(file):
+def parser_to_class(file: Any) -> Config:
     """
     Parse a config file and return a validated Config object.
-    
+
     Args:
         file: File object containing maze configuration.
-        
+
     Returns:
-        Config object if parsing succeeds, or "Error" string if validation fails.
+        Config object if parsing succeeds,
+        or "Error" string if validation fails.
     """
-    lst_values = []
-    lst_keys = []
+    lst_values: list[str] = []
+    lst_keys: list[str] = []
     keys_ideal = ["WIDTH", "HEIGHT", "ENTRY", "EXIT", "OUTPUT_FILE", "PERFECT"]
-    try:
-        raise_equal_not_defined_error(file)
-    except Equal_Not_Defined_Error as e:
-        print(e)
-        return "Error"
-    file.seek(0)
-    pass_keys_and_values(file, lst_keys, lst_values)
-    try:
-        raise_key_not_exist(lst_keys, keys_ideal)
-        raise_keys_configs_error(lst_keys)
-        raise_value_configs_error(lst_values)
-    except (Key_Not_Exist_Error, Keys_Configs_Error, Value_Configs_Error) as e:
-        print(e)
-        return "Error"
-    lst_values = order_values(lst_keys, lst_values)
-    inst = Config(lst_values)
-    return inst
+    with open(file, "r") as file:
+        try:
+            raise_equal_not_defined_error(file)
+        except EqualNotDefinedError as e:
+            print(e)
+            exit()
+        file.seek(0)
+        pass_keys_and_values(file, lst_keys, lst_values)
+        try:
+            raise_key_not_exist(lst_keys, keys_ideal)
+            raise_keys_configs_error(lst_keys)
+            raise_value_configs_error(lst_values)
+        except (KeyNotExistError, KeysConfigsError,
+                ValueConfigsError) as e:
+            print(e)
+            exit()
+        lst_values = order_values(lst_keys, lst_values)
+        inst = Config(lst_values)
+        return inst

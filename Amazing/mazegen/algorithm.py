@@ -1,4 +1,6 @@
-from .config import Grid
+from random import randint
+
+from .config import Grid, Config
 from .retry_logo_cells import retry_logo_cells
 from .dfs import dfs
 from .return_correct_path import return_correct_path
@@ -9,18 +11,18 @@ from .return_possible_paths import create_more_possible_paths
 from .return_less_path import bfs
 
 
-def algorithm(config_class, print_path, color):
+def algorithm(config_class: Config, print_path: bool, color: str) -> Grid:
     """Execute the maze generation algorithm from configuration to output.
-    
+
     Args:
         config_class: Config object with maze parameters.
         print_path: Boolean flag to control path printing.
         color: Color setting for grid printing.
-        
+
     Returns:
         Grid object representing the generated maze.
     """
-    grid_class = Grid(config_class)
+    grid_class = Grid(config_class, randint(1, 999))
 
     if grid_class.width > 10 and grid_class.height > 10:
         retry_logo_cells(grid_class)

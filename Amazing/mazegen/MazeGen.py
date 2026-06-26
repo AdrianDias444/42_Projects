@@ -1,5 +1,5 @@
 from random import choice
-from .config import Config
+from .config import Config, Grid
 from .algorithm import algorithm
 from .print_grid import print_grid
 from .return_less_path import bfs
@@ -8,7 +8,7 @@ from .return_less_path import bfs
 class MazeGenerator:
     def __init__(self, config: Config) -> None:
         """Initialize MazeGenerator with a Config object.
-        
+
         Args:
             config: Config object with maze generation parameters.
         """
@@ -17,24 +17,24 @@ class MazeGenerator:
     @staticmethod
     def config_class_checker(config: Config) -> int:
         """Validate all fields in a Config object for errors.
-        
+
         Args:
             config: Config object to validate.
-            
+
         Returns:
             0 if valid, -1 if any field contains an error or entry equals exit.
         """
-        if config.width == "Error":
+        if config.width == -1:
             return -1
-        if config.height == "Error":
+        if config.height == -1:
             return -1
-        if config.entry == "Error":
+        if config.entry == -1:
             return -1
-        if config.exit == "Error":
+        if config.exit == -1:
             return -1
-        if config.output_file == "Error":
+        if config.output_file == -1:
             return -1
-        if config.perfect == "Error":
+        if config.perfect == -1:
             return -1
         if config.entry == config.exit:
             print("Entry and Exit Cell cannot be the same.")
@@ -42,23 +42,24 @@ class MazeGenerator:
             return -1
         return 0
 
-
-    def run(self, print_path, color) -> None:
+    def run(self, print_path: bool, color: str) -> Grid:
         """Run the maze generation algorithm with current configuration.
-        
+
         Args:
             print_path: Boolean flag to control path printing.
             color: Color code string for grid visualization.
-            
+
         Returns:
             Grid object representing the generated maze.
         """
         grid_class = algorithm(self.config, print_path, color)
         return grid_class
 
-
     def menu(self) -> None:
-        """Display an interactive menu for maze generation, path toggling, and color rotation."""
+        """
+        Display an interactive menu for maze generation,
+        path toggling, and color rotation.
+        """
         user_nb = 0
         print_path = True
         print("\33c")

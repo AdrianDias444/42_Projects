@@ -1,10 +1,10 @@
 from .config import Grid
 
 
-def create_more_possible_paths(grid: Grid):
+def create_more_possible_paths(grid: Grid) -> None:
     """
     Remove walls along the entry row to create multiple possible paths.
-    
+
     Args:
         grid: Grid object containing the maze.
     """

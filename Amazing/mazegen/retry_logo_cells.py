@@ -1,16 +1,17 @@
 from .config import Grid, Cell
 
 
-def make_cells_visited_right(grid: Grid, center_cell: Cell, aresta: int):
+def make_cells_visited_right(grid: Grid, center_cell: Cell,
+                             aresta: int) -> list[Cell]:
     """
     Mark cells to the right of center_cell as visited and
     define them as logo cells.
-    
+
     Args:
         grid: Grid object.
         center_cell: Reference cell to start from.
         aresta: Number of cells to mark to the right.
-        
+
     Returns:
         List of Cell objects that were marked.
     """
@@ -29,16 +30,17 @@ def make_cells_visited_right(grid: Grid, center_cell: Cell, aresta: int):
     return cells
 
 
-def make_cells_visited_left(grid: Grid, center_cell: Cell, aresta: int):
+def make_cells_visited_left(grid: Grid, center_cell: Cell,
+                            aresta: int) -> list[Cell]:
     """
     Mark cells to the left of center_cell as visited and
     define them as logo cells.
-    
+
     Args:
         grid: Grid object.
         center_cell: Reference cell to start from.
         aresta: Number of cells to mark to the left.
-        
+
     Returns:
         List of Cell objects that were marked.
     """
@@ -57,15 +59,16 @@ def make_cells_visited_left(grid: Grid, center_cell: Cell, aresta: int):
     return cells
 
 
-def make_cells_visited_top(grid: Grid, center_cell: Cell, aresta: int):
+def make_cells_visited_top(grid: Grid, center_cell: Cell,
+                           aresta: int) -> list[Cell]:
     """Mark cells above center_cell as visited and
     define them as logo cells.
-    
+
     Args:
         grid: Grid object.
         center_cell: Reference cell to start from.
         aresta: Number of cells to mark above.
-        
+
     Returns:
         List of Cell objects that were marked.
     """
@@ -84,15 +87,16 @@ def make_cells_visited_top(grid: Grid, center_cell: Cell, aresta: int):
     return cells
 
 
-def make_cells_visited_bottom(grid: Grid, center_cell: Cell, aresta: int):
+def make_cells_visited_bottom(grid: Grid, center_cell: Cell,
+                              aresta: int) -> list[Cell]:
     """Mark cells below center_cell as visited and
     define them as logo cells.
-    
+
     Args:
         grid: Grid object.
         center_cell: Reference cell to start from.
         aresta: Number of cells to mark below.
-        
+
     Returns:
         List of Cell objects that were marked.
     """
@@ -111,9 +115,9 @@ def make_cells_visited_bottom(grid: Grid, center_cell: Cell, aresta: int):
     return cells
 
 
-def make_4(grid: Grid, center_cell: Cell, aresta: int):
+def make_4(grid: Grid, center_cell: Cell, aresta: int) -> None:
     """Create the '4' shape of the logo using visited cells.
-    
+
     Args:
         grid: Grid object.
         center_cell: Reference cell for logo placement.
@@ -125,9 +129,9 @@ def make_4(grid: Grid, center_cell: Cell, aresta: int):
     make_cells_visited_bottom(grid, left_cells[0], aresta - 1)
 
 
-def make_2(grid: Grid, center_cell: Cell, aresta: int):
+def make_2(grid: Grid, center_cell: Cell, aresta: int) -> None:
     """Create the '2' shape of the logo using visited cells.
-    
+
     Args:
         grid: Grid object.
         center_cell: Reference cell for logo placement.
@@ -142,9 +146,9 @@ def make_2(grid: Grid, center_cell: Cell, aresta: int):
     make_cells_visited_right(grid, bottom_right[-1], aresta - 1)
 
 
-def retry_logo_cells(grid: Grid):
+def retry_logo_cells(grid: Grid) -> None:
     """Draw the '42' logo in the center of the grid by marking cells.
-    
+
     Args:
         grid: Grid object.
     """

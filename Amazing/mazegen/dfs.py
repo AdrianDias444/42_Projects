@@ -9,11 +9,11 @@ def calculate_unvisited_neighbors(
     grid: Grid, cell: Cell
 ) -> Generator[Cell, None, None]:
     """Yield all unvisited neighbor cells of a given cell.
-    
+
     Args:
         grid: Grid object containing the maze.
         cell: Cell to check neighbors from.
-        
+
     Yields:
         Unvisited neighbor Cell objects (north, east, south, west).
     """
@@ -34,9 +34,9 @@ def calculate_unvisited_neighbors(
         yield west_cell
 
 
-def remove_walls_between(cell1: Cell, cell2: Cell):
+def remove_walls_between(cell1: Cell, cell2: Cell) -> None:
     """Remove the walls between two adjacent cells.
-    
+
     Args:
         cell1: First Cell object.
         cell2: Second Cell object adjacent to cell1.
@@ -55,13 +55,13 @@ def remove_walls_between(cell1: Cell, cell2: Cell):
         cell2.walls["bottom"] = False
 
 
-def dfs(grid: Grid):
+def dfs(grid: Grid) -> list[Cell]:
     """Generate a maze using iterative Depth-First Search algorithm.
-    
+
     Args:
         grid: Grid object with cells to remove the correct walls
         to make the maze.
-        
+
     Returns:
         List of Cell objects representing the DFS traversal path.
     """

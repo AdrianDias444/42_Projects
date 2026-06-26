@@ -1,13 +1,13 @@
-from .config import Grid
+from .config import Grid, Cell
 from .return_correct_path import calculate_possible_cell
 
 
-def bfs(grid: Grid):
+def bfs(grid: Grid) -> list[Cell]:
     """Find the shortest path from entry to exit using Breadth-First Search.
-    
+
     Args:
         grid: Grid object.
-        
+
     Returns:
         List of Cell objects representing the shortest path from entry to exit,
         or empty list if no path found.
