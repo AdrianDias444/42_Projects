@@ -55,15 +55,14 @@ def remove_walls_between(cell1: Cell, cell2: Cell) -> None:
         cell2.walls["bottom"] = False
 
 
-def dfs(grid: Grid) -> list[Cell]:
-    """Generate a maze using iterative Depth-First Search algorithm.
+def dfs(grid: Grid):
+    """
+    Generate a maze using iterative Depth-First Search algorithm.
 
     Args:
         grid: Grid object with cells to remove the correct walls
         to make the maze.
 
-    Returns:
-        List of Cell objects representing the DFS traversal path.
     """
     caminho = []
     total = []
@@ -90,4 +89,3 @@ def dfs(grid: Grid) -> list[Cell]:
             caminho.pop()
             if not caminho:
                 break
-    return caminho

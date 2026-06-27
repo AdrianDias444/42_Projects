@@ -1,8 +1,8 @@
-width=20
-HEIGHT=15
+width=12
+HEIGHT=12
 entry=1,1
-EXIT=19,14
+EXIT=9,11
 output_file=maze.txt
-PERFECT=True
+PERFECT=true
 
 # This is a comment

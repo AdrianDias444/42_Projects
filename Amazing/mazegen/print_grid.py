@@ -33,7 +33,6 @@ def print_grid(grid: Grid, caminho: list[Cell],
                 print(c("+---", color), end="")
             else:
                 print(c("+   ", color), end="")
-            last_cell = cell
         print(c("+", color))
 
         # LINHA MID

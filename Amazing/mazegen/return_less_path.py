@@ -3,7 +3,8 @@ from .return_correct_path import calculate_possible_cell
 
 
 def bfs(grid: Grid) -> list[Cell]:
-    """Find the shortest path from entry to exit using Breadth-First Search.
+    """
+    Find the shortest path from entry to exit using Breadth-First Search.
 
     Args:
         grid: Grid object.
