@@ -1,7 +1,7 @@
 from .config import Grid
 
 
-def if_is_row_all_open(grid: Grid):
+def if_is_row_all_open(grid: Grid) -> int:
     """
     Check if all walls along the entry row are already open.
     """

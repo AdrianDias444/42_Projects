@@ -91,10 +91,14 @@ PERFECT=True
 
 ## Maze Generation Algorithm
 
-The project uses an **iterative DFS (Depth-First Search) with backtracking**, also known as the **Recursive Backtracker algorithm**.
+The project uses an **iterative DFS (Depth-First Search) with backtracking** and also **Breadth-First algorithm**.
 
 **How it works:**
-1. 
+1. **Start** at the initial cell, mark it visited, and push it onto a stack.
+2. **Check unvisited neighbors** of the currently cell.
+3. **If neighbors exist**, randomly pick one, remove the wall between them and mark it visited.
+4. **If no neighbors exist**, pop the stack to backtrack to the previous cell.
+5. **Repeat** until every cell in the grid has been visited, then the maze is complete.
 
 **Why this algorithm?**
 
@@ -107,7 +111,7 @@ The project uses an **iterative DFS (Depth-First Search) with backtracking**, al
 
 ## Output File Format
 
-The output file stores one hexadecimal digit per cell. Each digit encodes which walls are **closed** as a 4-bit nibble:
+The output file stores one hexadecimal digit per cell. Each digit encodes which walls are **closed** as a 4-bit:
 
 | Bit | Direction |
 |-----|-----------|
@@ -151,61 +155,30 @@ pip install mazegen-1.0.0-py3-none-any.whl
 ```python
 from mazegen import MazeGenerator
 
-config = {
-    "WIDTH": 15,
-    "HEIGHT": 11,
-    "ENTRY": (0, 0),
-    "EXIT": (14, 10),
-    "OUTPUT_FILE": "maze.txt",
-    "PERFECT": True,
-}
+
+class Cell:
+    def __init__(self, x: int, y:int):
+        self.x = x
+        self.y = y
+
+
+class Config:
+    def __init__(self, width:int, height:int, entry_cell:Cell, exit_cell:Cell, output_file: str, perfect:str):
+        self.width = width
+        self.height = height
+        self.entry_cell = entry_cell
+        self.exit_cell = exit_cell
+        self.output_file = output_file
+        self.perfect = perfect
+
+
+config = Config(width, height, entry_cell, exit_cell, output_file, perfect)
 
 gen = MazeGenerator(config)
 gen.run()
 ```
+You need to pass for Maze Generator a object instance from Config class that is defined with this six parameters that tou need to handle them with YOUR parser. Thx
 
-### Accessing the Generated Structure
-
-```python
-maze = gen.maze          # Maze object
-grid = maze.grid         # list[list[Cell]] — 2D grid of Cell objects
-width = maze.width       # int
-height = maze.height     # int
-
-# Each Cell has:
-cell = grid[y][x]
-cell.walls    # int bitmask (N=1, E=2, S=4, W=8)
-cell.cell42   # bool — part of "42" decorative pattern
-cell.in_path  # bool — on the solution path
-```
-
-### Solving the Maze
-
-```python
-from mazegen import MazeSolver
-
-solver = MazeSolver(gen.maze)
-path = solver.solve(config["ENTRY"], config["EXIT"])
-# path: list[tuple[int, int]] — list of (dx, dy) direction moves
-```
-
-### Custom Parameters
-
-All configuration is passed via the `config` dictionary. Set `PERFECT=False` to generate imperfect mazes with loops. The `seed` is generated randomly internally but can be set by subclassing `MazeGenerator` and overriding `self.seed`.
-
-### Building the Package from Source
-
-```bash
-pip install build
-python -m build
-# Produces dist/mazegen-*.whl and dist/mazegen-*.tar.gz
-```
-
----
-
-## Visual Representation
-
-The terminal renderer draws the maze using ANSI escape codes and block characters. Each cell is rendered as a 5-character-wide column with wall segments using `▒` characters.
 
 **Interactive menu options:**
 
@@ -216,13 +189,6 @@ The terminal renderer draws the maze using ANSI escape codes and block character
 | `3` | Rotate wall colors (random palette each toggle) |
 | `4` | Quit |
 
-**Visual elements:**
-- Entry cell: blinking green `█`
-- Exit cell: blinking red `█`
-- Solution path: green `•` dots (when shown)
-- "42" pattern cells: filled purple background
-- Walls: customizable colored background blocks
-
 ---
 
 ## Team & Project Management
@@ -231,8 +197,8 @@ The terminal renderer draws the maze using ANSI escape codes and block character
 
 | Member | Role |
 |--------|------|
-| `addias` | *maze generation, solving and rendering algorithm, initial project structure, docstrings* |
-| `julidelg` | *flake8, mypy, makefile, parser, documentation, structural organization and improvements* |
+| `addias` | *maze generation, solving and rendering algorithm, initial project structure* |
+| `julidelg` | *flake8, mypy, makefile, parser, documentation, structural organization and improvements, docstrings* |
 
 ### Planning
 
@@ -240,7 +206,7 @@ The terminal renderer draws the maze using ANSI escape codes and block character
 
 ### What Could Be Improved
 
-Adding a proper seed parameter to the config, supporting MLX rendering, multiple generation algorithms.
+Adding a supporte MLX rendering, multiple generation algorithms.
 
 ### Tools Used
 

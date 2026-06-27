@@ -55,7 +55,7 @@ def remove_walls_between(cell1: Cell, cell2: Cell) -> None:
         cell2.walls["bottom"] = False
 
 
-def dfs(grid: Grid):
+def dfs(grid: Grid) -> None:
     """
     Generate a maze using iterative Depth-First Search algorithm.
 

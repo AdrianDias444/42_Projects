@@ -2,7 +2,8 @@ from .config import Grid
 
 
 def give_hex_to_cells(grid: Grid) -> None:
-    """Assign hexadecimal values to each cell based on its wall configuration.
+    """
+    Assign hexadecimal values to each cell based on its wall configuration.
 
     Args:
         grid: Grid object containing cells to update with hex values.
@@ -22,7 +23,8 @@ def give_hex_to_cells(grid: Grid) -> None:
 
 
 def put_hex_cells_in_file(grid: Grid, coordinates: list[str]) -> None:
-    """Write the grid's hex values and path coordinates to the output file.
+    """
+    Write the grid's hex values and path coordinates to the output file.
 
     Args:
         grid: Grid object containing cells and output configuration.
