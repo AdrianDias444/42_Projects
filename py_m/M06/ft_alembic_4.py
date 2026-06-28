@@ -10,5 +10,5 @@ print("Testing the hidden create_earth: ", end="")
 try:
     print(alchemy.create_earth())
 except AttributeError as e:
-    print(f"Traceback (most recent call last):\n...")
+    print("Traceback (most recent call last):\n...")
     print(f"AttributeError: {e}")
