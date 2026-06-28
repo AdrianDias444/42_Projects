@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "matrix-loading"
+version = "1.0.0"
+description = "Matrix data analysis training"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.0"
+numpy = "^1.25"
+matplotlib = "^3.7"
+requests = "^2.31"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
