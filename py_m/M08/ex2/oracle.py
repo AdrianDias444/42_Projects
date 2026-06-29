@@ -13,7 +13,7 @@ def main() -> None:
     print("ORACLE STATUS: Reading the Matrix...")
 
     try:
-        from dotenv import load_dotenv  # type: ignore
+        from dotenv import load_dotenv
         load_dotenv(override=False)
         mode = get_env("MATRIX_MODE")
         db = get_env("DATABASE_URL")
@@ -33,25 +33,24 @@ def main() -> None:
         sys.exit()
 
     print("\nConfiguration loaded:")
-    print(f"Mode: {mode.lower()}")
 
-    if mode.lower() == "development" and db:
+    if mode == "development" and db:
+        print(f"Mode: {mode}")
         print("Database: Connected to local instance")
-    elif mode.lower() == "production" and db:
+    elif mode == "production" and db:
+        print(f"Mode: {mode}")
         print("Database: Connected to production instance")
     else:
         print("Invalid mode.")
         sys.exit()
-
-    if api_key and api_key != "your-secret-key-here":
+    if api_key:
         print("API Access: Authenticated")
-    elif api_key == "your-secret-key-here":
-        print("API Access: Placeholder key detected")
     else:
         print("API Access: Missing key")
 
     print(f"Log Level: {log_level}")
-    print(f"Zion Network: Online")
+    if endpoint:
+        print("Zion Network: Online")
 
     print("\nEnvironment security check:")
     print("[OK] No hardcoded secrets detected")
@@ -61,8 +60,7 @@ def main() -> None:
     else:
         print("[INFO] No .env file found")
 
-    prod_override = os.environ.get("MATRIX_MODE")
-    if prod_override.lower() == "development":
+    if mode == "development":
         print("[OK] Production overrides available")
     else:
         print("[INFO] Running in production mode")
