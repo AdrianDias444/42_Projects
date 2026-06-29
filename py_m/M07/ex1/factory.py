@@ -1,20 +1,28 @@
-from abc import ABC, abstractmethod
-from ex0.factory import CreatureFactory
-from ex0.creature import Creature
-from .healing import Sproutling, Bloomelle
-from .transform import Shiftling, Morphagon
+from ex0 import CreatureFactory
+from .capabilities import Sproutling, Bloomelle, Shiftling, Morphagon
 
-class HealingCreatureFactory(CreatureFactory):    
-    def create_base(self) -> Creature:
-        return Sproutling()
-    
-    def create_evolved(self) -> Creature:
 
-        return Bloomelle()
+class HealingCreatureFactory(CreatureFactory):
+    def __init__(self) -> None:
+        pass
 
-class TransformCreatureFactory(CreatureFactory):    
-    def create_base(self) -> Creature:
-        return Shiftling()
-    
-    def create_evolved(self) -> Creature:
-        return Morphagon()
+    @staticmethod
+    def create_base() -> Sproutling:
+        return Sproutling("Sproutling", "Grass")
+
+    @staticmethod
+    def create_evolved() -> Bloomelle:
+        return Bloomelle("Bloomelle", "Grass/Fairy")
+
+
+class TransformCreatureFactory(CreatureFactory):
+    def __init__(self) -> None:
+        pass
+
+    @staticmethod
+    def create_base() -> Shiftling:
+        return Shiftling("Shiftling", "Normal")
+
+    @staticmethod
+    def create_evolved() -> Morphagon:
+        return Morphagon("Morphagon", "Normal/Dragon")

@@ -1,40 +1,35 @@
-from ex0 import FlameFactory, AquaFactory
+import ex0 as f
 
-def test_factory(factory):
-    print("Testing factory")
-    
-    base = factory.create_base()
-    print(base.describe())
-    print(base.attack())
-    
-    evolved = factory.create_evolved()
-    print(evolved.describe())
-    print(evolved.attack())
-    
-    print()
-
-def battle_factory(factory1, factory2):
-    print("Testing battle")
-    
-    creature1 = factory1.create_base()
-    creature2 = factory2.create_base()
-    
-    print(creature1.describe())
-    print("vs.")
-    print(creature2.describe())
-    print("fight!")
-    print(creature1.attack())
-    print(creature2.attack())
-    print()
 
 def main():
-    flame_factory = FlameFactory()
-    aqua_factory = AquaFactory()
-    
-    test_factory(flame_factory)
-    test_factory(aqua_factory)
-    
-    battle_factory(flame_factory, aqua_factory)
+    try:
+        flameling = f.FlameFactory.create_base()
+        print("Testing factory")
+        print(flameling.describe())
+        print(flameling.attack())
+        pyrodon = f.FlameFactory.create_evolved(flameling)
+        print(pyrodon.describe())
+        print(pyrodon.attack())
+
+        print("\nTesting factory")
+        aquabub = f.AquaFactory.create_base()
+        print(aquabub.describe())
+        print(aquabub.attack())
+        torragon = f.AquaFactory.create_evolved(aquabub)
+        print(torragon.describe())
+        print(torragon.attack())
+
+        print("\nTesting battle")
+        print(flameling.describe())
+        print(" vs.")
+        print(aquabub.describe())
+        print(" fight!")
+        print(flameling.attack())
+        print(aquabub.attack())
+
+    except ValueError as err:
+        print(f"\33[31mERROR: {err}\33[0m")
+
 
 if __name__ == "__main__":
     main()

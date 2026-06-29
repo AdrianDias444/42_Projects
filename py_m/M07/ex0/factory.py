@@ -1,29 +1,43 @@
 from abc import ABC, abstractmethod
-from .creature import Creature
+from .creature import Creature, Flameling, Pyrodon, Aquabub, Torragon
 
-class CreatureFactory(ABC):    
-    @abstractmethod
-    def create_base(self) -> Creature:
+
+class CreatureFactory(ABC):
+    def __init__(self) -> None:
         pass
-    
+
+    @staticmethod
     @abstractmethod
-    def create_evolved(self) -> Creature:
+    def create_base() -> Creature:
         pass
+
+    @staticmethod
+    @abstractmethod
+    def create_evolved() -> Creature:
+        pass
+
 
 class FlameFactory(CreatureFactory):
-    def create_base(self) -> Creature:
-        from .fire_creatures import Flameling  # Import atrasado
-        return Flameling()
-    
-    def create_evolved(self) -> Creature:
-        from .fire_creatures import Pyrodon  # Import atrasado
-        return Pyrodon()
+    def __init__(self) -> None:
+        pass
 
-class AquaFactory(CreatureFactory):    
-    def create_base(self) -> Creature:
-        from .water_creatures import Aquabub
-        return Aquabub()
-    
-    def create_evolved(self) -> Creature:
-        from .water_creatures import Torragon
-        return Torragon()
+    @staticmethod
+    def create_base() -> Flameling:
+        return Flameling("Flameling", "Fire")
+
+    @staticmethod
+    def create_evolved(creature: Creature) -> Pyrodon:
+        return Pyrodon("Pyrodon", "Fire/Flying")
+
+
+class AquaFactory(CreatureFactory):
+    def __init__(self) -> None:
+        pass
+
+    @staticmethod
+    def create_base() -> Aquabub:
+        return Aquabub("Aquabub", "Water")
+
+    @staticmethod
+    def create_evolved(creature: Creature) -> Torragon:
+        return Torragon("Torragon", "Water")
