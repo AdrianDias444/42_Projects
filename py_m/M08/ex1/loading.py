@@ -6,15 +6,14 @@ REQUIRED = {
     "pandas": "pandas",
     "numpy": "numpy",
     "matplotlib": "matplotlib",
-    "requests": "requests"
 }
 
 
 def check_dependencies() -> dict[str, tuple[str | None, bool]]:
-    status = {}
+    status: dict[str, tuple[str | None, bool]] = {}
     for pkg_name, import_name in REQUIRED.items():
         try:
-            mod = importlib.import_module(import_name)
+            _ = importlib.import_module(import_name)
             ver = importlib.metadata.version(pkg_name)
             status[pkg_name] = (ver, True)
         except ImportError:
@@ -31,15 +30,15 @@ def show_install_instructions() -> None:
 
 
 def generate_data(n: int = 1000) -> tuple:
-    np = importlib.import_module("numpy")
+    import numpy as np
     a = np.random.normal(10, 2, n)
     b = np.random.normal(5, 1.5, n)
     c = np.random.exponential(3, n)
     return a, b, c
 
 
-def analyse_data(a, b, c) -> None:
-    pd = importlib.import_module("pandas")
+def analyse_data(a, b, c):
+    import pandas as pd
     df = pd.DataFrame({"Stream A": a, "Stream B": b, "Stream C": c})
     print("\nMatrix data analysis (first 5 rows):")
     print(df.head())
@@ -49,7 +48,7 @@ def analyse_data(a, b, c) -> None:
 
 
 def plot_data(df) -> None:
-    plt = importlib.import_module("matplotlib.pyplot")
+    import matplotlib.pyplot as plt
     df.hist(bins=30, figsize=(10, 6))
     plt.suptitle("Matrix Stream Distributions")
     plt.savefig("matrix_analysis.png")
@@ -59,7 +58,8 @@ def plot_data(df) -> None:
 
 def compare_pip_poetry() -> None:
     print("\n--- Pip vs Poetry ---")
-    print("pip:      uses requirements.txt, installs globally or in active venv.")
+    print("pip:      uses requirements.txt, installs globally"
+          "or in active venv.")
     print("Poetry:   uses pyproject.toml + poetry.lock, manages its own venv.")
     print("Both can be used for this project.\n")
 

@@ -63,7 +63,7 @@ class DefensiveStrategy(BattleStrategy):
             raise CreatureError(f"Invalid Creature '{self.creature.name}'"
                                 f" for this {self.strat_type} strategy")
         print(self.creature.attack())
-        print(self.creature.heal())
+        print(self.creature.heal())  # type: ignore
 
     def is_valid(self) -> bool:
         return hasattr(self.creature, "attack") and \
