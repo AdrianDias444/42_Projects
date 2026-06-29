@@ -1,4 +1,7 @@
-import sys, os, site
+import sys
+import os
+import site
+
 
 def main() -> None:
     print("MATRIX STATUS: ", end="")
