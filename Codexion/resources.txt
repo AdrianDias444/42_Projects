@@ -1,0 +1,4 @@
+Threadings:
+
+https://www.geeksforgeeks.org/c/multithreading-in-c/
+https://www.reddit.com/r/C_Programming/comments/qtc2sl/multithreading_in_c_writing_more_difficult/
