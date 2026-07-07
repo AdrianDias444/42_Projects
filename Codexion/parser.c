@@ -20,12 +20,13 @@ char* handle_string(char* str)
 t_args ft_parser(int argc, char** argv)
 {
     t_args args;
-
-    if (argc != 9)
-    {
-        printf("Invalid number of parameters");
-        return args;
-    }
+    (void) argc;
+    (void) argv;
+    // if (argc != 9)
+    // {
+    //     printf("Invalid number of parameters");
+    //     return args;
+    // }
     args.number_of_coders = handle_number(NUMBER_OF_CODERS);
     args.time_to_burnout = handle_number(TIME_TO_BURNOUT);
     args.time_to_compile = handle_number(TIME_TO_COMPILE);

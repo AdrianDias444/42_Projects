@@ -7,35 +7,35 @@
 #include <pthread.h>
 
 #ifndef NUMBER_OF_CODERS
-#define NUMBER_OF_CODERS 0
+#define NUMBER_OF_CODERS "75"
 #endif
 
 #ifndef TIME_TO_BURNOUT
-#define TIME_TO_BURNOUT 0
+#define TIME_TO_BURNOUT "350"
 #endif
 
 #ifndef TIME_TO_COMPILE
-#define TIME_TO_COMPILE 0
+#define TIME_TO_COMPILE "150"
 #endif
 
 #ifndef TIME_TO_DEBUG
-#define TIME_TO_DEBUG 0
+#define TIME_TO_DEBUG "450"
 #endif
 
 #ifndef TIME_TO_REFACTOR
-#define TIME_TO_REFACTOR 0
+#define TIME_TO_REFACTOR "300"
 #endif
 
 #ifndef NUMBER_OF_COMPILES_REQUIRED
-#define NUMBER_OF_COMPILES_REQUIRED 0
+#define NUMBER_OF_COMPILES_REQUIRED "12"
 #endif
 
 #ifndef DONGLE_COOLDOWN
-#define DONGLE_COOLDOWN 0
+#define DONGLE_COOLDOWN "10"
 #endif
 
 #ifndef SCHEDULER
-#define SCHEDULER ""
+#define SCHEDULER "Iniciando teste 1.2.3..."
 #endif
 
 
