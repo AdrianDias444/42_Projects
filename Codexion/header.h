@@ -35,7 +35,7 @@
 #endif
 
 #ifndef SCHEDULER
-#define SCHEDULER "Iniciando teste 1.2.3..."
+#define SCHEDULER "edf"
 #endif
 
 
