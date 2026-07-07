@@ -1,18 +1,20 @@
 #include "header.h"
 
 
-void* foo(void* arg) {
+void* thread_test(void* arg) {
     printf("Created a new thread");
     return NULL;
  }
-int main() {
-    
-    // Create a pthread_t variable to store
-    // thread ID
+int main(int argc, char **argv)
+{
     pthread_t thread1;
+    t_args args;
     
-    // Creating a new thread. 
-    pthread_create(&thread1, NULL, foo, NULL);
-    pthread_join(thread1, NULL);
+    // pthread_create(&thread1, NULL, thread_test, NULL);
+    // pthread_join(thread1, NULL);
+
+    args = ft_parser(argc, argv);
+    printf("%d", args.number_of_coders);
+
     return 0;
 }
