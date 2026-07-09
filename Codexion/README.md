@@ -67,3 +67,10 @@
 **Foundations of Multithreaded, Parallel, and Distributed Programming, Gregory R. Andrews, 1999**:
 - https://github.com/mincongzhang/MultithreadingLearning (Repository with books)
 ****
+
+**Introduction of Shared Memory Segment**:
+- https://www.geeksforgeeks.org/dbms/introduction-of-shared-memory-segment/
+
+
+**Understanding Atomics and Memory Ordering**:
+- https://dev.to/kprotty/understanding-atomics-and-memory-ordering-2mom
