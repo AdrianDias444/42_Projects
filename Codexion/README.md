@@ -1,4 +1,7 @@
     1. Introduction to Concurrent Programming
+    
+***
+    Essential Concepts
 ****
 **Thread in Operating Systems**:
 - https://www.geeksforgeeks.org/operating-systems/thread-in-operating-system/
@@ -19,8 +22,18 @@
 **Data Races**:
 - https://www.geeksforgeeks.org/operating-systems/race-condition-in-operating-systems/
 ****
+**Registers**:
+- https://www.geeksforgeeks.org/computer-organization-architecture/different-classes-of-cpu-registers/
+****
+
+**Clocks**:
+- https://www.geeksforgeeks.org/distributed-systems/clock-synchronization-in-distributed-system/   
+****
+
+    Mechanism to Avoid Data Races:
 **Atomic Operations in Operative System**:
 - https://www.geeksforgeeks.org/operating-systems/atomic-operations-in-os/
+****
 
 **What is Spinlock in Operating System?**:
 - https://www.geeksforgeeks.org/operating-systems/what-is-spinlock-in-operating-system/
@@ -38,7 +51,7 @@
 - https://www.geeksforgeeks.org/operating-systems/read-copy-update-rcu/
 ****
 
-**Compare-and-Swap (CAS)**:
+**Compare-and-Swap Algorithm(CAS)**:
 - https://algomaster.io/learn/concurrency-interview/compare-and-swap
 ****
 
@@ -46,14 +59,7 @@
 - https://docs.kernel.org/locking/locktypes.html
 ****
 
-**Registers**:
-- https://www.geeksforgeeks.org/computer-organization-architecture/different-classes-of-cpu-registers/
-****
-
-**Clocks**:
-- https://www.geeksforgeeks.org/distributed-systems/clock-synchronization-in-distributed-system/   
-****
-
+    More general concepts
 **Introduction of Deadlock in Operating System**:
 - https://www.geeksforgeeks.org/operating-systems/introduction-of-deadlock-in-operating-system/
 ****
@@ -104,5 +110,5 @@
 ****
 
 **Memory Barriers in CPP**:
-garwal1999/memory-barriers-in-c-171bf4f03ff4
+- https://medium.com/@harshadaggarwal1999/memory-barriers-in-c-171bf4f03ff4
 ****
