@@ -1,6 +1,12 @@
     1. Introduction to Concurrent Programming
-
+**Thread in Operating Systems**:
+- https://www.geeksforgeeks.org/operating-systems/thread-in-operating-system/
 ****
+
+**Threads x Process**:
+- https://www.geeksforgeeks.org/operating-systems/difference-between-process-and-thread/
+****
+
 **State of a Process in Operating Systems**:
 - https://www.geeksforgeeks.org/operating-systems/states-of-a-process-in-operating-systems/
 ****
@@ -9,9 +15,6 @@
 - https://www.geeksforgeeks.org/operating-systems/what-is-program-counter/
 ****
 
-**Threads x Process**:
-- https://www.geeksforgeeks.org/operating-systems/difference-between-process-and-thread/
-****
 
 **Data Races**:
 - https://www.geeksforgeeks.org/operating-systems/race-condition-in-operating-systems/
@@ -36,9 +39,6 @@
 - https://www.geeksforgeeks.org/operating-systems/process-control-block-in-os/
 ****
 
-**Thread in Operating Systems**:
-- https://www.geeksforgeeks.org/operating-systems/thread-in-operating-system/
-****
 
 **CPU Sheduling in Operating Systems**:
 - https://www.geeksforgeeks.org/operating-systems/cpu-scheduling-in-operating-systems/
