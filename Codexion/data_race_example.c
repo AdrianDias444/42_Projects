@@ -1,5 +1,4 @@
 // Possible data race
-/
 
 int counter = 0;
 

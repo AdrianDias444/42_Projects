@@ -15,10 +15,36 @@
 - https://www.geeksforgeeks.org/operating-systems/what-is-program-counter/
 ****
 
-
 **Data Races**:
 - https://www.geeksforgeeks.org/operating-systems/race-condition-in-operating-systems/
 ****
+**Atomic Operations in Operative System**:
+- https://www.geeksforgeeks.org/operating-systems/atomic-operations-in-os/
+
+**What is Spinlock in Operating System?**:
+- https://www.geeksforgeeks.org/operating-systems/what-is-spinlock-in-operating-system/
+****
+
+**Mutex lock for Linux Thread Synchronization**:
+- https://www.geeksforgeeks.org/linux-unix/mutex-lock-for-linux-thread-synchronization/
+****
+
+**Reader-Writer Locks**:
+- https://medium.com/@humbertofilho_30158/reader-writer-locks-aaa64e154c4e
+****
+
+**Read-Copy Update (RCU)**:
+- https://www.geeksforgeeks.org/operating-systems/read-copy-update-rcu/
+****
+
+**Compare-and-Swap (CAS)**:
+- https://algomaster.io/learn/concurrency-interview/compare-and-swap
+****
+
+**Lock types and their rules**:
+- https://docs.kernel.org/locking/locktypes.html
+****
+
 **Registers**:
 - https://www.geeksforgeeks.org/computer-organization-architecture/different-classes-of-cpu-registers/
 ****
@@ -70,7 +96,12 @@
 
 **Introduction of Shared Memory Segment**:
 - https://www.geeksforgeeks.org/dbms/introduction-of-shared-memory-segment/
-
+****
 
 **Understanding Atomics and Memory Ordering**:
 - https://dev.to/kprotty/understanding-atomics-and-memory-ordering-2mom
+****
+
+**Memory Barriers in CPP**:
+garwal1999/memory-barriers-in-c-171bf4f03ff4
+****
