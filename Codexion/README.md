@@ -113,3 +113,37 @@
 **Memory Barriers in CPP**:
 - https://medium.com/@harshadaggarwal1999/memory-barriers-in-c-171bf4f03ff4
 ****
+
+PTHREAD_CREATE:
+
+    int pthread_create(thread, attr, routine, arg);
+
+    thread - pointer to pthread_t variable where the system can store the ID ot the new thread
+
+    attr - Pointer to a thread attributes object that defines thread properties. Use NULL for default attributes.
+    
+    routine - Pointer to the function that the thread will execute. It must return void* and accept a void* argument.
+    
+    arg - A single argument passed to the thread function. Use NULL if no argument is needed. We can pass a struct or pointer to pass multiple values.
+
+
+PTHREAD_JOIN:
+    int pthread_join(thread, retval);
+
+    thread - The ID of the thread you want to wait for. This is the thread that will be joined.
+
+    retval - A pointer to a location where the exit status of the thread will be stored. This is optional and can be set to NULL if you do not need the return value of the thread.
+
+PTHREAD_MUTEX_INIT:
+PTHREAD_MUTEX_LOCK:
+PTHREAD_MUTEX_UNLOCK:
+PTHREAD_MUTEX_DESTROY:
+PTHREAD_COND_INIT:
+PTHREAD_COND_WAIT:
+PTHREAD_COND_TIMEDWAIT:
+PTHREAD_COND_SIGNAL:
+PTHREAD_COND_BROADCAST:
+PTHREAD_COND_DESTROY:
+GETTIMEOFDAY:
+CLOCK_GETTIME:
+USLEEP:

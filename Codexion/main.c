@@ -20,7 +20,7 @@ void print_args(t_args args)
     printf("Scheduler: %s\n", args.scheduler);
 }
 
-int main(int argc, char **argv)
+int main()
 {
     pthread_t thread1;
     t_args args;
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     // pthread_create(&thread1, NULL, thread_test, NULL);
     // pthread_join(thread1, NULL);
 
-    args = ft_parser(argc, argv);
+    args = ft_parser();
     print_args(args);
     return 0;
 }
