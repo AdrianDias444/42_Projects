@@ -52,5 +52,29 @@ typedef struct arguments
     char* scheduler;
 } t_args;
 
-t_args ft_parser();
+
+typedef struct coder
+{
+    int number;
+    struct coder* next;
+    struct coder* previous;
+} t_coder;
+
+
+typedef struct lst_coders
+{
+    t_coder* first_coders;
+    int number_of_coders;
+} t_lst_coders;
+
+
+
+t_args ft_parser(void);
+t_coder* ft_create_coders(t_args args);
+void ft_add_next_coder(t_coder* current_coder, t_coder* next_coder);
+void ft_add_previous_coder(t_coder* current_coder, t_coder* previous_coder);
+void ft_print_coders(t_coder* first_coder);
+t_coder* ft_create_coder(int nb);
+
+
 #endif

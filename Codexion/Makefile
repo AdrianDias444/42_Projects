@@ -1,6 +1,6 @@
 NAME = library.a
 
-SOURCES = parser.c
+SOURCES = parser.c utils/add_next_coder.c utils/add_previous_coder.c utils/print_coders.c utils/create_coder.c
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
@@ -15,27 +15,27 @@ COMPRESS = ar rcs
 RM = rm -f
 
 
-A1 = -D NUMBER_OF_CODERS=23
-A2 = -D TIME_TO_BURNOUT=23
-A3 = -D TIME_TO_COMPILE=23
-A4 = -D TIME_TO_DEBUG=23
-A5 = -D TIME_TO_REFACTOR=23
-A6 = -D NUMBER_OF_COMPILES_REQUIRED=23
-A7 = -D DONGLE_COOLDOWN=23
-A8 = -D SCHEDULER='"fifosdf"'
+#A1 = -D NUMBER_OF_CODERS=23
+#A2 = -D TIME_TO_BURNOUT=23
+#A3 = -D TIME_TO_COMPILE=23
+#A4 = -D TIME_TO_DEBUG=23
+#A5 = -D TIME_TO_REFACTOR=23
+#A6 = -D NUMBER_OF_COMPILES_REQUIRED=23
+#A7 = -D DONGLE_COOLDOWN=23
+#A8 = -D SCHEDULER='"fifosdf"'
 
 
-ARGUMENTS = $(A1) $(A2) $(A3) $(A4) $(A5) $(A6) $(A7) $(A8)
+#ARGUMENTS = $(A1) $(A2) $(A3) $(A4) $(A5) $(A6) $(A7) $(A8)
 
 all: $(NAME)
-	$(CC) $(MAIN_FILE) $(ARGUMENTS) $(NAME)
+	$(CC) $(MAIN_FILE) $(NAME)
 	$(RM) $(OBJECTS) $(NAME)
 $(NAME): $(OBJECTS)
 	$(COMPRESS) $(NAME) $(OBJECTS)
 
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(ARGUMENTS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJECTS)

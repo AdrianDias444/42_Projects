@@ -23,6 +23,7 @@ void print_args(t_args args)
 int main()
 {
     pthread_t thread1;
+    t_coder* first_coder;
     t_args args;
     
     // pthread_create(&thread1, NULL, thread_test, NULL);
@@ -30,5 +31,9 @@ int main()
 
     args = ft_parser();
     print_args(args);
+    
+    first_coder = ft_create_coders(args);
+    printf("\n");
+    ft_print_coders(first_coder);
     return 0;
 }
