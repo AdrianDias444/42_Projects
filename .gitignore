@@ -1,2 +1,15 @@
-a.out
+*.out
+*.o
+*.obj
 
+.mypy_cache/
+__pycache__/
+*.pyc
+*.pyo
+
+venv/
+.env/
+
+.vscode/
+*.swp
+*.tmp
