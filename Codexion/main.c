@@ -8,32 +8,23 @@ void* thread_test(void* arg)
 }
 
 
-void print_args(t_args args)
-{
-    printf("Number of coders: %d\n", args.number_of_coders);
-    printf("Time to burnout: %d\n", args.time_to_burnout);
-    printf("Time to compile: %d\n", args.time_to_compile);
-    printf("Time to debug: %d\n", args.time_to_debug);
-    printf("Time to refactor: %d\n", args.time_to_refactor);
-    printf("Number of compiles: %d\n", args.number_of_compiles_required);
-    printf("Dongle Cooldown: %d\n", args.dongle_cooldown);
-    printf("Scheduler: %s\n", args.scheduler);
-}
-
 int main()
 {
     pthread_t thread1;
-    t_coder* first_coder;
+    t_circle* circle;
     t_args args;
     
     // pthread_create(&thread1, NULL, thread_test, NULL);
     // pthread_join(thread1, NULL);
 
     args = ft_parser();
-    print_args(args);
+    ft_print_args(args);
     
-    first_coder = ft_create_coders(args);
-    printf("\n");
-    ft_print_coders(first_coder);
+    circle = ft_handle_circle(args);
+    ft_print_circle(circle->first_coder);
+
+    ft_create_dongles(circle);
+    ft_print_dongles(circle);
+
     return 0;
 }

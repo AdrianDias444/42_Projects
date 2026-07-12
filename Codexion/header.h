@@ -38,7 +38,7 @@
 #define SCHEDULER "edf"
 #endif
 
-
+typedef struct dongle t_dongle;
 
 typedef struct arguments
 {
@@ -58,23 +58,39 @@ typedef struct coder
     int number;
     struct coder* next;
     struct coder* previous;
+    char* action;
+    t_dongle* right_dongle;
+    t_dongle* left_dongle;
 } t_coder;
 
 
-typedef struct lst_coders
+typedef struct circle
 {
-    t_coder* first_coders;
+    t_coder* first_coder;
     int number_of_coders;
-} t_lst_coders;
+    int nb_dongles;
+} t_circle;
 
+struct dongle
+{
+    t_coder* actual_coder;
+    struct dongle* next;
+    char name;
+};
 
 
 t_args ft_parser(void);
-t_coder* ft_create_coders(t_args args);
 void ft_add_next_coder(t_coder* current_coder, t_coder* next_coder);
 void ft_add_previous_coder(t_coder* current_coder, t_coder* previous_coder);
-void ft_print_coders(t_coder* first_coder);
 t_coder* ft_create_coder(int nb);
+t_circle* ft_handle_circle(t_args args);
+void ft_print_args(t_args args);
+void ft_print_circle(t_coder* first_coder);
+t_circle* ft_create_circle(t_coder* coder, t_args args);
+t_dongle* ft_create_dongles(t_circle* circle);
+void ft_print_dongles(t_circle* circle);
+void ft_add_dongle_right(t_coder* coder, t_dongle* dongle);
+void ft_add_dongle_left(t_coder* coder, t_dongle* dongle);
 
 
 #endif

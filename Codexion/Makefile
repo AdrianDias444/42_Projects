@@ -1,6 +1,15 @@
 NAME = library.a
 
-SOURCES = parser.c utils/add_next_coder.c utils/add_previous_coder.c utils/print_coders.c utils/create_coder.c
+SOURCES = utils/parser/add_next_coder.c \
+		utils/parser/add_previous_coder.c \
+		utils/parser/create_coder.c \
+		utils/parser/create_circle.c \
+		utils/print_functions/print_args.c \
+		utils/print_functions/print_circle.c \
+		utils/parser/handle_circle.c \
+		utils/parser/parser.c \
+		utils/auxiliar/create_dongles.c \
+		utils/print_functions/print_dongles.c
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
@@ -8,7 +17,7 @@ CC = cc
 
 MAIN_FILE = main.c
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -pthread
 
 COMPRESS = ar rcs
 
