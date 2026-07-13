@@ -24,7 +24,6 @@ int main()
     ft_print_circle(circle->first_coder);
     
     ft_create_dongles(circle);
-    //ft_print_dongles(circle);
     ft_print_all_dongles(circle->first_coder->right_dongle, circle->first_coder->left_dongle, circle);
     printf("\n");
     ft_print_dongles(circle);
