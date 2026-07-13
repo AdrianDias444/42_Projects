@@ -87,10 +87,11 @@ t_circle* ft_handle_circle(t_args args);
 void ft_print_args(t_args args);
 void ft_print_circle(t_coder* first_coder);
 t_circle* ft_create_circle(t_coder* coder, t_args args);
-t_dongle* ft_create_dongles(t_circle* circle);
+void* ft_create_dongles(t_circle* circle);
 void ft_print_dongles(t_circle* circle);
 void ft_add_dongle_right(t_coder* coder, t_dongle* dongle);
 void ft_add_dongle_left(t_coder* coder, t_dongle* dongle);
+void ft_print_all_dongles(t_dongle* first_dongle, t_dongle* last_dongle, t_circle* circle);
 
 
 #endif

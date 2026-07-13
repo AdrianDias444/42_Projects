@@ -8,7 +8,7 @@ SOURCES = utils/parser/add_next_coder.c \
 		utils/print_functions/print_circle.c \
 		utils/parser/handle_circle.c \
 		utils/parser/parser.c \
-		utils/auxiliar/create_dongles.c \
+		utils/parser/create_dongles.c \
 		utils/print_functions/print_dongles.c
 
 OBJECTS = $(SOURCES:%.c=%.o)
