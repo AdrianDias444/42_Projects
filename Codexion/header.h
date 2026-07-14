@@ -40,6 +40,7 @@
 
 typedef struct dongle t_dongle;
 
+
 typedef struct arguments
 {
     int number_of_coders;
@@ -71,12 +72,15 @@ typedef struct circle
     int nb_dongles;
 } t_circle;
 
+
 struct dongle
 {
     t_coder* actual_coder;
     struct dongle* next;
     char name;
+    pthread_mutex_t mutex;
 };
+
 
 
 t_args ft_parser(void);
