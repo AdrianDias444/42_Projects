@@ -1,10 +1,12 @@
 #ifndef HEADER_H
 #define HEADER_H
 
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
+#include <sys/time.h>
 
 #ifndef NUMBER_OF_CODERS
 #define NUMBER_OF_CODERS 12
@@ -51,6 +53,7 @@ typedef struct arguments
     int number_of_compiles_required;
     int dongle_cooldown;
     char* scheduler;
+    long start_ms;
 } t_args;
 
 
@@ -62,6 +65,10 @@ typedef struct coder
     char* action;
     t_dongle* right_dongle;
     t_dongle* left_dongle;
+    int time_to_compile;
+    int time_to_debug;
+    int time_to_refactor;
+    long start_ms;
 } t_coder;
 
 
@@ -79,6 +86,7 @@ struct dongle
     struct dongle* next;
     char name;
     pthread_mutex_t mutex;
+    pthread_cond_t cond;
 };
 
 
@@ -96,6 +104,7 @@ void ft_print_dongles(t_circle* circle);
 void ft_add_dongle_right(t_coder* coder, t_dongle* dongle);
 void ft_add_dongle_left(t_coder* coder, t_dongle* dongle);
 void ft_print_all_dongles(t_dongle* first_dongle, t_dongle* last_dongle, t_circle* circle);
-
+void ft_add_times(t_args args, t_coder* coder);
+void ft_create_coder_thread(t_coder* coder);
 
 #endif

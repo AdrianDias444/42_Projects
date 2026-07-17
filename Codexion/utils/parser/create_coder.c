@@ -14,6 +14,9 @@ t_coder* ft_create_coder(int nb)
     coder->action = NULL;
     coder->right_dongle = NULL;
     coder->left_dongle = NULL;
+    coder->time_to_compile = 0;
+    coder->time_to_debug = 0;
+    coder->time_to_refactor = 0;
 
     return (coder);
 }

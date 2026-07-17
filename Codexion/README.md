@@ -236,3 +236,7 @@ USLEEP:
     int usleep(usec);
 
     usec - Number of microseconds to suspend the calling thread's execution. The thread is blocked for at least this duration, though actual sleep time may be slightly longer due to system scheduling granularity. Use 0 to yield the processor.
+
+
+Mutex evita:
+- Que dois coders leem actual_coder == NULL ao mesmo tempo e ambos escrevem o seu nome:
