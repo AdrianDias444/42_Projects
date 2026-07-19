@@ -15,8 +15,6 @@ int main()
     t_args args;
     struct timeval tv_initial;
     long start_ms;
-    // pthread_create(&thread1, NULL, thread_test, NULL);
-    // pthread_join(thread1, NULL);
 
     
     gettimeofday(&tv_initial, NULL);
@@ -24,18 +22,37 @@ int main()
     
     
     args = ft_parser();
-    //ft_print_args(args);
     
     args.start_ms = start_ms;
     
     circle = ft_handle_circle(args);
-    //ft_print_circle(circle->first_coder);
     
     ft_create_dongles(circle);
-    //ft_print_all_dongles(circle->first_coder->right_dongle, circle->first_coder->left_dongle, circle);
     printf("\n");
-    //ft_print_dongles(circle);
-    ft_create_coder_thread(circle->first_coder);
+    
+    pthread_t thread[args.number_of_coders];
+    
+    
+    int i;
+    t_coder* current_coder;
+    
+    current_coder = circle->first_coder;
+    
+    i = 0;
+    while(i < args.number_of_coders)
+    {
+        current_coder->coder_thread_id = thread[i];
+        ft_create_coder_thread(current_coder);
+        current_coder = current_coder->next;
+        i++;
+    }
+    i = 0;
+    
+    while(i < args.number_of_coders)
+    {
+        pthread_join(thread[i], NULL);
+        i++;
+    }
     
     
     

@@ -13,16 +13,16 @@ long ft_return_time(long start_ms)
 }
 
 
-
-
 void ft_compile(t_coder* coder)
 {
     long duration;
     
-    duration = ft_return_time(coder->start_ms);
     
+    duration = ft_return_time(coder->start_ms);
+    pthread_mutex_lock(&coder->simulation->mutex);
     coder->action = "compile";
     printf("%ld %d is compilling\n", duration, coder->number);
+    pthread_mutex_unlock(&coder->simulation->mutex);
     usleep(coder->time_to_compile * 1000);
 }
 
@@ -32,8 +32,10 @@ void ft_debug(t_coder* coder)
 
     duration = ft_return_time(coder->start_ms);
 
+    pthread_mutex_lock(&coder->simulation->mutex);
     coder->action = "debug";
     printf("%ld %d is debugging\n", duration, coder->number);
+    pthread_mutex_unlock(&coder->simulation->mutex);
     usleep(coder->time_to_debug * 1000);
 }
 
@@ -43,8 +45,10 @@ void ft_refactor(t_coder* coder)
 
     duration = ft_return_time(coder->start_ms);;
     
+    pthread_mutex_lock(&coder->simulation->mutex);
     coder->action = "refactor";
     printf("%ld %d is refactoring\n", duration, coder->number);
+    pthread_mutex_unlock(&coder->simulation->mutex);
     usleep(coder->time_to_refactor * 1000);
 }
 
@@ -73,8 +77,14 @@ void* coder_rotine(void* arg)
         pthread_mutex_lock(&first->mutex);
         while(!(first->actual_coder == NULL))
             pthread_cond_wait(&first->cond, &first->mutex);
-        duration = ft_return_time(coder->start_ms);;
+        duration = ft_return_time(coder->start_ms);
+        
+        pthread_mutex_lock(&coder->simulation->mutex);
         printf("%ld %d has taken a dongle\n", duration, coder->number);        
+        pthread_mutex_unlock(&coder->simulation->mutex);
+        
+        
+        
         first->actual_coder = coder;
         pthread_mutex_unlock(&first->mutex);
 
@@ -82,7 +92,13 @@ void* coder_rotine(void* arg)
         while(!(second->actual_coder == NULL))
             pthread_cond_wait(&second->cond, &second->mutex);
         duration = ft_return_time(coder->start_ms);
-        printf("%ld %d has taken a dongle\n", duration, coder->number);
+
+        
+        pthread_mutex_lock(&coder->simulation->mutex);
+        printf("%ld %d has taken a dongle\n", duration, coder->number);        
+        pthread_mutex_unlock(&coder->simulation->mutex);
+
+
         second->actual_coder = coder;
         pthread_mutex_unlock(&second->mutex);
 
@@ -107,9 +123,6 @@ void* coder_rotine(void* arg)
 
 void ft_create_coder_thread(t_coder* coder)
 {
-    pthread_t thread;
-
-
-    pthread_create(&thread, NULL, coder_rotine, coder);
-    pthread_join(thread, NULL);
+    pthread_mutex_init(&coder->simulation->mutex, NULL);
+    pthread_create(&coder->coder_thread_id, NULL, coder_rotine, coder);
 }

@@ -41,7 +41,7 @@
 #endif
 
 typedef struct dongle t_dongle;
-
+typedef struct simulation t_simulation;
 
 typedef struct arguments
 {
@@ -69,6 +69,9 @@ typedef struct coder
     int time_to_debug;
     int time_to_refactor;
     long start_ms;
+    pthread_t coder_thread_id;
+    t_simulation* simulation;
+    
 } t_coder;
 
 
@@ -89,6 +92,11 @@ struct dongle
     pthread_cond_t cond;
 };
 
+
+struct simulation
+{
+    pthread_mutex_t mutex;
+};
 
 
 t_args ft_parser(void);
