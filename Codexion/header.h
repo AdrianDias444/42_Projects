@@ -113,6 +113,6 @@ void ft_add_dongle_right(t_coder* coder, t_dongle* dongle);
 void ft_add_dongle_left(t_coder* coder, t_dongle* dongle);
 void ft_print_all_dongles(t_dongle* first_dongle, t_dongle* last_dongle, t_circle* circle);
 void ft_add_times(t_args args, t_coder* coder);
-void ft_create_coder_thread(t_coder* coder, pthread_t thread);
+void ft_create_coder_thread(t_coder* coder, pthread_t* thread);
 
 #endif

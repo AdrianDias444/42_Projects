@@ -14,7 +14,7 @@ SOURCES = utils/parser/add_next_coder.c \
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
-CC = cc
+CC = cc -g
 
 MAIN_FILE = main.c
 

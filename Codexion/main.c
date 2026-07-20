@@ -1,19 +1,15 @@
 #include "header.h"
 
 
-void run_single_coder(t_coder* coder)
+void run_single_coder(t_coder* coder, pthread_t* thread)
 {
-    pthread_t thread;
-    
     ft_create_coder_thread(coder, thread);
-    pthread_join(thread, NULL);
 }
 
 
 
 int main()
 {
-    pthread_t thread1;
     t_circle* circle;
     t_args args;
     struct timeval tv_initial;
@@ -32,7 +28,24 @@ int main()
     
     ft_create_dongles(circle);
     printf("\n");
-    run_single_coder(circle->first_coder);
+    pthread_t thread[args.number_of_coders];
+    t_coder* current_coder;
+    int i;
+    
+    i = 0;
+    current_coder = circle->first_coder;
+    while(i < args.number_of_coders)
+    {
+        run_single_coder(current_coder, &thread[i]);
+        current_coder = current_coder->next;
+        i++;
+    }
+    i = 0;
+    while(i < args.number_of_coders)
+    {
+        pthread_join(thread[i], NULL);
+        i++;
+    }
             
     return 0;
 }
