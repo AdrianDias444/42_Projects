@@ -1,11 +1,14 @@
 #include "header.h"
 
 
-void* thread_test(void* arg)
+void run_single_coder(t_coder* coder)
 {
-    printf("Created a new thread");
-    return NULL;
+    pthread_t thread;
+    
+    ft_create_coder_thread(coder, thread);
+    pthread_join(thread, NULL);
 }
+
 
 
 int main()
@@ -29,32 +32,7 @@ int main()
     
     ft_create_dongles(circle);
     printf("\n");
-    
-    pthread_t thread[args.number_of_coders];
-    
-    
-    int i;
-    t_coder* current_coder;
-    
-    current_coder = circle->first_coder;
-    
-    i = 0;
-    while(i < args.number_of_coders)
-    {
-        current_coder->coder_thread_id = thread[i];
-        ft_create_coder_thread(current_coder);
-        current_coder = current_coder->next;
-        i++;
-    }
-    i = 0;
-    
-    while(i < args.number_of_coders)
-    {
-        pthread_join(thread[i], NULL);
-        i++;
-    }
-    
-    
-    
+    run_single_coder(circle->first_coder);
+            
     return 0;
 }

@@ -121,8 +121,8 @@ void* coder_rotine(void* arg)
 }
 
 
-void ft_create_coder_thread(t_coder* coder)
+void ft_create_coder_thread(t_coder* coder, pthread_t thread)
 {
     pthread_mutex_init(&coder->simulation->mutex, NULL);
-    pthread_create(&coder->coder_thread_id, NULL, coder_rotine, coder);
+    pthread_create(&thread, NULL, coder_rotine, coder);
 }
