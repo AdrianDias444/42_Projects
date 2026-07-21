@@ -56,7 +56,10 @@ void* coder_rotine(void* arg)
     while (1)
     {
         if(coder->run == 0)
-            break;
+        {
+            printf("Thread %d Stopped\n", coder->number);
+            return(NULL);
+        }
         pthread_mutex_lock(&first->mutex);
         while(!(first->actual_coder == NULL))
             pthread_cond_wait(&first->cond, &first->mutex);
@@ -66,7 +69,11 @@ void* coder_rotine(void* arg)
         pthread_mutex_unlock(&first->mutex);
 
         
-        
+        if(coder->run == 0)
+        {
+            printf("Thread %d Stopped\n", coder->number);
+            return(NULL);
+        }
         pthread_mutex_lock(&second->mutex);
         while(!(second->actual_coder == NULL))
             pthread_cond_wait(&second->cond, &second->mutex);
@@ -75,20 +82,54 @@ void* coder_rotine(void* arg)
         second->actual_coder = coder;
         pthread_mutex_unlock(&second->mutex);
 
+        if(coder->run == 0)
+        {
+            printf("Thread %d Stopped\n", coder->number);
+            return(NULL);
+        }
+        
         ft_compile(coder);
 
+        if(coder->run == 0)
+        {
+            printf("Thread %d Stopped\n", coder->number);
+            return(NULL);
+        }
         pthread_mutex_lock(&first->mutex);
         first->actual_coder = NULL;
         pthread_cond_signal(&first->cond);
         pthread_mutex_unlock(&first->mutex);
 
+        if(coder->run == 0)
+        {
+            printf("Thread %d Stopped\n", coder->number);
+            return(NULL);
+        }
+        
         pthread_mutex_lock(&second->mutex);
         second->actual_coder = NULL;
         pthread_cond_signal(&second->cond);
         pthread_mutex_unlock(&second->mutex);
 
+        if(coder->run == 0)
+        {
+            printf("Thread %d Stopped\n", coder->number);
+            return(NULL);
+        }
+        
         ft_debug(coder);
+        if(coder->run == 0)
+        {
+            printf("Thread %d Stopped\n", coder->number);
+            return(NULL);
+        }
         ft_refactor(coder);
+        
+        if(coder->run == 0)
+        {
+            printf("Thread %d Stopped\n", coder->number);
+            return(NULL);
+        }
     }
     return (NULL);
 }
@@ -96,9 +137,5 @@ void* coder_rotine(void* arg)
 
 void ft_create_coder_thread(t_coder* coder, pthread_t* thread)
 {
-    //pthread_mutex_init(&coder->simulation->mutex, NULL);
-    //printf("Fase 1\n");
     pthread_create(thread, NULL, coder_rotine, coder);
-    //printf("Fase 2\n");
-
 }

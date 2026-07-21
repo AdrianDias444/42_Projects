@@ -8,10 +8,7 @@ void ft_stop(t_coder* coder)
     
     while(current_coder->run == 1)
     {
-        //printf("\nteste 1: %d\n", current_coder->run);
         current_coder->run = 0;
-        //printf("\nteste 2: %d\n", current_coder->run);
-
         current_coder = current_coder->next;
     }
 }
@@ -24,26 +21,26 @@ void* ft_monitor_routine(void* arg)
     circle = (t_circle*) arg;
     coder = circle->first_coder;
     
-    long duration;
-    
-    duration = ft_return_time_since_start(coder->start_ms);
-    
     while(1)
     {
+        printf("adsffd");
         if(ft_return_time_now() - coder->time_of_last_compile > coder->time_to_compile)
         {
             ft_stop(coder);
-            printf("%ld %d burned out\n", duration, coder->number);        
             break;
         }
         coder = coder->next;    
     }
-    //printf("Saiu do while");
     return(NULL);
 }
 
 
-void ft_create_monitor_thread(t_circle* circle, pthread_t* thread)
+pthread_t ft_create_monitor_thread(t_circle* circle)
 {
-    pthread_create(thread, NULL, ft_monitor_routine, circle);    
+    pthread_t tid;
+    
+    pthread_create(&tid, NULL, ft_monitor_routine, circle);
+    pthread_join(tid, NULL);
+        
+    return(tid);
 }

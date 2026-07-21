@@ -28,7 +28,7 @@ int main()
     
     ft_create_dongles(circle);
     printf("\n");
-    pthread_t thread[args.number_of_coders];
+    pthread_t thread[args.number_of_coders + 1];
     t_coder* current_coder;
     int i;
     
@@ -40,14 +40,14 @@ int main()
         current_coder = current_coder->next;
         i++;
     }
+    ft_create_monitor_thread(circle, &thread[i]);
     i = 0;
     while(i < args.number_of_coders)
     {
         pthread_join(thread[i], NULL);
         i++;
     }
-    ft_create_monitor_thread(circle);
-
+    pthread_join(thread[i], NULL);
             
     return 0;
 }

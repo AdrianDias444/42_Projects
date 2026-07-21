@@ -17,7 +17,7 @@
 #endif
 
 #ifndef TIME_TO_COMPILE
-#define TIME_TO_COMPILE 15
+#define TIME_TO_COMPILE 150
 #endif
 
 #ifndef TIME_TO_DEBUG
@@ -118,7 +118,7 @@ void ft_add_times(t_args args, t_coder* coder);
 void ft_create_coder_thread(t_coder* coder, pthread_t* thread);
 long ft_return_time_since_start(long start_ms);
 long ft_return_time_now();
-pthread_t ft_create_monitor_thread(t_circle* circle);
+void ft_create_monitor_thread(t_circle* circle, pthread_t* thread);
 
 
 
