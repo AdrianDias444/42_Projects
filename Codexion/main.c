@@ -46,6 +46,8 @@ int main()
         pthread_join(thread[i], NULL);
         i++;
     }
+    ft_create_monitor_thread(circle);
+
             
     return 0;
 }

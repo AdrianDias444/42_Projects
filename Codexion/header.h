@@ -9,7 +9,7 @@
 #include <sys/time.h>
 
 #ifndef NUMBER_OF_CODERS
-#define NUMBER_OF_CODERS 12
+#define NUMBER_OF_CODERS 1
 #endif
 
 #ifndef TIME_TO_BURNOUT
@@ -17,7 +17,7 @@
 #endif
 
 #ifndef TIME_TO_COMPILE
-#define TIME_TO_COMPILE 150
+#define TIME_TO_COMPILE 15
 #endif
 
 #ifndef TIME_TO_DEBUG
@@ -59,6 +59,7 @@ typedef struct arguments
 
 typedef struct coder
 {
+    int run;
     int number;
     struct coder* next;
     struct coder* previous;
@@ -70,6 +71,7 @@ typedef struct coder
     int time_to_refactor;
     long start_ms;
     pthread_t coder_thread_id;
+    long time_of_last_compile;
     t_simulation* simulation;
     
 } t_coder;
@@ -114,5 +116,10 @@ void ft_add_dongle_left(t_coder* coder, t_dongle* dongle);
 void ft_print_all_dongles(t_dongle* first_dongle, t_dongle* last_dongle, t_circle* circle);
 void ft_add_times(t_args args, t_coder* coder);
 void ft_create_coder_thread(t_coder* coder, pthread_t* thread);
+long ft_return_time_since_start(long start_ms);
+long ft_return_time_now();
+pthread_t ft_create_monitor_thread(t_circle* circle);
+
+
 
 #endif

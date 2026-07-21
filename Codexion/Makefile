@@ -10,7 +10,9 @@ SOURCES = utils/parser/add_next_coder.c \
 		utils/parser/parser.c \
 		utils/parser/create_dongles.c \
 		utils/print_functions/print_dongles.c \
-		utils/auxiliar/create_coder_thread.c
+		utils/auxiliar/create_coder_thread.c \
+		utils/auxiliar/monitor_thread.c \
+		utils/auxiliar/return_time.c
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
