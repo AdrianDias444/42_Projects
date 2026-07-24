@@ -14,40 +14,47 @@ int main()
     t_args args;
     struct timeval tv_initial;
     long start_ms;
-
-    
-    gettimeofday(&tv_initial, NULL);
-    start_ms = tv_initial.tv_sec * 1000 + tv_initial.tv_usec / 1000;
-    
-    
-    args = ft_parser();
-    
-    args.start_ms = start_ms;
-    
-    circle = ft_handle_circle(args);
-    
-    ft_create_dongles(circle);
-    printf("\n");
-    pthread_t thread[args.number_of_coders + 1];
     t_coder* current_coder;
+    t_simulation sim;
     int i;
     
+    
     i = 0;
+    args = ft_parser();
+    args.start_ms = ft_return_time_now();
+    circle = ft_handle_circle(args);
+    ft_create_dongles(circle);
+
+    
+    pthread_t thread[args.number_of_coders + 1];
     current_coder = circle->first_coder;
-    while(i < args.number_of_coders)
+    for (int j = 0; j < args.number_of_coders; j++)
+    {
+        current_coder->simulation = &sim;
+        current_coder = current_coder->next;
+    }
+
+    pthread_mutex_init(&sim.mutex, NULL);
+    
+    current_coder = circle->first_coder;
+    ft_create_monitor_thread(circle, &thread[i]);
+    i++;
+    while(i <= args.number_of_coders)
     {
         run_single_coder(current_coder, &thread[i]);
         current_coder = current_coder->next;
         i++;
     }
-    ft_create_monitor_thread(circle, &thread[i]);
     i = 0;
-    while(i < args.number_of_coders)
+    while(i <= args.number_of_coders)
     {
         pthread_join(thread[i], NULL);
         i++;
     }
-    pthread_join(thread[i], NULL);
-            
+
+    
+    pthread_mutex_destroy(&sim.mutex);
     return 0;
 }
+
+

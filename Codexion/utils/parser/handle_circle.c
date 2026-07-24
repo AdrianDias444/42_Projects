@@ -6,7 +6,9 @@ void ft_add_times(t_args args, t_coder* coder)
     coder->time_to_compile = args.time_to_compile;
     coder->time_to_debug = args.time_to_debug;
     coder->time_to_refactor = args.time_to_refactor;
+    coder->time_to_burnout = args.time_to_burnout;
     coder->start_ms = args.start_ms;
+    coder -> time_of_last_compile = args.start_ms;
 }
 
 

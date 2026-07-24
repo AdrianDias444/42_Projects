@@ -2,44 +2,47 @@
 
 void ft_stop(t_coder* coder)
 {
-    t_coder* current_coder;
+    int i;
     
-    current_coder = coder;
-    
-    while(current_coder->run == 1)
+    i = 0;
+    while(i < NUMBER_OF_CODERS)
     {
-        //printf("\nteste 1: %d\n", current_coder->run);
-        current_coder->run = 0;
-        //printf("\nteste 2: %d\n", current_coder->run);
-
-        current_coder = current_coder->next;
+        coder->run = 0;
+        pthread_cond_broadcast(&coder->right_dongle->cond);
+        pthread_cond_broadcast(&coder->left_dongle->cond);
+        coder = coder->next;
+        i++;
     }
 }
 
-void* ft_monitor_routine(void* arg)
+void *ft_monitor_routine(void *arg)
 {
-    t_circle* circle;
-    t_coder* coder;
-    
-    circle = (t_circle*) arg;
-    coder = circle->first_coder;
-    
-    long duration;
-    
-    duration = ft_return_time_since_start(coder->start_ms);
-    
-    while(1)
+    t_circle *circle = (t_circle *)arg;
+    t_coder  *coder;
+    long      duration;
+    int       i;
+
+    while (1)
     {
-        if(ft_return_time_now() - coder->time_of_last_compile > coder->time_to_compile)
+        coder = circle->first_coder;
+        i = 0;
+        while (i < circle->number_of_coders)
         {
-            ft_stop(coder);
-            printf("%ld %d burned out\n", duration, coder->number);        
-            break;
+            if (ft_return_time_now() - coder->time_of_last_compile > coder->time_to_burnout)
+            {
+                duration = ft_return_time_since_start(coder->start_ms);
+                pthread_mutex_lock(&coder->simulation->mutex);
+                printf("%ld %d burned out\n", duration, coder->number);
+                pthread_mutex_unlock(&coder->simulation->mutex);
+                ft_stop(coder);
+                return (NULL);
+            }
+            coder = coder->next;
+            i++;
         }
-        coder = coder->next;    
+        usleep(1000);
     }
-    //printf("Saiu do while");
-    return(NULL);
+    return (NULL);
 }
 
 

@@ -9,11 +9,11 @@
 #include <sys/time.h>
 
 #ifndef NUMBER_OF_CODERS
-#define NUMBER_OF_CODERS 1
+#define NUMBER_OF_CODERS 11
 #endif
 
 #ifndef TIME_TO_BURNOUT
-#define TIME_TO_BURNOUT 350
+#define TIME_TO_BURNOUT 1550
 #endif
 
 #ifndef TIME_TO_COMPILE
@@ -69,6 +69,7 @@ typedef struct coder
     int time_to_compile;
     int time_to_debug;
     int time_to_refactor;
+    int time_to_burnout;
     long start_ms;
     pthread_t coder_thread_id;
     long time_of_last_compile;

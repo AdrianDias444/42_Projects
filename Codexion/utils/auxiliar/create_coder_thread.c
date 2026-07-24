@@ -5,10 +5,16 @@ void ft_compile(t_coder* coder)
 {
     long duration;
     
-    duration = ft_return_time_since_start(coder->start_ms);
     coder->action = "compile";
+    duration = ft_return_time_since_start(coder->start_ms);
+    
+    pthread_mutex_lock(&coder->simulation->mutex);
     printf("%ld %d is compilling\n", duration, coder->number);
+    pthread_mutex_unlock(&coder->simulation->mutex);
+    
+    
     usleep(coder->time_to_compile * 1000);
+    coder->time_of_last_compile = ft_return_time_now();
 }
 
 void ft_debug(t_coder* coder)
@@ -18,7 +24,11 @@ void ft_debug(t_coder* coder)
 
     duration = ft_return_time_since_start(coder->start_ms);
     coder->action = "debug";
+    
+    pthread_mutex_lock(&coder->simulation->mutex);
     printf("%ld %d is debugging\n", duration, coder->number);
+    pthread_mutex_unlock(&coder->simulation->mutex);
+    
     usleep(coder->time_to_debug * 1000);
 }
 
@@ -27,11 +37,39 @@ void ft_refactor(t_coder* coder)
     long duration;
 
     
-    duration = ft_return_time_since_start(coder->start_ms);;
     coder->action = "refactor";
+    duration = ft_return_time_since_start(coder->start_ms);
+    
+    pthread_mutex_lock(&coder->simulation->mutex);
     printf("%ld %d is refactoring\n", duration, coder->number);
+    pthread_mutex_unlock(&coder->simulation->mutex);
+    
     usleep(coder->time_to_refactor * 1000);
 }
+
+
+int ft_wait_dongle_be_free(t_dongle* dongle, t_coder* coder)
+{
+    long duration;
+    
+    while (dongle->actual_coder != NULL && coder->run == 1)
+        pthread_cond_wait(&dongle->cond, &dongle->mutex);
+    if (coder->run == 0)
+    {
+        pthread_mutex_unlock(&dongle->mutex);
+        return(0);
+    }
+    duration = ft_return_time_since_start(coder->start_ms);
+    
+    pthread_mutex_lock(&coder->simulation->mutex);
+    printf("%ld %d has taken a dongle\n", duration, coder->number);
+    pthread_mutex_unlock(&coder->simulation->mutex);    
+        
+    dongle->actual_coder = coder;
+    return(1);
+}
+
+
 
 void* coder_rotine(void* arg)
 {
@@ -40,7 +78,6 @@ void* coder_rotine(void* arg)
     t_dongle* first;
     t_dongle* second;
     t_coder* coder;
-    long duration;
     coder = (t_coder *) arg;
 
     left_dongle = coder->left_dongle;
@@ -56,80 +93,35 @@ void* coder_rotine(void* arg)
     while (1)
     {
         if(coder->run == 0)
-        {
-            printf("Thread %d Stopped\n", coder->number);
             return(NULL);
-        }
+
         pthread_mutex_lock(&first->mutex);
-        while(!(first->actual_coder == NULL))
-            pthread_cond_wait(&first->cond, &first->mutex);
-        duration = ft_return_time_since_start(coder->start_ms);
-        printf("%ld %d has taken a dongle\n", duration, coder->number);        
-        first->actual_coder = coder;
+        if(!ft_wait_dongle_be_free(first, coder))
+            return(NULL);
         pthread_mutex_unlock(&first->mutex);
 
         
-        if(coder->run == 0)
-        {
-            printf("Thread %d Stopped\n", coder->number);
-            return(NULL);
-        }
+
         pthread_mutex_lock(&second->mutex);
-        while(!(second->actual_coder == NULL))
-            pthread_cond_wait(&second->cond, &second->mutex);
-        duration = ft_return_time_since_start(coder->start_ms);
-        printf("%ld %d has taken a dongle\n", duration, coder->number);        
-        second->actual_coder = coder;
+        if(!ft_wait_dongle_be_free(second, coder))
+            return(NULL);
         pthread_mutex_unlock(&second->mutex);
 
-        if(coder->run == 0)
-        {
-            printf("Thread %d Stopped\n", coder->number);
-            return(NULL);
-        }
         
         ft_compile(coder);
 
-        if(coder->run == 0)
-        {
-            printf("Thread %d Stopped\n", coder->number);
-            return(NULL);
-        }
         pthread_mutex_lock(&first->mutex);
         first->actual_coder = NULL;
         pthread_cond_signal(&first->cond);
         pthread_mutex_unlock(&first->mutex);
 
-        if(coder->run == 0)
-        {
-            printf("Thread %d Stopped\n", coder->number);
-            return(NULL);
-        }
-        
         pthread_mutex_lock(&second->mutex);
         second->actual_coder = NULL;
         pthread_cond_signal(&second->cond);
         pthread_mutex_unlock(&second->mutex);
 
-        if(coder->run == 0)
-        {
-            printf("Thread %d Stopped\n", coder->number);
-            return(NULL);
-        }
-        
         ft_debug(coder);
-        if(coder->run == 0)
-        {
-            printf("Thread %d Stopped\n", coder->number);
-            return(NULL);
-        }
         ft_refactor(coder);
-        
-        if(coder->run == 0)
-        {
-            printf("Thread %d Stopped\n", coder->number);
-            return(NULL);
-        }
     }
     return (NULL);
 }
