@@ -9,11 +9,11 @@
 #include <sys/time.h>
 
 #ifndef NUMBER_OF_CODERS
-#define NUMBER_OF_CODERS 11
+#define NUMBER_OF_CODERS 2
 #endif
 
 #ifndef TIME_TO_BURNOUT
-#define TIME_TO_BURNOUT 1550
+#define TIME_TO_BURNOUT 800
 #endif
 
 #ifndef TIME_TO_COMPILE
@@ -29,7 +29,7 @@
 #endif
 
 #ifndef NUMBER_OF_COMPILES_REQUIRED
-#define NUMBER_OF_COMPILES_REQUIRED 12
+#define NUMBER_OF_COMPILES_REQUIRED 1
 #endif
 
 #ifndef DONGLE_COOLDOWN
@@ -74,6 +74,7 @@ typedef struct coder
     pthread_t coder_thread_id;
     long time_of_last_compile;
     t_simulation* simulation;
+    long number_of_compiles_done;
     
 } t_coder;
 
@@ -83,6 +84,7 @@ typedef struct circle
     t_coder* first_coder;
     int number_of_coders;
     int nb_dongles;
+    long number_of_compiles_required;
 } t_circle;
 
 

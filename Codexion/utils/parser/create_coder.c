@@ -18,5 +18,6 @@ t_coder* ft_create_coder(int nb)
     coder->time_to_debug = 0;
     coder->time_to_refactor = 0;
     coder->run = 1;
+    coder->number_of_compiles_done = 0;
     return (coder);
 }

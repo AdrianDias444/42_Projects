@@ -15,6 +15,8 @@ void ft_compile(t_coder* coder)
     
     usleep(coder->time_to_compile * 1000);
     coder->time_of_last_compile = ft_return_time_now();
+    coder->number_of_compiles_done +=1;
+    coder->action = NULL;
 }
 
 void ft_debug(t_coder* coder)
@@ -30,6 +32,7 @@ void ft_debug(t_coder* coder)
     pthread_mutex_unlock(&coder->simulation->mutex);
     
     usleep(coder->time_to_debug * 1000);
+    coder->action = NULL;
 }
 
 void ft_refactor(t_coder* coder)
@@ -45,6 +48,7 @@ void ft_refactor(t_coder* coder)
     pthread_mutex_unlock(&coder->simulation->mutex);
     
     usleep(coder->time_to_refactor * 1000);
+    coder->action = NULL;
 }
 
 
@@ -90,7 +94,7 @@ void* coder_rotine(void* arg)
         first = right_dongle;
         second = left_dongle;
     }
-    while (1)
+    while (coder->number_of_compiles_done < NUMBER_OF_COMPILES_REQUIRED)
     {
         if(coder->run == 0)
             return(NULL);
@@ -123,6 +127,7 @@ void* coder_rotine(void* arg)
         ft_debug(coder);
         ft_refactor(coder);
     }
+    coder->action = "done";
     return (NULL);
 }
 
