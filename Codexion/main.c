@@ -23,7 +23,7 @@ int main()
     args = ft_parser();
     args.start_ms = ft_return_time_now();
     circle = ft_handle_circle(args);
-    ft_create_dongles(circle);
+    ft_handle_dongles(circle);
 
     
     pthread_t thread[args.number_of_coders + 1];

@@ -1,18 +1,23 @@
 NAME = library.a
 
-SOURCES = utils/parser/add_next_coder.c \
-		utils/parser/add_previous_coder.c \
-		utils/parser/create_coder.c \
-		utils/parser/create_circle.c \
+SOURCES = utils/allocs/create_coder.c \
+		utils/allocs/create_circle.c \
+		utils/allocs/create_dongle.c \
+		\
+		utils/parser/parser.c \
+		utils/parser/handle_circle.c \
+		utils/parser/handle_dongles.c \
+		\
 		utils/print_functions/print_args.c \
 		utils/print_functions/print_circle.c \
-		utils/parser/handle_circle.c \
-		utils/parser/parser.c \
-		utils/parser/create_dongles.c \
 		utils/print_functions/print_dongles.c \
-		utils/auxiliar/create_coder_thread.c \
-		utils/auxiliar/create_monitor_thread.c \
-		utils/auxiliar/return_time.c
+		\
+		utils/threads/create_coder_thread.c \
+		utils/threads/create_monitor_thread.c \
+		\
+		utils/utils/add_previous_coder.c \
+		utils/utils/add_next_coder.c \
+		utils/utils/return_time.c
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
