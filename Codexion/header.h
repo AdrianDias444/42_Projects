@@ -29,11 +29,11 @@
 #endif
 
 #ifndef NUMBER_OF_COMPILES_REQUIRED
-#define NUMBER_OF_COMPILES_REQUIRED 1
+#define NUMBER_OF_COMPILES_REQUIRED 4
 #endif
 
 #ifndef DONGLE_COOLDOWN
-#define DONGLE_COOLDOWN 10
+#define DONGLE_COOLDOWN 100
 #endif
 
 #ifndef SCHEDULER
@@ -85,6 +85,7 @@ typedef struct circle
     int number_of_coders;
     int nb_dongles;
     long number_of_compiles_required;
+    long dongle_cooldown;
 } t_circle;
 
 
@@ -95,6 +96,7 @@ struct dongle
     char name;
     pthread_mutex_t mutex;
     pthread_cond_t cond;
+    long dongle_cooldown;
 };
 
 

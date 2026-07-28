@@ -28,6 +28,7 @@ void* ft_handle_dongles(t_circle* circle)
     first_dongle = ft_create_dongle();
     if (!first_dongle)
         return (NULL);
+    first_dongle->dongle_cooldown = circle -> dongle_cooldown;
     current_dongle = first_dongle;
     while(current_coder != circle->first_coder->previous)
     {
@@ -39,6 +40,7 @@ void* ft_handle_dongles(t_circle* circle)
         ft_add_dongle_left(current_coder, current_dongle);
         first_dongle = current_dongle;
         current_dongle = ft_create_dongle();
+        current_dongle -> dongle_cooldown = circle -> dongle_cooldown;
         c++;
     }
     current_dongle->name = c;

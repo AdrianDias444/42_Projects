@@ -36,6 +36,6 @@ t_circle* ft_handle_circle(t_args args)
     current_coder -> next = first_coder;
     first_coder -> previous = current_coder;
     circle = ft_create_circle(first_coder, args);
-
+    circle->dongle_cooldown = args.dongle_cooldown;
     return(circle);
 }

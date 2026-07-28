@@ -117,6 +117,7 @@ void* coder_rotine(void* arg)
         pthread_mutex_lock(&first->mutex);
         first->actual_coder = NULL;
         pthread_cond_signal(&first->cond);
+        usleep(first->dongle_cooldown * 1000);
         pthread_mutex_unlock(&first->mutex);
 
         pthread_mutex_lock(&second->mutex);
