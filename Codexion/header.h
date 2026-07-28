@@ -75,6 +75,7 @@ typedef struct coder
     long time_of_last_compile;
     t_simulation* simulation;
     long number_of_compiles_done;
+    struct coder* heap_next;
     
 } t_coder;
 
@@ -88,6 +89,14 @@ typedef struct circle
     long dongle_cooldown;
 } t_circle;
 
+typedef struct heap
+{
+    t_coder* first;
+    long how_many_waiting;
+} t_heap;
+
+
+
 
 struct dongle
 {
@@ -97,6 +106,7 @@ struct dongle
     pthread_mutex_t mutex;
     pthread_cond_t cond;
     long dongle_cooldown;
+    t_heap* heap;
 };
 
 
@@ -125,6 +135,9 @@ long ft_return_time_since_start(long start_ms);
 long ft_return_time_now();
 void ft_create_monitor_thread(t_circle* circle, pthread_t* thread);
 t_dongle* ft_create_dongle();
+t_heap* ft_create_heap();
+void ft_heap_push_back(t_heap* heap, t_coder* coder_to_push_back);
+void ft_remove_from_heap(t_heap* heap, t_coder* coder);
 
 
 

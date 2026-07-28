@@ -100,6 +100,7 @@ void* coder_rotine(void* arg)
             return(NULL);
 
         pthread_mutex_lock(&first->mutex);
+        ft_heap_push_back(first->heap, coder);
         if(!ft_wait_dongle_be_free(first, coder))
             return(NULL);
         pthread_mutex_unlock(&first->mutex);
@@ -107,11 +108,13 @@ void* coder_rotine(void* arg)
         
 
         pthread_mutex_lock(&second->mutex);
+        ft_heap_push_back(second->heap, coder);
         if(!ft_wait_dongle_be_free(second, coder))
             return(NULL);
         pthread_mutex_unlock(&second->mutex);
 
-        
+        ft_remove_from_heap(first->heap, coder);
+        ft_remove_from_heap(second->heap, coder);
         ft_compile(coder);
 
         pthread_mutex_lock(&first->mutex);

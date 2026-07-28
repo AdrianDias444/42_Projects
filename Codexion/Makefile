@@ -3,6 +3,7 @@ NAME = library.a
 SOURCES = utils/allocs/create_coder.c \
 		utils/allocs/create_circle.c \
 		utils/allocs/create_dongle.c \
+		utils/allocs/create_heap.c \
 		\
 		utils/parser/parser.c \
 		utils/parser/handle_circle.c \
@@ -14,6 +15,7 @@ SOURCES = utils/allocs/create_coder.c \
 		\
 		utils/threads/create_coder_thread.c \
 		utils/threads/create_monitor_thread.c \
+		utils/threads/heap_push_back \
 		\
 		utils/utils/add_previous_coder.c \
 		utils/utils/add_next_coder.c \
