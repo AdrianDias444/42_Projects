@@ -1,4 +1,4 @@
-#include "header.h"
+#include "../../header.h"
 
 t_heap* ft_create_heap()
 {
@@ -9,4 +9,6 @@ t_heap* ft_create_heap()
         return(NULL);
     heap -> first = NULL;
     heap -> how_many_waiting = 0;
+
+    return (heap);
 }

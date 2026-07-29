@@ -15,7 +15,7 @@ SOURCES = utils/allocs/create_coder.c \
 		\
 		utils/threads/create_coder_thread.c \
 		utils/threads/create_monitor_thread.c \
-		utils/threads/heap_push_back \
+		utils/threads/heap_functions.c \
 		\
 		utils/utils/add_previous_coder.c \
 		utils/utils/add_next_coder.c \

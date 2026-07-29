@@ -29,15 +29,15 @@
 #endif
 
 #ifndef NUMBER_OF_COMPILES_REQUIRED
-#define NUMBER_OF_COMPILES_REQUIRED 4
+#define NUMBER_OF_COMPILES_REQUIRED 2
 #endif
 
 #ifndef DONGLE_COOLDOWN
-#define DONGLE_COOLDOWN 100
+#define DONGLE_COOLDOWN 10
 #endif
 
 #ifndef SCHEDULER
-#define SCHEDULER "edf"
+#define SCHEDULER "edf" "fifo"
 #endif
 
 typedef struct dongle t_dongle;
@@ -73,7 +73,7 @@ typedef struct coder
     long start_ms;
     pthread_t coder_thread_id;
     long time_of_last_compile;
-    t_simulation* simulation;
+    t_simulation* simulation; // SIMULATION
     long number_of_compiles_done;
     struct coder* heap_next;
     
@@ -103,12 +103,11 @@ struct dongle
     t_coder* actual_coder;
     struct dongle* next;
     char name;
-    pthread_mutex_t mutex;
+    pthread_mutex_t mutex; // MUTEX
     pthread_cond_t cond;
     long dongle_cooldown;
-    t_heap* heap;
+    t_heap* dongle_heap;
 };
-
 
 struct simulation
 {
@@ -138,6 +137,7 @@ t_dongle* ft_create_dongle();
 t_heap* ft_create_heap();
 void ft_heap_push_back(t_heap* heap, t_coder* coder_to_push_back);
 void ft_remove_from_heap(t_heap* heap, t_coder* coder);
+void ft_print_current_dongle_heap(pthread_mutex_t mutex, t_dongle* dongle);
 
 
 
