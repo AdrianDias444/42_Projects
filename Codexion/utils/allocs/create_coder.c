@@ -20,6 +20,7 @@ t_coder* ft_create_coder(int nb)
     coder->run = 1;
     coder->number_of_compiles_done = 0;
     coder->heap_next = NULL;
+    pthread_mutex_init(&coder->mutex_coder, NULL);
     return (coder);
 }
 

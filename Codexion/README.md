@@ -240,3 +240,161 @@ USLEEP:
 
 Mutex evita:
 - Que dois coders leem actual_coder == NULL ao mesmo tempo e ambos escrevem o seu nome:
+
+
+
+
+Data Races example
+My coder struct has a action field, so coder->action
+
+    ➜  Codexion git:(main) ✗ valgrind --tool=helgrind ./a.out
+    ==13542== Helgrind, a thread error detector
+    ==13542== Copyright (C) 2007-2024, and GNU GPL'd, by OpenWorks LLP et al.
+    ==13542== Using Valgrind-3.25.1 and LibVEX; rerun with -h for copyright info
+    ==13542== Command: ./a.out
+    ==13542== 
+    49642 1 has taken a dongle
+    Dongle: A | First Coder in heap is 1
+    Dongle: A | Second Coder in heap is 1
+    49672 1 has taken a dongle
+    Dongle: C | First Coder in heap is 1
+    Dongle: C | Second Coder in heap is 1
+    ==13542== ---Thread-Announcement------------------------------------------
+    ==13542== 
+    ==13542== Thread #3 was created
+    ==13542==    at 0x4A1C8D3: clone (in /usr/lib/libc.so.6)
+    ==13542==    by 0x4A1C9E6: __clone_internal_fallback (clone-internal.c:64)
+    ==13542==    by 0x4A1C9E6: __clone_internal (clone-internal.c:109)
+    ==13542==    by 0x497B33B: create_thread (pthread_create.c:298)
+    ==13542==    by 0x497BFE0: pthread_create@@GLIBC_2.34 (pthread_create.c:858)
+    ==13542==    by 0x48AC061: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+    ==13542==    by 0x4001EDB: ft_create_coder_thread (create_coder_thread.c:144)
+    ==13542==    by 0x400126B: run_single_coder (main.c:6)
+    ==13542==    by 0x4001420: main (main.c:44)
+    ==13542== 
+    ==13542== ---Thread-Announcement------------------------------------------
+    ==13542== 
+    ==13542== Thread #2 was created
+    ==13542==    at 0x4A1C8D3: clone (in /usr/lib/libc.so.6)
+    ==13542==    by 0x4A1C9E6: __clone_internal_fallback (clone-internal.c:64)
+    ==13542==    by 0x4A1C9E6: __clone_internal (clone-internal.c:109)
+    ==13542==    by 0x497B33B: create_thread (pthread_create.c:298)
+    ==13542==    by 0x497BFE0: pthread_create@@GLIBC_2.34 (pthread_create.c:858)
+    ==13542==    by 0x48AC061: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+    ==13542==    by 0x400218F: ft_create_monitor_thread (create_monitor_thread.c:89)
+    ==13542==    by 0x40013EE: main (main.c:40)
+    ==13542== 
+    ==13542== ---Thread-Announcement------------------------------------------
+    ==13542== 
+    ==13542== Thread #1 is the program's root thread
+    ==13542== 
+    ==13542== ----------------------------------------------------------------
+    ==13542== 
+    ==13542== Possible data race during write of size 8 at 0x4B29058 by thread #3
+    ==13542== Locks held: none
+    ==13542==    at 0x400194E: ft_compile (create_coder_thread.c:8)
+    ==13542==    by 0x4001DDA: coder_rotine (create_coder_thread.c:121)
+    ==13542==    by 0x48AC26B: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+    ==13542==    by 0x497B797: start_thread (pthread_create.c:454)
+    ==13542==    by 0x4A1C8E3: clone (in /usr/lib/libc.so.6)
+    ==13542== 
+    ==13542== This conflicts with a previous read of size 8 by thread #2
+    ==13542== Locks held: none
+    ==13542==    at 0x400204B: ft_monitor_routine (create_monitor_thread.c:62)
+    ==13542==    by 0x48AC26B: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+    ==13542==    by 0x497B797: start_thread (pthread_create.c:454)
+    ==13542==    by 0x4A1C8E3: clone (in /usr/lib/libc.so.6)
+    ==13542==  Address 0x4b29058 is 24 bytes inside a block of size 112 alloc'd
+    ==13542==    at 0x489F9D8: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+    ==13542==    by 0x40024C4: ft_create_coder (create_coder.c:8)
+    ==13542==    by 0x4001617: ft_handle_circle (handle_circle.c:23)
+    ==13542==    by 0x40012EB: main (main.c:25)
+    ==13542==  Block was alloc'd by thread #1
+    ==13542== 
+    66973 1 is compilling
+    ==13542== ----------------------------------------------------------------
+    
+
+The functions `compile()`, `debug()`, and `refactor()` in the `<create_coder_thread.c>` file were modifying `coder->action` to indicate which phase the coder is currently in. This is a problem because I cannot ensure that the write process is atomic. In my `ft_monitor_routine` in the `<create_monitor_thread.c>` file, I check the current state of the action field several times. In a multithreading context, this can obviously cause data races. To fix this, I added a `mutex_coder` field to the coder struct, and in any of these three functions (`compile()`, `debug()`, and `refactor()`), I added `pthread_mutex_lock` and `pthread_mutex_unlock` calls before and after.
+
+---
+
+Another problem that Helgrind showed me is the lack of a mutex on some heap. Here is how this data race works: for some reasons that I don’t know, in a function in `<heap_function.c>`, when I lock a mutex on a given dongle heap, at the same time I am accessing another dongle who haven't protection (mutex). This happens because, technically, each coder can access the same dongle. I modified the state of the dongle heap with `ft_heap_push_back()` and read the same data without protection with `return_last_coder()`, so sad.
+
+# Helgrind Output
+    ==23282== Possible data race during write of size 8 at 0x4B290A8 by thread #3
+    ==23282== Locks held: 2, at addresses 0x4B29358 0x4B29410
+    ==23282==    at 0x40025F9: ft_remove_from_heap (heap_functions.c:107)
+    ==23282==    by 0x4001EAE: coder_rotine (create_coder_thread.c:154)
+    ==23282==    by 0x48AC26B: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+    ==23282==    by 0x497B797: start_thread (pthread_create.c:454)
+    ==23282==    by 0x4A1C8E3: clone (in /usr/lib/libc.so.6)
+    ==23282== 
+    ==23282== This conflicts with a previous read of size 8 by thread #5
+    ==23282== Locks held: 1, at address 0x4B29690
+    ==23282==    at 0x4002386: return_last_coder (heap_functions.c:18)
+    ==23282==    by 0x400250B: ft_heap_push_back (heap_functions.c:76)
+    ==23282==    by 0x4001BB3: ft_wait_dongle_be_free (create_coder_thread.c:71)
+    ==23282==    by 0x4001E19: coder_rotine (create_coder_thread.c:145)
+    ==23282==    by 0x48AC26B: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+    ==23282==    by 0x497B797: start_thread (pthread_create.c:454)
+    ==23282==    by 0x4A1C8E3: clone (in /usr/lib/libc.so.6)
+    ==23282==  Address 0x4b290a8 is 104 bytes inside a block of size 152 alloc'd
+    ==23282==    at 0x489F9D8: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+    ==23282==    by 0x4002778: ft_create_coder (create_coder.c:8)
+    ==23282==    by 0x4001607: ft_handle_circle (handle_circle.c:23)
+    ==23282==    by 0x40012DB: main (main.c:25)
+    ==23282==  Block was alloc'd by thread #1
+
+How I fixed this: honestly, at this point in the project I hadn’t made the EDF yet, so I will make the decision to choose which coder in the heap will be selected to get the dongle in the `ft_wait_dongle_be_free()` function, so after this function finishes we can safely remove the coder from the heap. And yes, we haven’t made the `compile()` yet.
+
+OK, so after this I went from 24 data races to 20.
+I was passing `coder->simulation->mutex` and
+directly accessing and reading `coder->simulation`
+before locking the mutex.
+
+
+OK, now we have 20 data races to fix.
+To end this, I finally noticed that:
+    
+- When in `<create_coder_thread.c>` I pass `coder->simulation->mutex` to `ft_print_current_dongle_heap`, I am not passing the real memory space allocated earlier in `<create_coder.c>`.
+- When this function receives this parameter, it is in fact a duplicated one.
+Yeah "mutex" variable is a copy.
+
+        void ft_print_current_dongle_heap(pthread_mutex_t mutex, t_dongle* dongle)
+
+To fix this, you can change the prototype of the function and pass not the mutex but the memory address of a mutex variable, like this:
+
+        void ft_print_current_dongle_heap(pthread_mutex_t* mutex, t_dongle* dongle)
+
+So when you call the function, instead of passing:
+
+    coder->simulation->mutex
+
+You will need to pass:
+
+    &coder->simulation->mutex
+
+
+
+
+Before:
+
+    ft_print_current_dongle_heap(coder->simulation->mutex, first);
+    ft_print_current_dongle_heap(coder->simulation->mutex, second);
+
+
+After:
+
+    ft_print_current_dongle_heap(&coder->simulation->mutex, first);
+    ft_print_current_dongle_heap(&coder->simulation->mutex, second);
+
+
+So now you can rest:
+
+    Simulation done
+    ==39296== 
+    ==39296== Use --history-level=approx or =none to gain increased speed, at
+    ==39296== the cost of reduced accuracy of conflicting-access information
+    ==39296== For lists of detected and suppressed errors, rerun with: -s
+    ==39296== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 124094700 from 150)

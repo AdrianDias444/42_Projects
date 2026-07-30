@@ -9,6 +9,6 @@ t_heap* ft_create_heap()
         return(NULL);
     heap -> first = NULL;
     heap -> how_many_waiting = 0;
-
+    pthread_mutex_init(&heap->mutex, NULL);
     return (heap);
 }

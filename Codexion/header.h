@@ -9,7 +9,7 @@
 #include <sys/time.h>
 
 #ifndef NUMBER_OF_CODERS
-#define NUMBER_OF_CODERS 2
+#define NUMBER_OF_CODERS 3
 #endif
 
 #ifndef TIME_TO_BURNOUT
@@ -76,6 +76,7 @@ typedef struct coder
     t_simulation* simulation; // SIMULATION
     long number_of_compiles_done;
     struct coder* heap_next;
+    pthread_mutex_t mutex_coder;
     
 } t_coder;
 
@@ -93,6 +94,7 @@ typedef struct heap
 {
     t_coder* first;
     long how_many_waiting;
+    pthread_mutex_t mutex;
 } t_heap;
 
 
@@ -137,7 +139,8 @@ t_dongle* ft_create_dongle();
 t_heap* ft_create_heap();
 void ft_heap_push_back(t_heap* heap, t_coder* coder_to_push_back);
 void ft_remove_from_heap(t_heap* heap, t_coder* coder);
-void ft_print_current_dongle_heap(pthread_mutex_t mutex, t_dongle* dongle);
+void ft_print_current_dongle_heap(pthread_mutex_t* mutex, t_dongle* dongle);
+t_coder* return_first_coder(t_heap* heap);
 
 
 

@@ -7,9 +7,11 @@ void ft_stop(t_coder* coder)
     i = 0;
     while(i < NUMBER_OF_CODERS)
     {
+        pthread_mutex_lock(&coder->mutex_coder);
         coder->run = 0;
-        pthread_cond_broadcast(&coder->right_dongle->cond);
-        pthread_cond_broadcast(&coder->left_dongle->cond);
+        pthread_cond_signal(&coder->right_dongle->cond);
+        pthread_cond_signal(&coder->left_dongle->cond);
+        pthread_mutex_unlock(&coder->mutex_coder);
         coder = coder->next;
         i++;
     }
@@ -20,22 +22,39 @@ int ft_all_coders_finish(t_circle* circle)
 {
     t_coder* current_coder;
 
+    
     current_coder = circle->first_coder;
-
+    
     while(current_coder != circle->first_coder->previous)
     {
+        pthread_mutex_lock(&current_coder->mutex_coder);
         if (current_coder-> number_of_compiles_done < NUMBER_OF_COMPILES_REQUIRED)
-            return(1); 
+        {
+            pthread_mutex_unlock(&current_coder->mutex_coder);
+            return(1);
+        }
+        pthread_mutex_unlock(&current_coder->mutex_coder);
         current_coder = current_coder->next;
     }
+    pthread_mutex_lock(&current_coder->mutex_coder);
     if (current_coder-> number_of_compiles_done < NUMBER_OF_COMPILES_REQUIRED)
-            return(1);
+    {
+        pthread_mutex_unlock(&current_coder->mutex_coder);
+        return(1);
+    }
 
     if (current_coder->action && strcmp(current_coder->action, "done") != 0)
+    {
+        pthread_mutex_unlock(&current_coder->mutex_coder);
         return(1);
+    }
     // Podemos estar a verificar a coder->action depois de um debug()
     if (!current_coder->action)
+    {
+        pthread_mutex_unlock(&current_coder->mutex_coder);            
         return(1);
+    }
+    pthread_mutex_unlock(&current_coder->mutex_coder);
     return(0);
 }
 
@@ -50,12 +69,14 @@ void *ft_monitor_routine(void *arg)
     int       i;
     long time_since_compile;
 
+
     while (ft_all_coders_finish(circle))
     {
         coder = circle->first_coder;
         i = 0;
         while (i < circle->number_of_coders)
         {
+            pthread_mutex_lock(&coder->mutex_coder);
             time_since_compile = ft_return_time_now() - coder->time_of_last_compile;
             if (time_since_compile > coder->time_to_burnout)
             {
@@ -67,11 +88,13 @@ void *ft_monitor_routine(void *arg)
                         pthread_mutex_lock(&coder->simulation->mutex);
                         printf("%ld %d burned out\n", duration, coder->number);
                         pthread_mutex_unlock(&coder->simulation->mutex);
+                        pthread_mutex_unlock(&coder->mutex_coder);
                         ft_stop(coder);
                         return (NULL);
                     }
                 }
             }
+            pthread_mutex_unlock(&coder->mutex_coder);
             coder = coder->next;
             i++;
         }
