@@ -59,6 +59,22 @@ void ft_refactor(t_coder* coder)
 }
 
 
+t_coder* ft_choose_coder_from_heap(t_dongle* dongle)
+{
+    t_coder* coder_chosen;
+
+    pthread_mutex_lock(&dongle->dongle_heap->mutex);
+    if (strcmp(SCHEDULER, "fifo") == 0)
+        coder_chosen = ft_fifo(dongle);
+    if (strcmp(SCHEDULER, "edf") == 0)
+        coder_chosen = ft_edf(dongle);
+    pthread_mutex_unlock(&dongle->dongle_heap->mutex);
+    return(coder_chosen);
+}
+
+
+
+
 int ft_wait_dongle_be_free(t_dongle* dongle, t_coder* coder)
 {
     long duration;
@@ -71,7 +87,7 @@ int ft_wait_dongle_be_free(t_dongle* dongle, t_coder* coder)
     ft_heap_push_back(dongle->dongle_heap, coder);
     pthread_mutex_lock(&dongle->mutex);
     
-    while (dongle->actual_coder != NULL && run_status == 1)
+    while (dongle->actual_coder != NULL && run_status == 1 && ft_choose_coder_from_heap(dongle) != coder)
         pthread_cond_wait(&dongle->cond, &dongle->mutex);
     
     if (run_status == 0)
@@ -143,9 +159,7 @@ void* coder_rotine(void* arg)
         ft_remove_from_heap(first->dongle_heap, coder);
 
 
-        //pthread_mutex_lock(&coder->simulation->mutex);
         ft_print_current_dongle_heap(&coder->simulation->mutex, first);
-        //pthread_mutex_unlock(&coder->simulation->mutex);
 
 
         if(!ft_wait_dongle_be_free(second, coder))
@@ -153,9 +167,7 @@ void* coder_rotine(void* arg)
         ft_remove_from_heap(second->dongle_heap, coder);
 
 
-        //pthread_mutex_lock(&coder->simulation->mutex);
         ft_print_current_dongle_heap(&coder->simulation->mutex, second);
-        //pthread_mutex_unlock(&coder->simulation->mutex);
 
         ft_compile(coder);
 

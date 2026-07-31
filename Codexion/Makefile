@@ -13,6 +13,9 @@ SOURCES = utils/allocs/create_coder.c \
 		utils/print_functions/print_circle.c \
 		utils/print_functions/print_dongles.c \
 		\
+		utils/scheduler/edf.c \
+		utils/scheduler/fifo.c \
+		\
 		utils/threads/create_coder_thread.c \
 		utils/threads/create_monitor_thread.c \
 		utils/threads/heap_functions.c \

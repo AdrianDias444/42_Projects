@@ -37,7 +37,7 @@
 #endif
 
 #ifndef SCHEDULER
-#define SCHEDULER "edf" "fifo"
+#define SCHEDULER "edf"
 #endif
 
 typedef struct dongle t_dongle;
@@ -141,6 +141,8 @@ void ft_heap_push_back(t_heap* heap, t_coder* coder_to_push_back);
 void ft_remove_from_heap(t_heap* heap, t_coder* coder);
 void ft_print_current_dongle_heap(pthread_mutex_t* mutex, t_dongle* dongle);
 t_coder* return_first_coder(t_heap* heap);
+t_coder* ft_edf(t_dongle* dongle);
+t_coder* ft_fifo(t_dongle* dongle);
 
 
 
