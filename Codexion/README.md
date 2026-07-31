@@ -398,3 +398,7 @@ So now you can rest:
     ==39296== the cost of reduced accuracy of conflicting-access information
     ==39296== For lists of detected and suppressed errors, rerun with: -s
     ==39296== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 124094700 from 150)
+
+One tip maybe in this projects or better in resolution of data races
+gdb can not be your best solution, the chance of Heisenbug is big.
+Helgrind probably will save your ass.
