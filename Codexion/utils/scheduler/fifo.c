@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fifo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/03 18:59:32 by adrian            #+#    #+#             */
+/*   Updated: 2026/08/03 18:59:57 by adrian           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../header.h"
 
-t_coder* ft_fifo(t_dongle* dongle)
+t_coder	*ft_fifo(t_dongle	*dongle)
 {
-    t_heap* heap;
+	t_heap	*heap;
 
-    heap = dongle -> dongle_heap;
-    //printf("fifo\n");
-    return (heap->first);
+	heap = dongle -> dongle_heap;
+	return (heap->first);
 }

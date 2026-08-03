@@ -1,6 +1,6 @@
 #include "../../header.h"
 
-void ft_add_previous_coder(t_coder* current_coder, t_coder* previous_coder)
+void ft_add_previous_coder(t_coder* current, t_coder* previous)
 {
-    current_coder -> previous = previous_coder;
+    current -> previous = previous;
 }

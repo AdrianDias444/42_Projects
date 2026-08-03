@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_coder_thread.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/03 19:00:01 by adrian            #+#    #+#             */
+/*   Updated: 2026/08/03 19:00:11 by adrian           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../header.h"
 
 
-void ft_compile(t_coder* coder)
+void	ft_compile(t_coder	*coder)
 {
     long duration;
     
@@ -159,7 +171,7 @@ void* coder_rotine(void* arg)
         ft_remove_from_heap(first->dongle_heap, coder);
 
 
-        ft_print_current_dongle_heap(&coder->simulation->mutex, first);
+        ft_print_dongle_heap(&coder->simulation->mutex, first);
 
 
         if(!ft_wait_dongle_be_free(second, coder))
@@ -167,7 +179,7 @@ void* coder_rotine(void* arg)
         ft_remove_from_heap(second->dongle_heap, coder);
 
 
-        ft_print_current_dongle_heap(&coder->simulation->mutex, second);
+        ft_print_dongle_heap(&coder->simulation->mutex, second);
 
         ft_compile(coder);
 

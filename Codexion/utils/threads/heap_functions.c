@@ -31,7 +31,7 @@ t_coder* return_first_coder(t_heap* heap)
 
 
 
-void ft_print_current_dongle_heap(pthread_mutex_t* mutex, t_dongle* dongle)
+void ft_print_dongle_heap(pthread_mutex_t* mutex, t_dongle* dongle)
 {
     
     t_coder* first_coder;
