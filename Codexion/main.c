@@ -10,8 +10,8 @@ void run_single_coder(t_coder* coder, pthread_t* thread)
 
 int main()
 {
-    t_circle* circle;
-    t_args args;
+    t_circle*	circle;
+    t_args*		args;
     struct timeval tv_initial;
     long start_ms;
     t_coder* current_coder;
@@ -20,15 +20,14 @@ int main()
     
     
     i = 0;
-    args = ft_parser();
-    args.start_ms = ft_return_time_now();
+    args = ft_create_args();
     circle = ft_handle_circle(args);
     ft_handle_dongles(circle);
 
     
-    pthread_t thread[args.number_of_coders + 1];
+    pthread_t thread[args->number_of_coders + 1];
     current_coder = circle->first_coder;
-    for (int j = 0; j < args.number_of_coders; j++)
+    for (int j = 0; j < args->number_of_coders; j++)
     {
         current_coder->simulation = &sim;
         current_coder = current_coder->next;
@@ -39,14 +38,14 @@ int main()
     current_coder = circle->first_coder;
     ft_create_monitor_thread(circle, &thread[i]);
     i++;
-    while(i <= args.number_of_coders)
+    while(i <= args->number_of_coders)
     {
         run_single_coder(current_coder, &thread[i]);
         current_coder = current_coder->next;
         i++;
     }
     i = 0;
-    while(i <= args.number_of_coders)
+    while(i <= args->number_of_coders)
     {
         pthread_join(thread[i], NULL);
         i++;

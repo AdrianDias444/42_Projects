@@ -6,7 +6,7 @@
 /*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 19:00:01 by adrian            #+#    #+#             */
-/*   Updated: 2026/08/04 12:54:10 by adrian           ###   ########.fr       */
+/*   Updated: 2026/08/04 13:19:34 by adrian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,9 @@ int	ft_wait_dongle_be_free(t_dongle *dongle, t_coder *coder)
 	pthread_mutex_unlock(&coder->mutex_coder);
 	ft_heap_push_back(dongle->dongle_heap, coder);
 	pthread_mutex_lock(&dongle->mutex);
-	while (ft_choose_coder_from_heap(dongle) != coder)
-	{
+	while (ft_choose_coder_from_heap(dongle) != coder && run_status == 1)
 		if (dongle->actual_coder)
-		{
-			if (run_status == 1)
-				pthread_cond_wait(&dongle->cond, &dongle->mutex);
-		}
-	}
+			pthread_cond_wait(&dongle->cond, &dongle->mutex);
 	if (run_status == 0)
 	{
 		ft_remove_from_heap(dongle->dongle_heap, coder);
@@ -46,24 +41,17 @@ int	ft_wait_dongle_be_free(t_dongle *dongle, t_coder *coder)
 	return (1);
 }
 
-void	*check_thread_state(t_coder *coder)
+void	set_actual_coder_null(t_dongle *dongle, long timetwait)
 {
-	pthread_mutex_lock(&coder->mutex_coder);
-	if (coder->run == 0)
-	{
-		pthread_mutex_unlock(&coder->mutex_coder);
-		return (NULL);
-	}
-	if (coder->number_of_compiles_done >= NUMBER_OF_COMPILES_REQUIRED)
-	{
-		pthread_mutex_unlock(&coder->mutex_coder);
-		return (NULL);
-	}
-	pthread_mutex_unlock(&coder->mutex_coder);
-	return (coder);
+	pthread_mutex_lock(&dongle->mutex);
+	dongle->actual_coder = NULL;
+	pthread_cond_signal(&dongle->cond);
+	if (timetwait > 0)
+		usleep(timetwait);
+	pthread_mutex_unlock(&dongle->mutex);
 }
 
-int coder_cicle(t_coder* coder, t_dongle* first, t_dongle* second)
+int	coder_cicle(t_coder *coder, t_dongle *first, t_dongle *second)
 {
 	while (1)
 	{
@@ -78,22 +66,13 @@ int coder_cicle(t_coder* coder, t_dongle* first, t_dongle* second)
 		ft_remove_from_heap(second->dongle_heap, coder);
 		ft_print_dongle_heap(&coder->simulation->mutex, second);
 		ft_compile(coder);
-		pthread_mutex_lock(&first->mutex);
-		first->actual_coder = NULL;
-		pthread_cond_signal(&first->cond);
-		usleep(first->dongle_cooldown * 1000);
-		pthread_mutex_unlock(&first->mutex);
-		pthread_mutex_lock(&second->mutex);
-		second->actual_coder = NULL;
-		pthread_cond_signal(&second->cond);
-		pthread_mutex_unlock(&second->mutex);
+		set_actual_coder_null(first, first->dongle_cooldown * 1000);
+		set_actual_coder_null(second, 0);
 		ft_debug(coder);
-		ft_refactor(coder);	
+		ft_refactor(coder);
 	}
 	return (1);
 }
-
-
 
 void	*coder_rotine(void *arg)
 {

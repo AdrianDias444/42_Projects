@@ -6,7 +6,7 @@
 /*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:11:11 by adrian            #+#    #+#             */
-/*   Updated: 2026/08/04 10:57:56 by adrian           ###   ########.fr       */
+/*   Updated: 2026/08/04 13:53:36 by adrian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct arguments
 	int						time_to_compile;
 	int						time_to_debug;
 	int						time_to_refactor;
-	int						number_of_compiles_required;
+	int						nb_of_comp_req;
 	int						dongle_cooldown;
 	char					*scheduler;
 	long					start_ms;
@@ -83,7 +83,7 @@ typedef struct coder
 	long						time_to_burnout;
 	long					start_ms;
 	pthread_t				coder_thread_id;
-	long					time_of_last_compile;
+	long					time_last_compile;
 	t_simulation			*simulation; // SIMULATION
 	long					number_of_compiles_done;
 	struct coder			*heap_next;
@@ -96,8 +96,9 @@ typedef struct circle
 	t_coder					*first_coder;
 	int						number_of_coders;
 	int						nb_dongles;
-	long					number_of_compiles_required;
+	long					nb_of_comp_req;
 	long					dongle_cooldown;
+	t_args					*args_struct;
 }							t_circle;
 
 typedef struct heap
@@ -123,19 +124,19 @@ struct						s_simulation
 	pthread_mutex_t			mutex;
 };
 
-t_args		ft_parser(void);
+t_args*		ft_parser(void);
 void		ft_add_next_coder(t_coder *current, t_coder *next);
 void		ft_add_previous_coder(t_coder *current, t_coder *previous);
 t_coder		*ft_create_coder(int nb);
-t_circle	*ft_handle_circle(t_args args);
+t_circle	*ft_handle_circle(t_args *args);
 void		ft_print_args(t_args args);
 void		ft_print_circle(t_coder *first_coder);
-t_circle	*ft_create_circle(t_coder *coder, t_args args);
+t_circle	*ft_create_circle(t_coder *coder, t_args *args);
 void		*ft_handle_dongles(t_circle *circle);
 void		ft_print_dongles(t_circle *circle);
 void		ft_add_dongle_right(t_coder *coder,	t_dongle *dongle);
 void		ft_add_dongle_left(t_coder *coder,	t_dongle *dongle);
-void		ft_add_times(t_args args, t_coder *coder);
+void		ft_add_times(t_args *args, t_coder *coder);
 void		ft_create_coder_thread(t_coder *coder, pthread_t *thread);
 long		ft_return_time_since_start(long start_ms);
 long		ft_return_time_now(void);
@@ -156,6 +157,10 @@ void	ft_compile(t_coder	*coder);
 void	ft_debug(t_coder *coder);
 void	ft_refactor(t_coder	*coder);
 t_coder	*ft_choose_coder_from_heap(t_dongle *dongle);
+void	*check_thread_state(t_coder *coder);
+
+t_args	*ft_create_args(void);
+char	*handle_string(char	*str);
 
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   coder_actions.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/04 13:19:49 by adrian            #+#    #+#             */
+/*   Updated: 2026/08/04 13:53:51 by adrian           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../header.h"
 
 void	ft_compile(t_coder	*coder)
@@ -11,7 +23,7 @@ void	ft_compile(t_coder	*coder)
 	printf("%ld %d is compilling\n", duration, coder->number);
 	pthread_mutex_unlock(&coder->simulation->mutex);
 	usleep(coder->time_to_compile * 1000);
-	coder->time_of_last_compile = ft_return_time_now();
+	coder->time_last_compile = ft_return_time_now();
 	coder->number_of_compiles_done += 1;
 	coder->action = NULL;
 	pthread_mutex_unlock(&coder->mutex_coder);
@@ -47,7 +59,6 @@ void	ft_refactor(t_coder	*coder)
 	pthread_mutex_unlock(&coder->mutex_coder);
 }
 
-
 t_coder	*ft_choose_coder_from_heap(t_dongle *dongle)
 {
 	t_coder	*coder_chosen;
@@ -59,4 +70,21 @@ t_coder	*ft_choose_coder_from_heap(t_dongle *dongle)
 		coder_chosen = ft_edf(dongle);
 	pthread_mutex_unlock(&dongle->dongle_heap->mutex);
 	return (coder_chosen);
+}
+
+void	*check_thread_state(t_coder *coder)
+{
+	pthread_mutex_lock(&coder->mutex_coder);
+	if (coder->run == 0)
+	{
+		pthread_mutex_unlock(&coder->mutex_coder);
+		return (NULL);
+	}
+	if (coder->number_of_compiles_done >= NUMBER_OF_COMPILES_REQUIRED)
+	{
+		pthread_mutex_unlock(&coder->mutex_coder);
+		return (NULL);
+	}
+	pthread_mutex_unlock(&coder->mutex_coder);
+	return (coder);
 }

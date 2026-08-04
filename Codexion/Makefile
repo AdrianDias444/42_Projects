@@ -1,6 +1,7 @@
 NAME = library.a
 
-SOURCES = utils/allocs/create_coder.c \
+SOURCES = utils/allocs/create_args.c \
+		utils/allocs/create_coder.c \
 		utils/allocs/create_circle.c \
 		utils/allocs/create_dongle.c \
 		utils/allocs/create_heap.c \
