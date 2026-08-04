@@ -6,7 +6,7 @@
 /*   By: adrian <adrian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:11:11 by adrian            #+#    #+#             */
-/*   Updated: 2026/08/03 18:46:24 by adrian           ###   ########.fr       */
+/*   Updated: 2026/08/04 10:57:56 by adrian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,14 @@ void		ft_print_dongle_heap(pthread_mutex_t *mutex, t_dongle *dongle);
 t_coder		*return_first_coder(t_heap *heap);
 t_coder		*ft_edf(t_dongle *dongle);
 t_coder		*ft_fifo(t_dongle *dongle);
+
+
+
+
+void	ft_compile(t_coder	*coder);
+void	ft_debug(t_coder *coder);
+void	ft_refactor(t_coder	*coder);
+t_coder	*ft_choose_coder_from_heap(t_dongle *dongle);
+
 
 #endif

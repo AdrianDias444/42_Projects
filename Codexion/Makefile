@@ -16,6 +16,7 @@ SOURCES = utils/allocs/create_coder.c \
 		utils/scheduler/edf.c \
 		utils/scheduler/fifo.c \
 		\
+		utils/threads/coder_actions.c \
 		utils/threads/create_coder_thread.c \
 		utils/threads/create_monitor_thread.c \
 		utils/threads/heap_functions.c \
