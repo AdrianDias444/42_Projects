@@ -25,7 +25,7 @@
 # endif
 
 # ifndef TIME_TO_BURNOUT
-#  define TIME_TO_BURNOUT 800
+#  define TIME_TO_BURNOUT 10
 # endif
 
 # ifndef TIME_TO_COMPILE
@@ -41,7 +41,7 @@
 # endif
 
 # ifndef NUMBER_OF_COMPILES_REQUIRED
-#  define NUMBER_OF_COMPILES_REQUIRED 2
+#  define NUMBER_OF_COMPILES_REQUIRED 21
 # endif
 
 # ifndef DONGLE_COOLDOWN
@@ -49,7 +49,7 @@
 # endif
 
 # ifndef SCHEDULER
-#  define SCHEDULER "edf"
+#  define SCHEDULER "fifo"
 # endif
 
 typedef struct s_dongle		t_dongle;
@@ -77,13 +77,13 @@ typedef struct coder
 	char					*action;
 	t_dongle				*right_dongle;
 	t_dongle				*left_dongle;
-	long						time_to_compile;
-	long						time_to_debug;
-	long						time_to_refactor;
-	long						time_to_burnout;
+	long					time_to_compile;
+	long					time_to_debug;
+	long					time_to_refactor;
+	long					time_to_burnout;
 	long					start_ms;
 	pthread_t				coder_thread_id;
-	long					time_last_compile;
+	long					last_compile;
 	t_simulation			*simulation; // SIMULATION
 	long					number_of_compiles_done;
 	struct coder			*heap_next;
@@ -124,7 +124,7 @@ struct						s_simulation
 	pthread_mutex_t			mutex;
 };
 
-t_args*		ft_parser(void);
+t_args		*ft_parser(void);
 void		ft_add_next_coder(t_coder *current, t_coder *next);
 void		ft_add_previous_coder(t_coder *current, t_coder *previous);
 t_coder		*ft_create_coder(int nb);
@@ -150,17 +150,13 @@ t_coder		*return_first_coder(t_heap *heap);
 t_coder		*ft_edf(t_dongle *dongle);
 t_coder		*ft_fifo(t_dongle *dongle);
 
+void		ft_compile(t_coder	*coder);
+void		ft_debug(t_coder *coder);
+void		ft_refactor(t_coder	*coder);
+t_coder		*ft_choose_coder_from_heap(t_dongle *dongle);
+void		*check_thread_state(t_coder *coder);
 
-
-
-void	ft_compile(t_coder	*coder);
-void	ft_debug(t_coder *coder);
-void	ft_refactor(t_coder	*coder);
-t_coder	*ft_choose_coder_from_heap(t_dongle *dongle);
-void	*check_thread_state(t_coder *coder);
-
-t_args	*ft_create_args(void);
-char	*handle_string(char	*str);
-
+t_args		*ft_create_args(void);
+char		*handle_string(char	*str);
 
 #endif

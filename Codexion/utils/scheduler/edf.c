@@ -25,8 +25,8 @@ t_coder	*ft_edf(t_dongle *dongle)
 	second_coder = first_coder->heap_next;
 	if (!second_coder)
 		return (first_coder);
-	time1 = first_coder -> time_last_compile;
-	time2 = second_coder -> time_last_compile;
+	time1 = first_coder -> last_compile;
+	time2 = second_coder -> last_compile;
 	if (time1 < time2)
 		return (first_coder);
 	return (second_coder);

@@ -19,7 +19,7 @@ void	ft_add_times(t_args *args, t_coder	*coder)
 	coder->time_to_refactor = args->time_to_refactor;
 	coder->time_to_burnout = args->time_to_burnout;
 	coder->start_ms = args->start_ms;
-	coder -> time_last_compile = args->start_ms;
+	coder -> last_compile = args->start_ms;
 }
 
 t_circle	*ft_handle_circle(t_args *args)

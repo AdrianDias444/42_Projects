@@ -50,8 +50,6 @@ int main()
         pthread_join(thread[i], NULL);
         i++;
     }
-
-    
     pthread_mutex_destroy(&sim.mutex);
     return 0;
 }

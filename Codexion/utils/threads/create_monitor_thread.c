@@ -74,11 +74,23 @@ int	ft_all_coders_finish(t_circle *circle)
 	return (0);
 }
 
+void	*make_stop(t_coder *coder)
+{
+	long	duration;
+
+	duration = ft_return_time_since_start(coder->start_ms);
+	pthread_mutex_lock(&coder->simulation->mutex);
+	printf("%ld %d burned out\n", duration, coder->number);
+	pthread_mutex_unlock(&coder->simulation->mutex);
+	pthread_mutex_unlock(&coder->mutex_coder);
+	ft_stop(coder);
+	return (NULL);
+}
+
 void	*ft_monitor_routine(void *arg)
 {
 	t_circle	*circle;
 	t_coder		*coder;
-	long		duration;
 	int			i;
 	long		time_since_compile;
 
@@ -90,28 +102,17 @@ void	*ft_monitor_routine(void *arg)
 		while (i < circle->number_of_coders)
 		{
 			pthread_mutex_lock(&coder->mutex_coder);
-			time_since_compile = ft_return_time_now() - coder->time_last_compile;
+			time_since_compile = ft_return_time_now() - coder->last_compile;
 			if (time_since_compile > coder->time_to_burnout)
 			{
 				if (coder->action && strcmp(coder->action, "compile") != 0)
-				{
 					if (coder->number_of_compiles_done < circle->nb_of_comp_req)
-					{
-						duration = ft_return_time_since_start(coder->start_ms);
-						pthread_mutex_lock(&coder->simulation->mutex);
-						printf("%ld %d burned out\n", duration, coder->number);
-						pthread_mutex_unlock(&coder->simulation->mutex);
-						pthread_mutex_unlock(&coder->mutex_coder);
-						ft_stop(coder);
-						return (NULL);
-					}
-				}
+						make_stop(coder);
 			}
 			pthread_mutex_unlock(&coder->mutex_coder);
 			coder = coder->next;
 			i++;
 		}
-		//usleep(2000);
 	}
 	pthread_mutex_lock(&coder->simulation->mutex);
 	printf("Simulation done\n");

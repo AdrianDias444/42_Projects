@@ -23,7 +23,7 @@ void	ft_compile(t_coder	*coder)
 	printf("%ld %d is compilling\n", duration, coder->number);
 	pthread_mutex_unlock(&coder->simulation->mutex);
 	usleep(coder->time_to_compile * 1000);
-	coder->time_last_compile = ft_return_time_now();
+	coder->last_compile = ft_return_time_now();
 	coder->number_of_compiles_done += 1;
 	coder->action = NULL;
 	pthread_mutex_unlock(&coder->mutex_coder);
